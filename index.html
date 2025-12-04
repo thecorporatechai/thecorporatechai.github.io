@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Corporate Chai - Corporate Memes & Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #ffc300;
+            color: #333;
+            line-height: 1.5;
+            padding-bottom: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+            position: relative;
+        }
+        
+        .logo-placeholder img {
+    max-width: 25%;   /* logo will only take up 80% of the circle */
+    max-height:25%;
+    object-fit: contain; /* keeps proportions without cropping */
+}
+
+
+        
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .brand-title {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: 3.2rem;
+    color: #3b2d1f;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #D84315;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .followers-count {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* Flashcard Section */
+        .flashcards-section {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #D84315;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: #FF9800;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .flashcards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .flashcard {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+        
+        .flashcard:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .flashcard .icon {
+            font-size: 2.5rem;
+            color: #FF9800;
+            margin-bottom: 15px;
+        }
+        
+        .flashcard h3 {
+            color: #D84315;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .flashcard p {
+            color: #5D4037;
+            flex-grow: 1;
+        }
+        
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .instagram-btn {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        .youtube-btn {
+    background-color: #FF0000; /* YouTube red */
+    color: white;
+}
+.youtube-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button i {
+            font-size: 1.5rem;
+        }
+        
+        /* Features Section */
+        .features-section {
+            margin: 50px 0;
+        }
+        
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+        
+        .feature-card h3 {
+            color: #D84315;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-card h3 i {
+            color: #FF9800;
+        }
+        
+        .highlight {
+            background-color: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 5px solid #FF9800;
+        }
+        
+        /* Social & QR Section */
+        .social-qr-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+        
+        .social-links {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .social-links h3 {
+            color: #D84315;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            font-size: 1.8rem;
+            color: #D84315;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+        }
+        
+        .social-icon:hover {
+            background-color: #FF9800;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .qr-container {
+            flex: 0 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            border: 2px dashed rgba(255, 152, 0, 0.5);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+        
+        .qr-code i {
+            font-size: 80px;
+            color: #333;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #5D4037;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .flashcards-container, .features-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-qr-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+ 
+
+            .social-icons {
+                justify-content: center;
+            }
+            .youtube-btn {
+    background-color: #FF0000; /* YouTube red */
+    color: white;
+}
+.youtube-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo Placeholder -->
+        <header>
+            <div class="logo-placeholder">
+                <img src="src/logo.png" alt="The Corporate Chai logo">
+            </div>
+            <h1 class="brand-title">The Corporate Chai</h1>
+
+            <p class="tagline">Real Stories | Real Hustle | Real People </p>
+            <div class="followers-count">
+                <i class="fas fa-users"></i> 10K+ Followers
+            </div>
+        </header>
+        
+        <!-- Flashcard Section -->
+        <section class="flashcards-section">
+            <h2 class="section-title">Corporate Flashcards & Memes</h2>
+            <div class="flashcards-container">
+                <div class="flashcard">
+                    <div class="icon"><i class="fas fa-comment-dots"></i></div>
+                    <h3>Corporate Truth</h3>
+                
+                    <p>"In Corporate World, Everything is URGENT except your PROMOTION..."</p>
+                </div>
+                
+                <div class="flashcard">
+                    <div class="icon"><i class="fas fa-laugh-beam"></i></div>
+                    <h3>Monday Mood</h3>
+                    <p>"Monday morning status: Laptop on, brain off..."</p>
+                </div>
+                
+                <div class="flashcard">
+                    <div class="icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Meeting Bingo</h3>
+                    <p>"FYI, ASAP, PFA, ETA, EOD, MOM, WIP, TBD, SOP, SLA, POC, BAU, OOO, TL..!"</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action Buttons -->
+        <div class="cta-buttons">
+            <a href="https://www.instagram.com/thecorporatechai" target="_blank" class="cta-button instagram-btn">
+                <i class="fab fa-instagram"></i> Join Instagram Channel
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb6zfSR9mrGgge4Dw83F" target="_blank" class="cta-button whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Community
+            </a>
+            <a href="https://youtube.com/@thecorporatechai" target="_blank" class="cta-button youtube-btn">
+                <i class="fab fa-youtube"></i> Join YouTube Channel
+            </a>
+        </div>
+        
+        
+        <!-- Features & Highlights Section -->
+        <section class="features-section">
+            <h2 class="section-title">Community Highlights</h2>
+            <div class="features-container">
+                <div class="feature-card">
+                    <h3><i class="fas fa-gift"></i> Monthly Giveaway</h3>
+                    <p>Every 1st of the month, we give away movie ticket coupons to our active community members in WhatsApp!</p>
+                    <div class="highlight">
+                        <strong>This Month's Prize:</strong> 2 Movie Tickets + Popcorn Combo
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-handshake"></i> Job Support Community</h3>
+                    <p>Exclusive job postings shared daily. Get referrals, resume tips, and interview preparation help from our community.</p>
+                    <div class="highlight">
+                        <strong>Recently Shared:</strong> 25+ openings in Product Management, Marketing & Tech roles
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-users"></i> Peer Networking</h3>
+                    <p>Connect with professionals across industries. Share experiences, ask for advice, and grow together.</p>
+                    <div class="highlight">
+                        <strong>Active Groups:</strong> Tech, Marketing, Finance, HR, and Operations
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Social Media & QR Code Section -->
+        <section class="social-qr-section">
+            <div class="social-links">
+                <h3>Connect With Us 🤝</h3>
+                <p><i>Follow us on all platforms for daily corporate humor, job alerts, and community updates.</i></p>
+                <br>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/thecorporatechai?igsh=ZDY0bnd1eWdmNHh2" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@thecorporatechai" target="_blank" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/aanantharao/" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                   
+                </div>
+                
+                
+            </div>
+            
+            <div class="qr-container">
+                <h3>Scan to Follow</h3>
+                <div class="qr-code">
+                    <img src="src/QR.jpeg" alt="Scan QR to Follow" style="width:100%; height:100%; object-fit:contain; border-radius:10px;">
+                </div>
+               
+            </div>
+            
+               
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>The Corporate Chai &copy; <span id="current-year">2023</span> | Corporate Humor & Professional Community ✅</p>
+            
+            <div class="copyright">
+               
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Flashcard interaction
+        document.querySelectorAll('.flashcard').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+        
+        // Simple animation for buttons on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach((button, index) => {
+                setTimeout(() => {
+                    button.style.opacity = '1';
+                    button.style.transform = 'scale(1)';
+                }, 300 + (index * 200));
+            });
+            
+            // Set initial state for animation
+            buttons.forEach(button => {
+                button.style.opacity = '0';
+                button.style.transform = 'scale(0.8)';
+                button.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+        });
+    </script>
+</body>
+</html>
