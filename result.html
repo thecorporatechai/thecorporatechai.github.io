@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your free ATS resume score from The Corporate Chai.">
+  <meta name="robots" content="noindex">
+  <title>Your ATS Score | The Corporate Chai</title>
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="subpage">
+  <div class="grain"></div>
+  <nav class="subnav">
+    <a class="nav-brand" href="index.html"><img src="assets/logo.jpeg" alt=""><span>The Corporate <b>Chai</b></span></a>
+    <a class="back-link" href="index.html#ats">← Check another resume</a>
+  </nav>
+
+  <!-- SCORE -->
+  <section class="result-hero">
+    <div class="result-wrap">
+      <span class="ats-eyebrow">Your free ATS report</span>
+      <div id="scoreMount"></div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact-section">
+    <div class="section-inner center">
+      <span class="sec-label">The impact</span>
+      <h2 class="sec-title display">What usually happens after a rewrite.</h2>
+      <p class="sec-sub">The kind of momentum our clients tend to build once their resume actually clears the bots and reaches real recruiters.</p>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof-section">
+    <div class="section-inner center">
+      <span class="sec-label">Social proof</span>
+      <h2 class="sec-title display">Our clients have interviewed at</h2>
+      <div class="logo-strip" id="logoStrip"></div>
+      <p class="proof-disclaimer">Companies our clients have landed interviews with after working with us. We help you get noticed and shortlisted — we do <strong>not</strong> guarantee interview calls, a job, or a 100% switch. <a href="privacy.html#terms">See terms</a>.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sub-contact">
+    <div class="sub-contact-inner">
+      <h5>Contact us</h5>
+      <div class="social-row" id="subSocial"></div>
+      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy &amp; Terms</a></div>
+      <div class="foot-bottom" style="border:0">© 2024–2026 The Corporate Chai</div>
+    </div>
+  </section>
+
+  <a class="float-wa" id="floatWa" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10.3 10.3 0 0 1-1.6-5.6c0-5.7 4.7-10.4 10.4-10.4s10.4 4.7 10.4 10.4S21.7 25.8 16 25.8zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z" fill="#fff"/></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script>
+    (function () {
+      const cfg = SITE_CONFIG;
+      const wa = (m) => `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(m)}`;
+      const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+      const p = new URLSearchParams(location.search);
+      const mount = document.getElementById("scoreMount");
+
+      // Wire static links.
+      document.getElementById("floatWa").href = wa("Hi! I'd like help with my resume / ATS score.");
+      if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
+
+      if (!p.has("s")) {
+        mount.innerHTML = `<div class="rc-card band-medium" style="gap:14px">
+          <h4 class="rc-title">No score yet</h4>
+          <p class="rc-issues">Upload your resume to see your free ATS score.</p>
+          <a class="btn btn-primary btn-full" href="index.html#ats">Check my resume free →</a></div>`;
+        return;
+      }
+
+      const total = clamp(parseInt(p.get("s"), 10) || 0, 0, 100);
+      const bands = cfg.scoreBands || { medium: 55, high: 80 };
+      let band = p.get("b");
+      if (["low", "medium", "high"].indexOf(band) < 0) band = total >= bands.high ? "high" : total >= bands.medium ? "medium" : "low";
+      const issues = Math.max(0, parseInt(p.get("i"), 10) || 0);
+      const VERDICT = { low: "Weak", medium: "Medium", high: "Strong" };
+
+      const tmpl = (cfg.services || []).find((s) => s.id === (cfg.templatesServiceId || "01")) || {};
+      const sampleReportUrl = cfg.sampleReportUrl || "#";
+      const reportUrl = wa(`Hi! I used the free ATS checker and scored ${total}/100. I'd like the detailed fix report (${cfg.reportPrice || "₹19"}).`);
+      const rewriteUrl = wa(`Hi! I used the free ATS checker and scored ${total}/100. I'd like the ATS Resume Rewrite (${cfg.rewritePrice || "₹199"}) to fix it.`);
+      const tmplUrl = wa(tmpl.whatsappMsg || "Hi! I want the ATS resume templates (₹49).");
+
+      const ARC = Math.PI * 90;
+      const offset = ARC * (1 - total / 100);
+      const issuesHtml = issues > 0
+        ? `<p class="rc-issues">${issues} ${issues === 1 ? "issue" : "issues"} found</p>`
+        : `<p class="rc-issues ok">No major issues 🎉</p>`;
+
+      const cardHtml = `
+        <div class="rc-card band-${band}">
+          <h4 class="rc-title">Resume Checker</h4>
+          <div class="semi-gauge">
+            <svg viewBox="0 0 220 128" aria-hidden="true">
+              <path class="sg-track" d="M20 118 A 90 90 0 0 1 200 118"></path>
+              <path class="sg-fill" d="M20 118 A 90 90 0 0 1 200 118" style="stroke-dasharray:${ARC};stroke-dashoffset:${ARC}"></path>
+            </svg>
+            <div class="sg-score"><strong>${total}</strong><span>/100</span></div>
+          </div>
+          <div class="rc-verdict">${VERDICT[band]}</div>
+          ${issuesHtml}
+          <a class="sample-report-btn" href="${sampleReportUrl}" target="_blank" rel="noopener noreferrer">View sample report →</a>
+          <a class="btn btn-primary btn-full" href="${reportUrl}" target="_blank" rel="noopener noreferrer">Unlock full report — ${cfg.reportPrice || "₹19"} →</a>
+          <a class="btn btn-dark btn-full" href="${rewriteUrl}" target="_blank" rel="noopener noreferrer">Rewrite my resume — ${cfg.rewritePrice || "₹199"} →</a>
+          <a class="ats-reset" href="index.html#ats">↻ Check another resume</a>
+          <div class="diy-card">
+            <div class="diy-copy">
+              <span class="diy-tag">DIY · ${tmpl.price || "₹49"}</span>
+              <strong>Prefer to fix it yourself?</strong>
+              <p>Grab our 5 ATS-ready resume templates and rewrite it on your own.</p>
+            </div>
+            <a class="btn btn-primary" href="${tmplUrl}" target="_blank" rel="noopener noreferrer">Get templates →</a>
+          </div>
+          <p class="ats-privacy">🔒 Scored in your browser — your resume was never uploaded or stored.</p>
+          <p class="ats-disclaimer">*This ATS score is generated by our own heuristic logic for guidance only. It is not aligned with, or endorsed by, any specific ATS, employer or official benchmark.</p>
+        </div>`;
+      mount.innerHTML = `
+        <div class="ats-loading">
+          <div class="ats-spinner"><span></span><span></span><span></span></div>
+          <p class="ats-loading-msg" id="rLoadMsg">Calculating your ATS score…</p>
+          <p class="ats-loading-sub">Reading sections, keywords &amp; impact…</p>
+        </div>`;
+      const rMsgs = ["Calculating your ATS score…", "Scanning keywords &amp; sections…", "Measuring impact &amp; clarity…", "Almost ready…"];
+      let ri = 0; const rEl = document.getElementById("rLoadMsg");
+      const rTmr = setInterval(() => { ri = (ri + 1) % rMsgs.length; if (rEl) rEl.innerHTML = rMsgs[ri]; }, 650);
+      setTimeout(() => {
+        clearInterval(rTmr);
+        mount.innerHTML = cardHtml;
+        requestAnimationFrame(() => { const f = mount.querySelector(".sg-fill"); if (f) f.style.strokeDashoffset = offset; });
+      }, 3000);
+
+      // Impact timeline
+      const tl = document.getElementById("timeline");
+      (cfg.impactTimeline || []).forEach((it, i) => {
+        const el = document.createElement("div");
+        el.className = "tl-item";
+        el.innerHTML = `<div class="tl-dot">${i + 1}</div><div class="tl-body"><span class="tl-when">${it.when}</span><p>${it.text}</p></div>`;
+        tl.appendChild(el);
+      });
+
+      // Company logo strip (text chips)
+      const strip = document.getElementById("logoStrip");
+      (cfg.companies || []).forEach((c) => {
+        const el = document.createElement("span");
+        el.className = "logo-chip";
+        el.textContent = c;
+        strip.appendChild(el);
+      });
+    })();
+  </script>
+</body>
+</html>

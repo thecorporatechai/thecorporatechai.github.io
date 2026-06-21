@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connect with The Corporate Chai on Instagram, YouTube, LinkedIn, Facebook and Twitter — real stories, real hustle, real people, and monthly giveaways.">
+  <title>Connect & Grow With Us | The Corporate Chai</title>
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="subpage">
+  <div class="grain"></div>
+  <nav class="subnav">
+    <a class="nav-brand" href="index.html"><img src="assets/logo.jpeg" alt=""><span>The Corporate <b>Chai</b></span></a>
+    <a class="back-link" href="index.html">← Back to home</a>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <span class="sec-label">Let's grow together</span>
+      <h1>Connect &amp; grow with us</h1>
+      <p>Real stories, real hustle, real people — plus monthly giveaways. Follow along on your favourite platform and become part of the community.</p>
+    </div>
+  </header>
+
+  <main class="connect-body">
+    <div class="ig-feature" id="igFeature"></div>
+    <div class="connect-grid" id="connectGrid"></div>
+  </main>
+
+  <section class="sub-contact">
+    <div class="sub-contact-inner">
+      <h5>Contact us</h5>
+      <div class="social-row" id="subSocial"></div>
+      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy &amp; Terms</a></div>
+      <div class="foot-bottom" style="border:0">© 2024–2026 The Corporate Chai</div>
+    </div>
+  </section>
+
+  <a class="float-wa" id="floatWa" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10.3 10.3 0 0 1-1.6-5.6c0-5.7 4.7-10.4 10.4-10.4s10.4 4.7 10.4 10.4S21.7 25.8 16 25.8zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z" fill="#fff"/></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script>
+    (function () {
+      const cfg = SITE_CONFIG;
+      const I = window.TCC_ICON || {};
+
+      // Featured Instagram card
+      document.getElementById("igFeature").innerHTML = `
+        <div class="ig-badge">${I.instagram || ""}</div>
+        <h2>Follow us on Instagram</h2>
+        <span class="ig-handle">@thecorporatechai.in</span>
+        <span class="ig-followers">★ 20K+ followers · meme channel</span>
+        <div class="ig-tags"><span>Real Stories</span><span>Real Hustle</span><span>Real People</span></div>
+        <div class="giveaway-banner">🎉 Monthly Giveaways</div>
+        <div class="perk-row">
+          <div class="perk"><span class="pi">🎟️</span> Vouchers</div>
+          <div class="perk"><span class="pi">📱</span> Electronic gadgets</div>
+          <div class="perk"><span class="pi">🎁</span> &amp; more exciting prizes</div>
+        </div>
+        <p class="fewi"><b>Follow</b> · <b>Engage</b> · <b>Get Inspired</b> · <b>Win Big</b></p>
+        <a class="btn btn-primary" href="${cfg.instagram}" target="_blank" rel="noopener noreferrer">Follow on Instagram →</a>
+        <span class="ig-grow">Let's grow together!</span>`;
+
+      // Other platforms
+      const cards = [
+        { name: "YouTube", ico: "youtube", url: cfg.youtube, note: "Career tips, breakdowns & HR contact drops." },
+        { name: "LinkedIn", ico: "linkedin", url: cfg.linkedin, note: "Professional insights & founder updates." },
+        { name: "Facebook", ico: "facebook", url: cfg.facebook, note: "Community updates, stories & events." },
+        { name: "Twitter / X", ico: "twitter", url: cfg.twitter, note: "Quick takes & corporate banter." }
+      ];
+      document.getElementById("connectGrid").innerHTML = cards.map((c) => `
+        <article class="connect-card">
+          <div class="cc-ico">${I[c.ico] || ""}</div>
+          <h3>${c.name}</h3>
+          <p>${c.note}</p>
+          <a class="cc-cta" href="${c.url}" target="_blank" rel="noopener noreferrer">Follow →</a>
+        </article>`).join("");
+
+      // Footer + float
+      if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
+      document.getElementById("floatWa").href = "https://wa.me/" + cfg.whatsapp;
+    })();
+  </script>
+</body>
+</html>

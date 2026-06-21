@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Certification & exam-prep kits — roadmaps, study materials and AI prompt cheat sheets for ISO 27001, CompTIA and more.">
+  <title>Certifications & Exam-Prep Kits | The Corporate Chai</title>
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="subpage">
+  <div class="grain"></div>
+  <nav class="subnav">
+    <a class="nav-brand" href="index.html"><img src="assets/logo.jpeg" alt=""><span>The Corporate <b>Chai</b></span></a>
+    <a class="back-link" href="index.html#services">← Back to services</a>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <span class="sec-label">Service 08</span>
+      <h1>Certifications, Exam-Prep &amp; AI Prompts</h1>
+      <p>Roadmaps, curated study materials and our AI Prompts Pack to clear certifications and prep for exams across government and private job roles. Grab the prompts pack or pick a track below.</p>
+    </div>
+  </header>
+
+  <main class="page-body">
+    <h2 class="cat-title"><span class="cat-ico">⚡</span> AI Prompt Packs</h2>
+    <p class="cat-sub">Copy-paste AI prompt packs to work faster and stand out — starting at ₹19.</p>
+    <div class="tiles-grid" id="promptGrid"></div>
+
+    <h2 class="cat-title"><span class="cat-ico">🎓</span> Professional Certifications</h2>
+    <p class="cat-sub">Roadmaps, study materials &amp; cheat sheets to clear industry certifications.</p>
+    <div class="tiles-grid" id="certGrid"></div>
+
+    <h2 class="cat-title"><span class="cat-ico">📝</span> Exam Prep Packs</h2>
+    <p class="cat-sub">Government &amp; competitive exam kits — material, study plan, notes &amp; references.</p>
+    <div class="tiles-grid" id="examGrid"></div>
+
+    <p class="add-note">More packs are added regularly. Need something specific? Tell us on WhatsApp and we'll build it.</p>
+  </main>
+
+  <section class="sub-contact">
+    <div class="sub-contact-inner">
+      <h5>Contact us</h5>
+      <div class="social-row" id="subSocial"></div>
+      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy &amp; Terms</a></div>
+      <div class="foot-bottom" style="border:0">© 2024–2026 The Corporate Chai</div>
+    </div>
+  </section>
+
+  <a class="float-wa" id="floatWa" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10.3 10.3 0 0 1-1.6-5.6c0-5.7 4.7-10.4 10.4-10.4s10.4 4.7 10.4 10.4S21.7 25.8 16 25.8zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z" fill="#fff"/></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script>
+    (function () {
+      const wa = (m) => `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(m)}`;
+      const make = (ico, meta, title, desc, href, cta) => {
+        const el = document.createElement("article");
+        el.className = "tile";
+        el.innerHTML = `
+          <div class="tile-ico">${ico}</div>
+          ${meta ? `<span class="tile-meta">${meta}</span>` : ""}
+          <h3>${title}</h3>
+          <p>${desc || ""}</p>
+          <a class="tile-cta" href="${href}" target="_blank" rel="noopener noreferrer">${cta}</a>`;
+        return el;
+      };
+      const promptGrid = document.getElementById("promptGrid");
+      (SITE_CONFIG.aiPromptPacks || []).forEach((p) =>
+        promptGrid.appendChild(make("⚡", p.price, p.title, p.desc, wa(p.whatsappMsg), "Get it — " + p.price + " →")));
+      const certGrid = document.getElementById("certGrid");
+      (SITE_CONFIG.certifications || []).forEach((c) =>
+        certGrid.appendChild(make("🎓", c.code, c.name, c.desc, wa("Hi! I want to explore the " + c.code + " (" + c.name + ") kit — roadmap & materials."), "Explore →")));
+      const examGrid = document.getElementById("examGrid");
+      (SITE_CONFIG.examPacks || []).forEach((e) =>
+        examGrid.appendChild(make("📝", e.price, e.title, e.desc, wa(e.whatsappMsg), "Get it — " + e.price + " →")));
+    })();
+  </script>
+  <script>renderContactRow(document.getElementById("subSocial"), SITE_CONFIG); document.getElementById("floatWa").href = "https://wa.me/" + SITE_CONFIG.whatsapp;</script>
+</body>
+</html>
