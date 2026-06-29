@@ -38,9 +38,8 @@ const SITE_CONFIG = {
 
   /* --- Hero stats ------------------------------------------------------ */
   stats: [
-    { value: "100+",   label: "Professionals helped" },
-    { value: "300+",   label: "Interview calls landed" },
-    { value: "24–48h", label: "Delivery time" }
+    { value: "1000+", label: "Professionals helped" },
+    { value: "500+",  label: "Interview calls landed" }
   ],
 
   /* --- Rolling highlights ticker (under the header) -------------------- */
@@ -76,6 +75,10 @@ const SITE_CONFIG = {
 
     { id: "01", title: "5 ATS Resume Templates", price: "₹49", priceNote: "5 editable templates",
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
+      // Sample-templates "View sample" button → paste the Google Drive share link
+      // below (the button stays hidden until a valid https:// link is added).
+      sampleUrl: "https://drive.google.com/drive/folders/1SMJRWYwjdsAC880Co4rW9RhKyh5CcKaH?usp=sharing",
+      sampleLabel: "View sample template",
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
     { id: "02", title: "ATS Resume Rewrite", price: "₹199", priceNote: "complete rewrite", bonus: "Free AI job-hunting prompts",
