@@ -15,7 +15,9 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-HL097LFTE1'); </script>
+
+  gtag('config', 'G-HL097LFTE1');
+</script>
 </head>
 <body id="top">
   <div class="grain"></div>
@@ -27,16 +29,21 @@
       <span>The Corporate <b>Chai</b></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#community">Join Community</a>
+      <a href="free-ats-resume-checker.html">Free ATS Score</a>
+      <a href="services.html">Services</a>
+      <a href="samples.html">Samples</a>
+      <a href="community.html">Community</a>
       <a href="certify.html">Get Certified</a>
-      <a href="free-ats-resume-checker.html">Get Free ATS Score</a>
-      <a href="#services">Services</a>
-      <a href="#coming-soon">Coming Soon</a>
       <a class="nav-cta" href="connect.html">Connect</a>
     </div>
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span><span class="sr-only">Toggle menu</span>
-    </button>
+    <div class="nav-mobile-actions">
+      <a class="nav-msvc" href="services.html">Services</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">
+        <span class="nt-label">Explore</span>
+        <span class="nt-bars"><span></span><span></span><span></span></span>
+        <span class="sr-only">Toggle menu</span>
+      </button>
+    </div>
   </nav>
 
   <!-- ROLLING SERVICE HIGHLIGHTS -->
@@ -46,40 +53,105 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner reveal">
-      <div class="eyebrow-pill">☕ Ideas Brewed · Connections Built · Impact Delivered</div>
-      <h1 class="display">Your resume shouldn't be why you're <span class="hl">still job hunting.</span></h1>
-      <p class="lead">75% of resumes are auto-rejected by ATS software before a human ever reads them. We help you beat the bots, get shortlisted, and actually land the interview — with free tools and honest, expert help.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary cta-attract" href="free-ats-resume-checker.html"><span class="cta-spark">✦</span> Check your resume for free →</a>
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <div class="eyebrow-pill">✦ Building India's #1 Corporate Community</div>
+        <h1 class="display">From <span class="hl">resume</span> to <span class="hl">interview-ready</span> — the honest way.</h1>
+        <p class="lead">75% of resumes are auto-rejected by ATS bots before a human ever reads them. Get your free ATS score in seconds, then beat the bots with expert, no-nonsense help that actually lands interviews.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary cta-attract" href="free-ats-resume-checker.html"><span class="cta-spark">✦</span> Check Your Resume for Free →</a>
+        </div>
+        <div class="hero-rating">
+          <span class="hr-stars" aria-hidden="true">★★★★★</span>
+          <span class="hr-text"><strong>Top Rated</strong> · loved by 1000+ job seekers</span>
+        </div>
       </div>
-      <div class="hero-stats" id="heroStats"></div>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="hv-stack">
+          <img class="hv-shot" src="assets/samples/template-07.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-12.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-08.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-11.jpg" alt="" loading="lazy">
+        </div>
+        <div class="hv-gauge">
+          <svg viewBox="0 0 120 120">
+            <circle class="hvg-track" cx="60" cy="60" r="50"/>
+            <circle class="hvg-fill" cx="60" cy="60" r="50"/>
+          </svg>
+          <div class="hv-score"><strong id="heroScore">0</strong><span class="hv-verdict-lbl">Strong</span></div>
+        </div>
+        <span class="hv-pill hv-pill-1"><i class="pi">✓</i> ATS-friendly</span>
+        <span class="hv-pill hv-pill-2"><i class="pi">✓</i> Recruiter-ready</span>
+        <span class="hv-badge">◎ Scored by AI</span>
+      </div>
     </div>
   </section>
 
-  <!-- COMMUNITY -->
-  <section class="community-section" id="community">
-    <div class="section-inner">
-      <div class="community-card reveal">
-        <div class="community-copy">
-          <span class="sec-label">Join the inner circle</span>
-          <h2 class="display">The Corporate Majdoor Community</h2>
-          <p>Stop hustling alone. Join a no-filter WhatsApp circle of working professionals who share <b>real job openings, referrals and corporate survival hacks</b> every single day.</p>
-          <ul class="community-perks">
-            <li>Job + referral drops from members</li>
-            <li>Real corporate discussions, zero gyaan</li>
-            <li>First access to new tools &amp; launches</li>
+  <!-- STATS BAND -->
+  <section class="stat-band">
+    <div class="stat-band-inner" id="heroStats"></div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="wwd-section" id="what-we-do">
+    <div class="section-inner center">
+      <span class="sec-label">What we do</span>
+      <h2 class="sec-title display">From rejected to recruiter-ready.</h2>
+      <p class="sec-sub">See the difference an honest, ATS-savvy fix makes — then pick how we help you get there.</p>
+
+      <div class="wwd-compare reveal">
+        <div class="wwd-score wwd-before">
+          <span class="wwd-tag">Before</span>
+          <div class="wwd-num">42<small>/100</small></div>
+          <ul>
+            <li>Missing critical job keywords</li>
+            <li>Weak, vague bullet points</li>
+            <li>ATS-incompatible formatting</li>
           </ul>
         </div>
-        <div class="community-join">
-          <div class="cj-icon">💬</div>
-          <strong class="cj-title">Join now · Stay updated</strong>
-          <p class="cj-sub">Be the first to spot referrals and launches. It takes 10 seconds and it's completely free.</p>
-          <a class="btn btn-primary btn-full" id="communityJoinBtn" href="#" target="_blank" rel="noopener noreferrer">Join the WhatsApp community →</a>
-          <p class="community-note">No spam · Leave anytime · 1000+ members</p>
+        <div class="wwd-jump"><span class="wwd-arrow">↗</span><strong>+44</strong><small>points</small></div>
+        <div class="wwd-score wwd-after">
+          <span class="wwd-tag">After</span>
+          <div class="wwd-num">86<small>/100</small></div>
+          <ul>
+            <li>ATS-optimized keywords added</li>
+            <li>Quantified achievements &amp; impact</li>
+            <li>Clean, parseable formatting</li>
+          </ul>
         </div>
       </div>
 
+      <div class="wwd-grid">
+        <article class="wwd-card reveal">
+          <div class="wwd-ico">📊</div>
+          <h3>ATS Report</h3>
+          <p>A detailed, section-by-section score report showing exactly what's holding your resume back.</p>
+          <span class="wwd-price">from ₹19</span>
+          <a class="btn btn-dark btn-full" href="free-ats-resume-checker.html">Check my score →</a>
+        </article>
+        <article class="wwd-card featured reveal">
+          <span class="wwd-best">Most popular</span>
+          <div class="wwd-ico">✍️</div>
+          <h3>Resume Rewrite</h3>
+          <p>We rewrite your resume with the right keywords, real impact and clean ATS-friendly formatting.</p>
+          <span class="wwd-price">from ₹199</span>
+          <a class="btn btn-primary btn-full" id="wwdRewriteBtn" href="#" target="_blank" rel="noopener noreferrer">Rewrite my resume →</a>
+        </article>
+        <article class="wwd-card reveal">
+          <div class="wwd-ico">🚀</div>
+          <h3>Build from Scratch</h3>
+          <p>No resume yet? We build a professional, recruiter-ready resume for you from the ground up.</p>
+          <span class="wwd-price">from ₹250</span>
+          <a class="btn btn-dark btn-full" href="build.html">Build mine →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFY -->
+  <section class="certify-section">
+    <div class="section-inner">
       <div class="certify-card reveal" id="get-certified">
         <div class="certify-sample-mini">
           <span class="cs-label">Your free certificate</span>
@@ -107,27 +179,6 @@
           </ul>
           <a class="btn btn-primary" href="certify.html">Get certified — free →</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="brush-divider"></div>
-
-  <!-- SERVICES -->
-  <section class="services-section" id="services">
-    <div class="section-inner">
-      <span class="sec-label">Services</span>
-      <h2 class="sec-title display">Pick your level. Pay once. Get it on WhatsApp.</h2>
-      <p class="sec-sub">Clear pricing, fast delivery. Pay via UPI and get most things within 24–48 hours.</p>
-      <div class="ticker review-ticker" aria-label="What our clients say"><div class="ticker-track" id="reviewTicker"></div></div>
-      <div class="svc-carousel" id="svcCarousel">
-        <button class="svc-arrow svc-prev" id="svcPrev" type="button" aria-label="Previous services">‹</button>
-        <div class="svc-grid" id="servicesGrid"></div>
-        <button class="svc-arrow svc-next" id="svcNext" type="button" aria-label="Next services">›</button>
-      </div>
-      <div class="svc-followline">
-        <p>The free HR directory is yours — no strings. If it helps, a follow means a lot:</p>
-        <div class="follow-logos" id="followLogos"></div>
       </div>
     </div>
   </section>
