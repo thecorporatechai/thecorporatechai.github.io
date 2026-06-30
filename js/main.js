@@ -269,41 +269,34 @@ if (founderBox && cfg.founder) {
 }
 if (typeof renderContactRow === "function") renderContactRow($("#socialRow"), cfg);
 
-/* ---- Follow-us popup (first button click, once per session) ----------- */
-// Instead of interrupting on landing, the popup appears the FIRST time the
-// visitor clicks any action button/link. That first click is intercepted so the
-// popup is actually seen; after dismissing, the visitor clicks again to proceed.
-// It shows only once per browser session.
-const followPop = $("#followPop");
-if (followPop) {
+/* ---- Welcome launch-offer popup (once per session, auto-disappears) --- */
+const launchPop = $("#launchPop");
+const lo = cfg.launchOffer;
+if (launchPop && lo && lo.enabled !== false) {
+  const set = (id, txt) => { const el = document.getElementById(id); if (el && txt) el.textContent = txt; };
+  set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub); set("lpValid", lo.validTill);
+  setHref("lpIg", cfg.instagram);
+  setHref("lpWa", waUrl("Hi! I'd like to claim the launch offer — 5% off on services."));
+
   let seen = false;
-  try { seen = !!sessionStorage.getItem("tccFollowSeen"); } catch (e) {}
-  const markSeen = () => { seen = true; try { sessionStorage.setItem("tccFollowSeen", "1"); } catch (e) {} };
-  const openPop = () => { followPop.hidden = false; document.body.classList.add("pop-open"); markSeen(); };
-  const closePop = () => { followPop.hidden = true; document.body.classList.remove("pop-open"); };
-
-  // Intercept the first action click anywhere on the page (capture phase) so the
-  // popup is shown before any navigation happens.
-  const onFirstClick = (e) => {
-    if (seen) return;
-    const t = e.target.closest("a[href], button");
-    if (!t) return;
-    if (t.closest("#followPop")) return;        // ignore the popup's own controls
-    if (t.id === "navToggle") return;           // ignore the mobile menu toggle
-    e.preventDefault();
-    e.stopPropagation();
-    openPop();
+  try { seen = !!sessionStorage.getItem("tccLaunchSeen"); } catch (e) {}
+  let hideTimer = null;
+  const close = () => {
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    launchPop.classList.add("lp-closing");
+    setTimeout(() => { launchPop.hidden = true; launchPop.classList.remove("lp-closing"); }, 400);
   };
-  document.addEventListener("click", onFirstClick, true);
-
-  // Dismiss controls — closing does NOT navigate; the visitor clicks again to go on.
-  const closeBtn = $("#fpClose");
-  if (closeBtn) closeBtn.addEventListener("click", closePop);
-  const backdrop = $("#fpBackdrop");
-  if (backdrop) backdrop.addEventListener("click", closePop);
-  // Following IG / YouTube opens in a new tab and just closes the popup.
-  followPop.querySelectorAll(".fp-btn").forEach((b) => b.addEventListener("click", closePop));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !followPop.hidden) closePop(); });
+  const open = () => {
+    launchPop.hidden = false;
+    try { sessionStorage.setItem("tccLaunchSeen", "1"); } catch (e) {}
+    hideTimer = setTimeout(close, 12000);   // disappears on its own after 12s
+  };
+  if (!seen) setTimeout(open, 1400);
+  const lpClose = $("#lpClose");
+  if (lpClose) lpClose.addEventListener("click", close);
+  const lpBackdrop = $("#lpBackdrop");
+  if (lpBackdrop) lpBackdrop.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !launchPop.hidden) close(); });
 }
 
 /* ---- Scroll reveal ---------------------------------------------------- */
