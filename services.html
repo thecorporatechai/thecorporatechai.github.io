@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Resume rewrite, LinkedIn & Naukri optimization, ATS templates, certifications and more — clear pricing, fast delivery on WhatsApp. The Corporate Chai services.">
+  <title>Services | The Corporate Chai</title>
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="subpage">
+  <div class="grain"></div>
+  <nav class="subnav">
+    <a class="nav-brand" href="index.html"><img src="assets/logo.jpeg" alt=""><span>The Corporate <b>Chai</b></span></a>
+    <a class="back-link" href="index.html">← Back to home</a>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <span class="sec-label">Services</span>
+      <h1>Pick your level. Pay once. Get it on WhatsApp.</h1>
+      <p>Clear pricing, fast delivery. Pay via UPI and get most things within 24–48 hours.</p>
+    </div>
+  </header>
+
+  <div class="ticker review-ticker" aria-label="What our clients say"><div class="ticker-track" id="svcReviewTicker"></div></div>
+
+  <main class="services-page">
+    <div class="svc-tiles" id="svcTiles"></div>
+    <div class="svc-followline">
+      <p>The free HR directory is yours — no strings. If it helps, a follow means a lot:</p>
+      <div class="follow-logos" id="followLogos"></div>
+    </div>
+  </main>
+
+  <section class="sub-contact">
+    <div class="sub-contact-inner">
+      <h5>Contact us</h5>
+      <div class="social-row" id="subSocial"></div>
+      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy &amp; Terms</a></div>
+      <div class="foot-bottom" style="border:0">© 2024–2026 The Corporate Chai</div>
+    </div>
+  </section>
+
+  <a class="float-wa" id="floatWa" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10.3 10.3 0 0 1-1.6-5.6c0-5.7 4.7-10.4 10.4-10.4s10.4 4.7 10.4 10.4S21.7 25.8 16 25.8zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z" fill="#fff"/></svg>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script>
+    (function () {
+      var cfg = SITE_CONFIG;
+      var waUrl = function (m) { return "https://wa.me/" + cfg.whatsapp + "?text=" + encodeURIComponent(m || "Hi! I'd like to know more about The Corporate Chai."); };
+      var grid = document.getElementById("svcTiles");
+
+      (cfg.services || []).forEach(function (svc) {
+        var card = document.createElement("article");
+        var feats = (svc.feats || []).map(function (f) { return '<div>' + f + '</div>'; }).join("");
+        if (svc.free) {
+          card.className = "svc-card free-card";
+          card.innerHTML =
+            '<span class="gift-badge">🎁 FREE</span>' +
+            '<div class="svc-num">FREE GIFT</div>' +
+            '<h3 class="svc-title">' + svc.title + '</h3>' +
+            '<div class="svc-feats">' + feats + '</div>' +
+            '<div class="svc-price-row"><div class="svc-price"><strong>' + svc.price + '</strong><small>' + svc.priceNote + '</small></div>' +
+            '<a class="svc-cta-link" href="' + cfg.hrContactsUrl + '" target="_blank" rel="noopener noreferrer">Open →</a></div>';
+          grid.appendChild(card);
+          return;
+        }
+        card.className = "svc-card" + (svc.featured ? " featured" : "");
+        var cta = svc.href
+          ? '<a class="svc-cta-link" href="' + svc.href + '">Explore →</a>'
+          : '<a class="svc-cta-link" href="' + waUrl(svc.whatsappMsg) + '" target="_blank" rel="noopener noreferrer">Get this →</a>';
+        var bonus = svc.bonus ? '<div class="bonus-line">🎁 ' + svc.bonus + ' <span>included free</span></div>' : "";
+        var sampleHref = svc.sampleHref || svc.sampleUrl || (svc.sample ? cfg.sampleReportUrl : "");
+        var sampleLabel = svc.sampleLabel || "View sample report";
+        var sampleExt = /^https?:\/\//i.test(sampleHref || "");
+        var sample = sampleHref
+          ? '<a class="sample-report-link" href="' + sampleHref + '"' + (sampleExt ? ' target="_blank" rel="noopener noreferrer"' : '') + '><span>★</span> ' + sampleLabel + '</a>' : "";
+        card.innerHTML =
+          (svc.featured ? '<span class="best-tag">BEST VALUE</span>' : "") +
+          '<div class="svc-num">SERVICE ' + svc.id + '</div>' +
+          '<h3 class="svc-title">' + svc.title + '</h3>' +
+          '<div class="svc-feats">' + feats + '</div>' + bonus + sample +
+          '<div class="svc-price-row"><div class="svc-price"><strong>' + svc.price + '</strong><small>' + svc.priceNote + '</small></div>' + cta + '</div>';
+        grid.appendChild(card);
+      });
+
+      // review ticker
+      var tk = document.getElementById("svcReviewTicker");
+      if (tk && Array.isArray(cfg.reviews)) {
+        var seq = cfg.reviews.map(function (r) { return '<span>' + r + '</span><i>✦</i>'; }).join("");
+        tk.innerHTML = seq + seq;
+      }
+      // follow logos
+      var fl = document.getElementById("followLogos");
+      if (fl && window.TCC_ICON) {
+        fl.innerHTML =
+          '<a class="social-ico" href="' + cfg.instagram + '" target="_blank" rel="noopener noreferrer" aria-label="Instagram">' + TCC_ICON.instagram + '</a>' +
+          '<a class="social-ico" href="' + cfg.youtube + '" target="_blank" rel="noopener noreferrer" aria-label="YouTube">' + TCC_ICON.youtube + '</a>';
+      }
+      var floatWa = document.getElementById("floatWa");
+      if (floatWa) floatWa.href = waUrl("Hi! I'd like to know more about your services.");
+      if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
+    })();
+  </script>
+</body>
+</html>
