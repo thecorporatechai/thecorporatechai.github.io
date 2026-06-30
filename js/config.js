@@ -38,8 +38,10 @@ const SITE_CONFIG = {
 
   /* --- Hero stats ------------------------------------------------------ */
   stats: [
-    { value: "1000+", label: "Professionals helped" },
-    { value: "500+",  label: "Interview calls landed" }
+    { value: "1000+",  label: "Professionals helped", sub: "and counting" },
+    { value: "500+",   label: "Interview calls landed", sub: "after our help" },
+    { value: "10s",    label: "Instant ATS score", sub: "free, in your browser" },
+    { value: "24–48h", label: "Resume delivery", sub: "fast turnaround" }
   ],
 
   /* --- Rolling highlights ticker (under the header) -------------------- */
@@ -70,6 +72,7 @@ const SITE_CONFIG = {
   /* --- Paid services (cards under "Services") -------------------------- */
   services: [
     { id: "00", title: "ATS Resume Report", price: "₹19", priceNote: "detailed score report", sample: true,
+      sampleHref: "samples.html#reports", sampleLabel: "View sample report",
       feats: ["Complete ATS score breakdown", "Priority fixes for shortlist chances", "Sample report preview available"],
       whatsappMsg: "Hi! I want the detailed ATS Resume Report (₹19)." },
 
@@ -77,7 +80,7 @@ const SITE_CONFIG = {
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
       // Sample-templates "View sample" button → paste the Google Drive share link
       // below (the button stays hidden until a valid https:// link is added).
-      sampleUrl: "https://drive.google.com/drive/folders/1SMJRWYwjdsAC880Co4rW9RhKyh5CcKaH?usp=sharing",
+      sampleHref: "samples.html#templates",
       sampleLabel: "View sample template",
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
@@ -177,6 +180,32 @@ const SITE_CONFIG = {
   companies: [
     "Deloitte", "PwC", "EY", "KPMG", "Accenture", "Tech Mahindra",
     "TCS", "Infosys", "Wipro", "Deutsche Bank", "Capgemini", "Cognizant"
+  ],
+
+  /* --- Samples page (samples.html) ------------------------------------
+     Image tiles shown on the Samples page. Drop a new image in
+     assets/samples/ and add a line here — it appears automatically. */
+  sampleTemplates: [
+    { img: "assets/samples/template-01.jpg", name: "ATS · GRC / Security" },
+    { img: "assets/samples/template-02.jpg", name: "ATS · Developer" },
+    { img: "assets/samples/template-03.jpg", name: "Modern · Black & White" },
+    { img: "assets/samples/template-04.jpg", name: "Simple Professional · A4" },
+    { img: "assets/samples/template-05.jpg", name: "Simple Professional" },
+    { img: "assets/samples/template-06.jpg", name: "Standard Professional" },
+    { img: "assets/samples/template-07.jpg", name: "Modern Professional · Gold" },
+    { img: "assets/samples/template-08.jpg", name: "Software Engineer" },
+    { img: "assets/samples/template-09.jpg", name: "Simple CV · Blue" },
+    { img: "assets/samples/template-10.jpg", name: "Nursing / Healthcare" },
+    { img: "assets/samples/template-11.jpg", name: "Fresh Graduate" },
+    { img: "assets/samples/template-12.jpg", name: "Corporate ATS · Minimalist" },
+    { img: "assets/samples/template-13.jpg", name: "Accountant · Minimalist" },
+    { img: "assets/samples/template-14.jpg", name: "Modern Professional · Navy" },
+    { img: "assets/samples/template-15.jpg", name: "Professional Modern CV" },
+    { img: "assets/samples/template-16.jpg", name: "Accounting Executive CV" }
+  ],
+  sampleReports: [
+    { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
+    { img: "assets/samples/report-02.jpg", name: "ATS Score Report · Page 2" }
   ],
 
   /* --- Coming soon ----------------------------------------------------- */
