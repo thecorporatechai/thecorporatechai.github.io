@@ -620,6 +620,33 @@ footer { background: var(--ink); color: var(--muted-light); padding: 60px 5vw 30
 .fp-yt { background: #ff0000; }
 body.pop-open { overflow: hidden; }
 
+/* ---------- Launch-offer popup (centered) ---------- */
+.launch-pop { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
+.launch-pop[hidden] { display: none; }
+.lp-backdrop { position: absolute; inset: 0; background: rgba(13,13,13,.55); animation: lpFade .3s ease; }
+.lp-card { position: relative; z-index: 2; width: min(360px, 92vw); text-align: center;
+  background: linear-gradient(165deg, #221f1a, #0d0d0d); color: var(--paper); border: 1.5px solid var(--gold);
+  border-radius: 20px; padding: 30px 26px 26px; box-shadow: 0 26px 60px rgba(0,0,0,.6); animation: lpIn .5s cubic-bezier(.22,1,.36,1); }
+.launch-pop.lp-closing .lp-card { animation: lpOut .35s ease forwards; }
+.launch-pop.lp-closing .lp-backdrop { animation: lpFade .35s ease reverse forwards; }
+.lp-close { position: absolute; top: 10px; right: 12px; width: 30px; height: 30px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.12); color: var(--paper); font-size: 19px; line-height: 1; cursor: pointer; transition: background .2s; }
+.lp-close:hover { background: rgba(255,255,255,.24); }
+.lp-badge { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 11.5px; padding: 5px 13px; border-radius: 20px; letter-spacing: .03em; }
+.lp-title { font-family: var(--display); text-transform: uppercase; font-size: 23px; color: var(--gold); margin-top: 14px; line-height: 1.12; }
+.lp-sub { font-size: 13.5px; color: #d8d2c4; line-height: 1.55; margin-top: 10px; }
+.lp-sub strong { color: var(--paper); }
+.lp-valid { font-size: 12.5px; color: var(--gold); font-weight: 800; margin-top: 12px; }
+.lp-actions { display: flex; gap: 10px; margin-top: 18px; }
+.lp-btn { flex: 1; text-align: center; padding: 11px 8px; border-radius: 10px; font-size: 13px; font-weight: 800; color: #fff; transition: transform .15s; }
+.lp-btn:hover { transform: translateY(-1px); }
+.lp-ig { background: linear-gradient(45deg, #f09433, #dc2743 50%, #bc1888); }
+.lp-wa { background: #25d366; }
+@keyframes lpIn { from { opacity: 0; transform: translateY(14px) scale(.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes lpOut { to { opacity: 0; transform: translateY(14px) scale(.95); } }
+@keyframes lpFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .lp-card, .lp-backdrop { animation: none; } }
+
 /* ---------- AI prompts pack (certifications page) ---------- */
 .ai-pack { background: var(--ink); color: var(--paper); border: 2px solid var(--gold); border-radius: 20px; padding: 30px 32px; margin-bottom: 44px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; position: relative; overflow: hidden; }
