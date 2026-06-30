@@ -29,14 +29,49 @@
     els.status.className = "form-status" + (message ? " show" : "") + (type ? " form-status--" + type : "");
   }
 
+  /* ---- Mandatory selections (job type + experience level) ------------- */
+  // Both choices are required before a resume can be scored. The picks change
+  // how the resume is scored — everything still runs entirely in the browser.
+  function getPrefs() {
+    const jt = document.querySelector('input[name="jobType"]:checked');
+    const el = document.querySelector('input[name="expLevel"]:checked');
+    return { jobType: jt ? jt.value : "", expLevel: el ? el.value : "" };
+  }
+  function prefsValid() {
+    const p = getPrefs();
+    const box = document.getElementById("atsPrefs");
+    if (!p.jobType || !p.expLevel) {
+      if (box) { box.classList.add("invalid"); scrollIntoChecker(box); }
+      setStatus("Please pick your role type (Tech/IT or Non-tech) and experience level before uploading.", "error");
+      els.file.value = "";
+      return false;
+    }
+    if (box) box.classList.remove("invalid");
+    return true;
+  }
+  // Clear the error highlight as soon as the user makes a choice.
+  document.querySelectorAll('input[name="jobType"], input[name="expLevel"]').forEach((r) =>
+    r.addEventListener("change", () => {
+      const box = document.getElementById("atsPrefs");
+      if (box) box.classList.remove("invalid");
+      setStatus("");
+    }));
+
   /* ---- Upload (auto-runs the check) ----------------------------------- */
-  els.file.addEventListener("change", () => { if (els.file.files[0]) analyze(els.file.files[0]); });
+  els.file.addEventListener("change", () => {
+    if (!els.file.files[0]) return;
+    if (!prefsValid()) return;
+    analyze(els.file.files[0]);
+  });
   ["dragenter", "dragover"].forEach((ev) =>
     els.drop.addEventListener(ev, (e) => { e.preventDefault(); els.drop.classList.add("dragover"); }));
   ["dragleave", "drop"].forEach((ev) =>
     els.drop.addEventListener(ev, (e) => { e.preventDefault(); els.drop.classList.remove("dragover"); }));
   els.drop.addEventListener("drop", (e) => {
-    if (e.dataTransfer.files.length) { els.file.files = e.dataTransfer.files; analyze(e.dataTransfer.files[0]); }
+    if (!e.dataTransfer.files.length) return;
+    if (!prefsValid()) return;
+    els.file.files = e.dataTransfer.files;
+    analyze(e.dataTransfer.files[0]);
   });
 
   /* ---- Text extraction ------------------------------------------------ */
@@ -83,8 +118,41 @@
   const tokenize = (t) => (t.toLowerCase().match(/[a-z][a-z+.#-]{1,}/g) || [])
     .map((w) => w.replace(/[.+#-]+$/, "")).filter((w) => w.length >= 3 && !STOPWORDS.has(w));
 
-  function scoreResume(text) {
-    const raw = (text || "").replace(/[   ]/g, " ");
+  /* Role-relevant keyword banks. The chosen track decides which bank we look
+     for — a Tech/IT resume is rewarded for tech keywords, a Non-tech resume
+     for business/operations keywords. All matching happens in the browser. */
+  const TECH_KEYWORDS = [
+    "javascript", "typescript", "python", "java", "c++", "c#", "golang", "rust",
+    "kotlin", "swift", "php", "ruby", "react", "angular", "vue", "node", "django",
+    "flask", "spring", "html", "css", "sql", "nosql", "mongodb", "postgres",
+    "mysql", "redis", "aws", "azure", "gcp", "cloud", "docker", "kubernetes",
+    "linux", "git", "github", "api", "rest", "graphql", "microservices", "devops",
+    "ci/cd", "jenkins", "terraform", "ansible", "selenium", "automation", "agile",
+    "scrum", "machine learning", "deep learning", "tensorflow", "pytorch", "data",
+    "analytics", "tableau", "power bi", "excel", "spark", "hadoop", "kafka",
+    "cybersecurity", "security", "network", "firewall", "siem", "penetration",
+    "embedded", "firmware", "qa", "testing", "debugging"
+  ];
+  const NONTECH_KEYWORDS = [
+    "sales", "marketing", "operations", "finance", "accounting", "audit",
+    "compliance", "payroll", "human resources", "recruitment", "onboarding",
+    "training", "stakeholder", "client", "customer", "communication",
+    "leadership", "negotiation", "strategy", "business development", "management",
+    "coordination", "presentation", "budget", "revenue", "profit", "forecasting",
+    "crm", "b2b", "b2c", "campaign", "branding", "content", "social media",
+    "logistics", "supply chain", "procurement", "vendor", "portfolio", "planning",
+    "administration", "documentation", "reporting", "relationship", "retention",
+    "process improvement", "stakeholder management", "team handling", "escalation",
+    "service delivery", "quality", "operations management"
+  ];
+
+  // jobType: "tech" | "nontech" — expLevel: "fresher" | "experienced"
+  function scoreResume(text, jobType, expLevel) {
+    jobType = (jobType === "tech") ? "tech" : "nontech";
+    expLevel = (expLevel === "experienced") ? "experienced" : "fresher";
+    const isExp = expLevel === "experienced";
+
+    const raw = (text || "").replace(/[  -​ 　]/g, " ");
     const lower = raw.toLowerCase();
     const words = (raw.match(/\b[\w'-]+\b/g) || []).length;
     const lines = raw.split(/\r?\n/);
@@ -92,47 +160,116 @@
     const hasEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(raw);
     const pm = raw.match(/(\+?\d[\d\s().-]{7,}\d)/);
     const hasPhone = !!pm && pm[0].replace(/\D/g, "").length >= 8;
-    const hasProfileLink = /linkedin\.com\//i.test(raw) || /github\.com\//i.test(raw);
+    const hasLinkedIn = /linkedin\.com\//i.test(raw);
+    const hasGithub = /github\.com\//i.test(raw);
+    // Tech track values a GitHub/portfolio link; non-tech values LinkedIn.
+    const hasProfileLink = jobType === "tech" ? (hasGithub || hasLinkedIn) : hasLinkedIn;
     const pages = Math.max(1, Math.ceil(words / 500));
 
     const sec = (re) => re.test(lower);
     const hasExperience = sec(/\b(experience|work history|employment|professional background)\b/);
-    const hasEducation = sec(/\b(education|academic|qualification)\b/);
-    const hasSkills = sec(/\b(skills|technical skills|core competenc|expertise)\b/);
+    const hasEducation = sec(/\b(education|academic|qualification|degree|bachelor|master|b\.?tech|b\.?e\.?|b\.?sc|m\.?tech|mba|university|college)\b/);
+    const hasSkills = sec(/\b(skills|technical skills|core competenc|expertise|proficienc)\b/);
     const hasSummary = sec(/\b(summary|objective|profile|about me)\b/);
+    const hasProjects = sec(/\b(projects?|capstone|portfolio)\b/);
+    const hasInternship = sec(/\b(intern|internship|trainee|apprentice)\b/);
+    const hasCerts = sec(/\b(certification|certificate|certified|coursera|udemy|nptel)\b/);
 
     const quantHits = (raw.match(/(\d+\s?%|₹\s?\d|\$\s?\d|\b\d+\s?\+|\b\d{2,}\b)/g) || []).length;
     let verbHits = 0;
     ACTION_VERBS.forEach((v) => { if (new RegExp("\\b" + v + "\\b", "i").test(raw)) verbHits++; });
+
+    // Role-relevant keyword coverage for the chosen track.
+    const KW = jobType === "tech" ? TECH_KEYWORDS : NONTECH_KEYWORDS;
+    let kwHits = 0;
+    KW.forEach((k) => { if (lower.indexOf(k) !== -1) kwHits++; });
 
     const hasBullets = lines.filter((l) => /^\s*[•▪◦–⁃*-]/.test(l)).length >= 3;
     const hasDates = /\b(19|20)\d{2}\b/.test(raw);
     const letters = (raw.match(/[a-z]/gi) || []).length;
     const upper = (raw.match(/[A-Z]/g) || []).length;
     const tooShouty = letters > 0 && upper / letters > 0.45;
-    const garbled = (raw.match(/�/g) || []).length > 10;
+    const garbled = (raw.match(/ /g) || []).length > 10;
     const toks = tokenize(raw);
     const uniqueRatio = toks.length ? new Set(toks).size / toks.length : 0;
 
     let earned = 0, possible = 0;
     const add = (e, m) => { earned += e; possible += m; };
-    add((hasEmail ? 4 : 0) + (hasPhone ? 4 : 0) + (hasProfileLink ? 3 : 0) +
-        ((words >= 300 && words <= 1100) ? 4 : (words >= 200 && words <= 1400 ? 2 : 1)), 15);
-    add((hasExperience ? 8 : 0) + (hasSkills ? 7 : 0) + (hasEducation ? 5 : 0) + (hasSummary ? 5 : 0), 25);
-    add((quantHits >= 8 ? 12 : quantHits >= 4 ? 8 : quantHits >= 1 ? 4 : 0) +
-        (verbHits >= 8 ? 13 : verbHits >= 4 ? 9 : verbHits >= 1 ? 5 : 0), 25);
-    add((hasBullets ? 5 : 0) + (hasDates ? 4 : 0) + (tooShouty ? 0 : 3) + (garbled ? 0 : 3), 15);
-    add(Math.round(clamp(verbHits / 8, 0, 1) * 8) + (hasBullets ? 4 : 0), 12);
-    add(Math.round(clamp((uniqueRatio - 0.3) / 0.4, 0, 1) * 8), 8);
 
-    const total = clamp(Math.round((earned / possible) * 100), 0, 100);
+    // 1. Contact & length (15) — experienced resumes are expected to be longer.
+    const lenLo = isExp ? 350 : 220, lenHi = isExp ? 1100 : 850;
+    const lenScore = (words >= lenLo && words <= lenHi) ? 4
+      : (words >= lenLo - 120 && words <= lenHi + 300) ? 2 : 1;
+    add((hasEmail ? 4 : 0) + (hasPhone ? 4 : 0) + (hasProfileLink ? 3 : 0) + lenScore, 15);
+
+    // 2. Core sections (25) — weighted by experience level.
+    if (isExp) {
+      add((hasExperience ? 9 : 0) + (hasSkills ? 6 : 0) + (hasSummary ? 6 : 0) + (hasEducation ? 4 : 0), 25);
+    } else {
+      // Freshers: projects / internships / certifications carry the weight.
+      add((hasEducation ? 7 : 0) + (hasSkills ? 6 : 0) +
+          ((hasProjects || hasInternship) ? 7 : 0) + ((hasSummary || hasCerts) ? 5 : 0), 25);
+    }
+
+    // 3. Quantified impact & action verbs (18) — higher bar for experienced.
+    const qS = isExp
+      ? (quantHits >= 8 ? 9 : quantHits >= 4 ? 6 : quantHits >= 1 ? 3 : 0)
+      : (quantHits >= 5 ? 9 : quantHits >= 2 ? 6 : quantHits >= 1 ? 3 : 0);
+    const vS = isExp
+      ? (verbHits >= 8 ? 9 : verbHits >= 4 ? 6 : verbHits >= 1 ? 3 : 0)
+      : (verbHits >= 5 ? 9 : verbHits >= 3 ? 6 : verbHits >= 1 ? 3 : 0);
+    add(qS + vS, 18);
+
+    // 4. Role-relevant keyword match (12) — this is where Tech vs Non-tech bites.
+    const kwScore = kwHits >= 8 ? 12 : kwHits >= 5 ? 9 : kwHits >= 3 ? 6 : kwHits >= 1 ? 3 : 0;
+    add(kwScore, 12);
+
+    // 5. Formatting & readability (15).
+    add((hasBullets ? 5 : 0) + (hasDates ? 4 : 0) + (tooShouty ? 0 : 3) + (garbled ? 0 : 3), 15);
+
+    // 6. Articulation & vocabulary variety (15).
+    add(Math.round(clamp(verbHits / 8, 0, 1) * 7) + (hasBullets ? 3 : 0) +
+        Math.round(clamp((uniqueRatio - 0.3) / 0.4, 0, 1) * 5), 15);
+
+    // ---- Resume gate + calibration --------------------------------------
+    // A genuine resume must show contact info, multiple recognised sections and
+    // dates. Anything that doesn't look like a resume is scored low so the tool
+    // stays honest (no more "good score for any file"). Real resumes are then
+    // kept a notch below the paid engine and capped below a perfect score.
+    const rawPct = clamp(Math.round((earned / possible) * 100), 0, 100);
+    const FREE_CAP = 88;   // free score never reads "perfect"
+    const sectionCount = [hasExperience, hasEducation, hasSkills, hasSummary, hasProjects].filter(Boolean).length;
+    const hasContact = hasEmail || hasPhone;
+    // Reject audit reports / scorecards / analyses that merely TALK about a resume
+    // (e.g. our own ₹19 report) — they trip every resume signal but aren't resumes.
+    let reportHits = 0;
+    [/\baudit report\b/, /\bats audit\b/, /\bcategory breakdown\b/, /\bverdict\s*:/, /\bprepared for\b/,
+     /\btop priority fixes\b/, /\bkeyword analysis\b/, /\bfull checklist\b/, /\bsection detected\b/,
+     /\b(email|phone number) found\b/, /\bimprovement\(s\)/, /\brecommendation/].forEach(function (re) { if (re.test(lower)) reportHits++; });
+    const fractionCount = (raw.match(/\b\d{1,3}\s*\/\s*\d{1,3}\b/g) || []).length;   // 86/100, 17/20 …
+    const looksLikeReport = reportHits >= 2 || fractionCount >= 5;
+    const looksLikeResume = hasContact && sectionCount >= 2 && (hasDates || sectionCount >= 3) &&
+                            words >= 60 && words <= 1800 && !looksLikeReport;
+    let total;
+    if (looksLikeReport) {
+      total = clamp(Math.round(rawPct * 0.28), 0, 28);   // an audit/report, not a resume
+    } else if (!looksLikeResume) {
+      total = clamp(Math.round(rawPct * 0.4), 0, 38);    // not a (proper) resume → low
+    } else {
+      total = clamp(rawPct >= 60 ? Math.round(rawPct + (rawPct - 60) * 0.30 + 2) : rawPct, 0, FREE_CAP);
+    }
     const bands = CFG.scoreBands || { medium: 55, high: 80 };
     const band = total >= bands.high ? "high" : total >= bands.medium ? "medium" : "low";
 
     const problems = [
       !hasEmail, !hasPhone, !hasProfileLink, !hasSummary, !hasSkills,
-      !hasExperience, !hasEducation, quantHits < 4, verbHits < 4, !hasBullets,
-      (words < 300 || pages > 2), garbled, uniqueRatio < 0.45
+      isExp ? !hasExperience : !(hasProjects || hasInternship),
+      !hasEducation,
+      isExp ? quantHits < 4 : quantHits < 2,
+      isExp ? verbHits < 4 : verbHits < 3,
+      !hasBullets, kwHits < 3,
+      (words < lenLo - 120 || pages > (isExp ? 3 : 2)),
+      garbled, uniqueRatio < 0.45
     ];
     return { total, band, issues: problems.filter(Boolean).length };
   }
@@ -188,11 +325,18 @@
     const reportUrl = waLink(`Hi! I used the free ATS checker and scored ${total}/100. I'd like the detailed fix report (${CFG.reportPrice || "₹19"}).`);
     const rewriteUrl = waLink(`Hi! I used the free ATS checker and scored ${total}/100. I'd like the ATS Resume Rewrite (${CFG.rewritePrice || "₹199"}) to fix it.`);
     const tmplUrl = waLink(tmpl.whatsappMsg || "Hi! I want the ATS resume templates (₹49).");
+    // "View sample template" link — same config field as the Services card,
+    // so one Drive link drives both. The button only shows for a real URL.
+    const tmplSampleUrl = tmpl.sampleUrl || "";
+    const tmplSampleOk = /^https?:\/\//i.test(tmplSampleUrl);
+    const tmplSampleLabel = tmpl.sampleLabel || "View sample template";
     const ARC = Math.PI * 90;
     const offset = ARC * (1 - total / 100);
+    // We flag THAT issues exist, but never reveal the count or the details —
+    // the exact, itemised issue list is part of the paid ₹19 report.
     const issuesHtml = issues > 0
-      ? `<p class="rc-issues">${issues} ${issues === 1 ? "issue" : "issues"} found</p>`
-      : `<p class="rc-issues ok">No major issues 🎉</p>`;
+      ? `<p class="rc-issues">⚠️ Issues found in your resume</p>`
+      : `<p class="rc-issues ok">No major blockers found 🎉</p>`;
     els.result.innerHTML = `
       <div class="rc-card band-${band}">
         <h4 class="rc-title">Resume Checker</h4>
@@ -205,9 +349,14 @@
         </div>
         <div class="rc-verdict">${VERDICT[band]}</div>
         ${issuesHtml}
-        <a class="sample-report-btn" href="${sampleReportUrl}" target="_blank" rel="noopener noreferrer">View sample report →</a>
+        <p class="ats-watermark rc-watermark">🔒 This free score is a deliberately conservative, browser-based estimate. Your <strong>exact ATS score and every issue in detail</strong> — as per our designed ATS algorithm — are revealed in the paid <strong>ATS Resume Report (${CFG.reportPrice || "₹19"})</strong>.</p>
+        <div class="rc-sample-row">
+          <a class="sample-report-btn" href="samples.html#reports">View sample report →</a>
+          <a class="sample-report-btn" href="samples.html">View samples →</a>
+        </div>
         <a class="btn btn-primary btn-full" href="${reportUrl}" target="_blank" rel="noopener noreferrer">Unlock full report — ${CFG.reportPrice || "₹19"} →</a>
         <a class="btn btn-dark btn-full" href="${rewriteUrl}" target="_blank" rel="noopener noreferrer">Rewrite my resume — ${CFG.rewritePrice || "₹199"} →</a>
+        <p class="ats-watermark rc-merged-note">✍️ <strong>Fix every issue</strong> with our Resume Rewrite · 🚚 delivered in <strong>24–48 hrs</strong>.</p>
         <a class="ats-reset" id="atsReset" role="button" tabindex="0">↻ Check another resume</a>
         <div class="diy-card">
           <div class="diy-copy">
@@ -240,7 +389,8 @@
       if (!text || text.replace(/\s/g, "").length < 120) {
         throw new Error("We couldn't read enough text — this may be a scanned/image PDF. Try a DOCX or a text-based PDF.");
       }
-      const r = scoreResume(text);
+      const prefs = getPrefs();
+      const r = scoreResume(text, prefs.jobType, prefs.expLevel);
       await minDelay;
       clearInterval(timer);
       renderScoreCard(r.total, r.band, r.issues);
