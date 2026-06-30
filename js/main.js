@@ -28,6 +28,8 @@ setHref("rateBtn", cfg.googleReviewUrl);
 setHref("feedbackBtn", `mailto:${cfg.email}?subject=${encodeURIComponent("Feedback for The Corporate Chai")}`);
 setHref("fpIg", cfg.instagram);
 setHref("fpYt", cfg.youtube);
+setHref("heroIg", cfg.instagram);
+setHref("wwdRewriteBtn", waUrl("Hi! I'd like the ATS Resume Rewrite service (" + (cfg.rewritePrice || "₹199") + ")."));
 
 /* ---- Rolling highlights ticker ---------------------------------------- */
 const tickerItem = (t) => `<span>${t}</span><i>✦</i>`;
@@ -69,14 +71,70 @@ function countUp(el, target, suffix, duration) {
   const d = document.createElement("div");
   d.className = "hstat";
   const m = String(s.value).match(/^(\d+)(.*)$/);          // split "100+" -> 100, "+"
-  d.innerHTML = `<div class="n">${m ? "1" + m[2] : s.value}</div><div class="l">${s.label}</div>`;
+  d.innerHTML = `<div class="n">${m ? "1" + m[2] : s.value}</div><div class="l">${s.label}</div>${s.sub ? `<div class="s">${s.sub}</div>` : ""}`;
   heroStats.appendChild(d);
   if (m) countUp(d.querySelector(".n"), parseInt(m[1], 10), m[2] || "", 3400);
 });
 
-/* ---- Services --------------------------------------------------------- */
+/* ---- Hero resume showcase — cycles weak ↔ strong with a synced gauge --- */
+(function () {
+  const stack = document.querySelector(".hv-stack");
+  const shots = stack ? Array.prototype.slice.call(stack.querySelectorAll(".hv-shot")) : [];
+  const fill = document.querySelector(".hvg-fill");
+  const numEl = document.getElementById("heroScore");
+  const lblEl = document.querySelector(".hv-verdict-lbl");
+  if (!stack || shots.length < 2 || !fill || !numEl) { if (numEl) numEl.textContent = "88"; return; }
+
+  // A mix of weak (blurred, red) and strong (sharp, green) resumes so visitors
+  // see the before/after at a glance. tone → blur amount + gauge colour.
+  const slides = [
+    { score: 88, label: "Strong",  tone: "strong" },
+    { score: 41, label: "Weak",    tone: "weak" },
+    { score: 86, label: "Strong",  tone: "strong" },
+    { score: 58, label: "Average", tone: "avg" }
+  ];
+  const COLOR = { weak: "#ef4444", avg: "#f59e0b", strong: "#22c55e" };
+  const BLUR  = { weak: "blur(3px)", avg: "blur(1.2px)", strong: "none" };
+  const ARC = 314;
+  let idx = -1, numRaf = null, timer = null;
+
+  function animateNum(to) {
+    cancelAnimationFrame(numRaf);
+    const from = parseInt(numEl.textContent, 10) || 0, start = performance.now(), dur = 850;
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      numEl.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) numRaf = requestAnimationFrame(step);
+    };
+    numRaf = requestAnimationFrame(step);
+  }
+  function show(n) {
+    const s = slides[n], active = n % shots.length, c = COLOR[s.tone];
+    shots.forEach((img, k) => {
+      img.style.opacity = k === active ? "1" : "0";
+      img.style.filter = k === active ? BLUR[s.tone] : "none";
+    });
+    fill.style.stroke = c;
+    fill.style.strokeDashoffset = ARC * (1 - s.score / 100);
+    numEl.style.color = c;
+    if (lblEl) { lblEl.textContent = s.label; lblEl.style.color = c; lblEl.style.opacity = "1"; }
+    animateNum(s.score);
+  }
+  function next() { idx = (idx + 1) % slides.length; show(idx); }
+
+  next();   // show first state immediately
+  if (!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    timer = setInterval(next, 3400);
+    document.addEventListener("visibilitychange", () => {
+      clearInterval(timer);
+      if (!document.hidden) timer = setInterval(next, 3400);
+    });
+  }
+})();
+
+/* ---- Services (homepage carousel; the full list lives on services.html) */
 const servicesGrid = $("#servicesGrid");
-(cfg.services || []).forEach((svc) => {
+if (servicesGrid) (cfg.services || []).forEach((svc) => {
   const card = document.createElement("article");
   const feats = (svc.feats || []).map((f) => `<div>${f}</div>`).join("");
 
@@ -104,10 +162,11 @@ const servicesGrid = $("#servicesGrid");
   // Per-service "View sample" button. A service can either set its own `sampleUrl`
   // (e.g. the templates card) or use `sample: true` to fall back to the shared
   // report sample link. The button only renders when the link is a real URL.
-  const sampleUrl = svc.sampleUrl || (svc.sample ? cfg.sampleReportUrl : "");
+  const sampleHref = svc.sampleHref || svc.sampleUrl || (svc.sample ? cfg.sampleReportUrl : "");
   const sampleLabel = svc.sampleLabel || "View sample report";
-  const sample = /^https?:\/\//i.test(sampleUrl || "")
-    ? `<a class="sample-report-link" href="${sampleUrl}" target="_blank" rel="noopener noreferrer" aria-label="${sampleLabel}"><span>★</span> ${sampleLabel}</a>`
+  const sampleExt = /^https?:\/\//i.test(sampleHref || "");
+  const sample = sampleHref
+    ? `<a class="sample-report-link" href="${sampleHref}"${sampleExt ? ' target="_blank" rel="noopener noreferrer"' : ''} aria-label="${sampleLabel}"><span>★</span> ${sampleLabel}</a>`
     : "";
   card.innerHTML = `
     ${svc.featured ? '<span class="best-tag">BEST VALUE</span>' : ""}
@@ -147,21 +206,26 @@ const servicesGrid = $("#servicesGrid");
     else track.scrollBy({ left: -step(), behavior: "smooth" });
   };
 
-  let timer = null;
-  const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-  const start = () => { stop(); timer = setInterval(() => goNext(true), 3000); };
-  const restart = () => { start(); };
+  // Smooth, continuous "marquee" auto-scroll — premium feel, ~3 tiles gliding.
+  let raf = null;
+  const SPEED = 0.7;                       // px per frame ≈ 42px/s
+  const tick = () => {
+    if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) track.scrollLeft = 0;
+    else track.scrollLeft += SPEED;
+    raf = requestAnimationFrame(tick);
+  };
+  const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } };
+  const start = () => { stop(); raf = requestAnimationFrame(tick); };
 
-  if (next) next.addEventListener("click", () => { goNext(true); restart(); });
-  if (prev) prev.addEventListener("click", () => { goPrev(); restart(); });
-  // Pause while the visitor is reading / interacting, resume after.
+  // Arrows pause the glide, step one card, then resume.
+  if (next) next.addEventListener("click", () => { stop(); goNext(true); setTimeout(start, 900); });
+  if (prev) prev.addEventListener("click", () => { stop(); goPrev(); setTimeout(start, 900); });
   carousel.addEventListener("mouseenter", stop);
   carousel.addEventListener("mouseleave", start);
   carousel.addEventListener("touchstart", stop, { passive: true });
-  // Pause while the tab is hidden; resume when it's visible again.
   document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); else start(); });
 
-  // Auto-roll unless the visitor prefers reduced motion (arrows still work).
+  // Glide unless the visitor prefers reduced motion (arrows still work).
   const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduce && !document.hidden) start();
 })();
