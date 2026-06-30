@@ -387,16 +387,33 @@
         add(Math.round(clamp(verbHits / 8, 0, 1) * 7) + (hasBullets ? 3 : 0) +
             Math.round(clamp((uniqueRatio - 0.3) / 0.4, 0, 1) * 5), 15);
 
-        // ---- Calibration -------------------------------------------------
-        // The full ATS engine behind the paid ₹19 report is the source of truth.
-        // This free in-browser checker is intentionally a TEASER: it tracks that
-        // engine but reads a notch lower and is capped below a perfect score, so
-        // the exact score + detailed issue list stay exclusive to the paid report
-        // and rewrite. Only already-decent resumes (raw >= 60) get the upward
-        // alignment toward the engine; weaker resumes stay low so their gaps show.
+        // ---- Resume gate + calibration -----------------------------------
+        // A genuine resume must show contact info, multiple recognised sections
+        // and dates. Anything that doesn't look like a resume is scored low so the
+        // tool stays honest (no more "good score for any file"). Real resumes are
+        // then kept a notch below the paid engine and capped below a perfect score.
         const rawPct = clamp(Math.round((earned / possible) * 100), 0, 100);
         const FREE_CAP = 88;   // free score never reads "perfect"
-        const total = clamp(rawPct >= 60 ? Math.round(rawPct + (rawPct - 60) * 0.35 + 3) : rawPct, 0, FREE_CAP);
+        const sectionCount = [hasExperience, hasEducation, hasSkills, hasSummary, hasProjects].filter(Boolean).length;
+        const hasContact = hasEmail || hasPhone;
+        // Reject audit reports / scorecards / analyses that merely TALK about a resume
+        // (e.g. our own ₹19 report) — they trip every resume signal but aren't resumes.
+        let reportHits = 0;
+        [/\baudit report\b/, /\bats audit\b/, /\bcategory breakdown\b/, /\bverdict\s*:/, /\bprepared for\b/,
+         /\btop priority fixes\b/, /\bkeyword analysis\b/, /\bfull checklist\b/, /\bsection detected\b/,
+         /\b(email|phone number) found\b/, /\bimprovement\(s\)/, /\brecommendation/].forEach(function (re) { if (re.test(lower)) reportHits++; });
+        const fractionCount = (raw.match(/\b\d{1,3}\s*\/\s*\d{1,3}\b/g) || []).length;   // 86/100, 17/20 …
+        const looksLikeReport = reportHits >= 2 || fractionCount >= 5;
+        const looksLikeResume = hasContact && sectionCount >= 2 && (hasDates || sectionCount >= 3) &&
+                                words >= 60 && words <= 1800 && !looksLikeReport;
+        let total;
+        if (looksLikeReport) {
+          total = clamp(Math.round(rawPct * 0.28), 0, 28);   // an audit/report, not a resume
+        } else if (!looksLikeResume) {
+          total = clamp(Math.round(rawPct * 0.4), 0, 38);    // not a (proper) resume → low
+        } else {
+          total = clamp(rawPct >= 60 ? Math.round(rawPct + (rawPct - 60) * 0.30 + 2) : rawPct, 0, FREE_CAP);
+        }
         const bands = CFG.scoreBands || { medium: 55, high: 80 };
         const band = total >= bands.high ? "high" : total >= bands.medium ? "medium" : "low";
 
@@ -489,7 +506,10 @@
             <div class="rc-verdict">${VERDICT[band]}</div>
             ${issuesHtml}
             <p class="ats-watermark rc-watermark">🔒 This free score is a deliberately conservative, browser-based estimate. Your <strong>exact ATS score and every issue in detail</strong> — as per our designed ATS algorithm — are revealed in the paid <strong>ATS Resume Report (${CFG.reportPrice || "₹19"})</strong>.</p>
-            <a class="sample-report-btn" href="${sampleReportUrl}" target="_blank" rel="noopener noreferrer">View sample report →</a>
+            <div class="rc-sample-row">
+              <a class="sample-report-btn" href="samples.html#reports">View sample report →</a>
+              <a class="sample-report-btn" href="samples.html">View samples →</a>
+            </div>
             <a class="btn btn-primary btn-full" href="${reportUrl}" target="_blank" rel="noopener noreferrer">Unlock full report — ${CFG.reportPrice || "₹19"} →</a>
             <a class="btn btn-dark btn-full" href="${rewriteUrl}" target="_blank" rel="noopener noreferrer">Rewrite my resume — ${CFG.rewritePrice || "₹199"} →</a>
             <p class="ats-watermark rc-merged-note">✍️ <strong>Fix every issue</strong> with our Resume Rewrite · 🚚 delivered in <strong>24–48 hrs</strong>.</p>
@@ -500,10 +520,7 @@
                 <strong>Prefer to fix it yourself?</strong>
                 <p>Grab our 5 ATS-ready resume templates and rewrite it on your own.</p>
               </div>
-              <div class="diy-actions">
-                <a class="btn btn-primary" href="${tmplUrl}" target="_blank" rel="noopener noreferrer">Get templates →</a>
-                ${tmplSampleOk ? `<a class="sample-report-btn diy-sample" href="${tmplSampleUrl}" target="_blank" rel="noopener noreferrer">★ ${tmplSampleLabel}</a>` : ""}
-              </div>
+              <a class="btn btn-primary" href="${tmplUrl}" target="_blank" rel="noopener noreferrer">Get templates →</a>
             </div>
             <p class="ats-privacy">🔒 Scored in your browser — your resume was never uploaded or stored.</p>
             <p class="ats-disclaimer">*This ATS score is generated by our own heuristic logic for guidance only. It is not aligned with, or endorsed by, any specific ATS, employer or official benchmark.</p>
