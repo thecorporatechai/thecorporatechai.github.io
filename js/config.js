@@ -69,6 +69,15 @@ const SITE_CONFIG = {
   buildOffer: "50% off · first 100 users",
   scoreBands: { medium: 55, high: 80 },   // <medium = Weak, <high = Medium, else Strong
 
+  /* --- Welcome launch-offer popup (shows once per visit) -------------- */
+  launchOffer: {
+    enabled: true,
+    badge: "🎉 Launch Offer",
+    title: "Flat 5% OFF on all services",
+    sub: "Contact us now to claim it — and follow us on Instagram for our monthly giveaway. This month: 🎧 Earphones!",
+    validTill: "⏳ Valid till 15 July 2026"
+  },
+
   /* --- Paid services (cards under "Services") -------------------------- */
   services: [
     { id: "00", title: "ATS Resume Report", price: "₹19", priceNote: "detailed score report", sample: true,
