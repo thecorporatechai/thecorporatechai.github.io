@@ -10,32 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HL097LFTE1');
-</script>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1329183836005098');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body class="subpage">
   <div class="grain"></div>
@@ -55,9 +29,12 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
   <div class="ticker review-ticker" aria-label="What our clients say"><div class="ticker-track" id="svcReviewTicker"></div></div>
 
   <main class="services-page">
+    <div class="svc-samples-cta">
+      <a class="samples-highlight" href="samples.html"><span class="sh-star">★</span> View sample reports &amp; templates <span class="sh-arrow">→</span></a>
+    </div>
     <div class="svc-tiles" id="svcTiles"></div>
     <div class="svc-followline">
-      <p>The free HR directory is yours — no strings. If it helps, a follow means a lot:</p>
+      <p>If our free tools helped you, a quick follow means a lot:</p>
       <div class="follow-logos" id="followLogos"></div>
     </div>
   </main>
@@ -83,37 +60,35 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
       var waUrl = function (m) { return "https://wa.me/" + cfg.whatsapp + "?text=" + encodeURIComponent(m || "Hi! I'd like to know more about The Corporate Chai."); };
       var grid = document.getElementById("svcTiles");
 
+      // Builds the price block: struck original + "% OFF" pill on top, the live
+      // price big below, then the note — clean, left-aligned discount layout.
+      function priceBlock(svc) {
+        var was = "";
+        if (svc.original) {
+          var a = parseInt(String(svc.original).replace(/[^\d]/g, ""), 10);
+          var b = parseInt(String(svc.price).replace(/[^\d]/g, ""), 10);
+          var off = (a && b && b < a) ? '<span class="svc-off">' + Math.round((1 - b / a) * 100) + '% OFF</span>' : "";
+          was = '<div class="svc-price-was"><s class="svc-orig">' + svc.original + '</s>' + off + '</div>';
+        }
+        return '<div class="svc-price">' + was +
+               '<strong>' + svc.price + '</strong>' +
+               '<small>' + svc.priceNote + '</small></div>';
+      }
+
       (cfg.services || []).forEach(function (svc) {
         var card = document.createElement("article");
         var feats = (svc.feats || []).map(function (f) { return '<div>' + f + '</div>'; }).join("");
-        if (svc.free) {
-          card.className = "svc-card free-card";
-          card.innerHTML =
-            '<span class="gift-badge">🎁 FREE</span>' +
-            '<div class="svc-num">FREE GIFT</div>' +
-            '<h3 class="svc-title">' + svc.title + '</h3>' +
-            '<div class="svc-feats">' + feats + '</div>' +
-            '<div class="svc-price-row"><div class="svc-price"><strong>' + svc.price + '</strong><small>' + svc.priceNote + '</small></div>' +
-            '<a class="svc-cta-link" href="' + cfg.hrContactsUrl + '" target="_blank" rel="noopener noreferrer">Open →</a></div>';
-          grid.appendChild(card);
-          return;
-        }
         card.className = "svc-card" + (svc.featured ? " featured" : "");
         var cta = svc.href
           ? '<a class="svc-cta-link" href="' + svc.href + '">Explore →</a>'
           : '<a class="svc-cta-link" href="' + waUrl(svc.whatsappMsg) + '" target="_blank" rel="noopener noreferrer">Get this →</a>';
         var bonus = svc.bonus ? '<div class="bonus-line">🎁 ' + svc.bonus + ' <span>included free</span></div>' : "";
-        var sampleHref = svc.sampleHref || svc.sampleUrl || (svc.sample ? cfg.sampleReportUrl : "");
-        var sampleLabel = svc.sampleLabel || "View sample report";
-        var sampleExt = /^https?:\/\//i.test(sampleHref || "");
-        var sample = sampleHref
-          ? '<a class="sample-report-link" href="' + sampleHref + '"' + (sampleExt ? ' target="_blank" rel="noopener noreferrer"' : '') + '><span>★</span> ' + sampleLabel + '</a>' : "";
         card.innerHTML =
           (svc.featured ? '<span class="best-tag">BEST VALUE</span>' : "") +
           '<div class="svc-num">SERVICE ' + svc.id + '</div>' +
           '<h3 class="svc-title">' + svc.title + '</h3>' +
-          '<div class="svc-feats">' + feats + '</div>' + bonus + sample +
-          '<div class="svc-price-row"><div class="svc-price"><strong>' + svc.price + '</strong><small>' + svc.priceNote + '</small></div>' + cta + '</div>';
+          '<div class="svc-feats">' + feats + '</div>' + bonus +
+          '<div class="svc-price-row">' + priceBlock(svc) + cta + '</div>';
         grid.appendChild(card);
       });
 
