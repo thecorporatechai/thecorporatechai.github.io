@@ -47,7 +47,7 @@ const SITE_CONFIG = {
   /* --- Rolling highlights ticker (under the header) -------------------- */
   highlights: [
     "Resume Rewrites", "LinkedIn Makeovers", "Naukri Optimization",
-    "Recruiter Connections", "ATS Templates", "Certification Kits", "Premium Tools"
+    "Recruiter Connections", "ATS Templates"
   ],
 
   /* --- Reviews ticker (in the Services section) ------------------------ */
@@ -79,50 +79,28 @@ const SITE_CONFIG = {
   },
 
   /* --- Paid services (cards under "Services") -------------------------- */
+  /* Each card can carry an `original` (struck-through) price; the renderer
+     shows it crossed out beside the live price with a "% OFF" pill. */
   services: [
-    { id: "00", title: "ATS Resume Report", price: "₹19", priceNote: "detailed score report", sample: true,
-      sampleHref: "samples.html#reports", sampleLabel: "View sample report",
+    { id: "00", title: "ATS Resume Report", price: "₹19", original: "₹49", priceNote: "detailed score report",
       feats: ["Complete ATS score breakdown", "Priority fixes for shortlist chances", "Sample report preview available"],
       whatsappMsg: "Hi! I want the detailed ATS Resume Report (₹19)." },
 
-    { id: "01", title: "5 ATS Resume Templates", price: "₹49", priceNote: "5 editable templates",
+    { id: "01", title: "5 ATS Resume Templates", price: "₹49", original: "₹99", priceNote: "5 editable templates",
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
-      // Sample-templates "View sample" button → paste the Google Drive share link
-      // below (the button stays hidden until a valid https:// link is added).
-      sampleHref: "samples.html#templates",
-      sampleLabel: "View sample template",
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
-    { id: "02", title: "ATS Resume Rewrite", price: "₹199", priceNote: "complete rewrite", bonus: "Free AI job-hunting prompts",
+    { id: "02", title: "ATS Resume Rewrite", price: "₹199", original: "₹399", priceNote: "complete rewrite", bonus: "Free AI job-hunting prompts",
       feats: ["Professionally rewritten content", "Keyword + impact optimization", "Clean ATS-friendly formatting"],
       whatsappMsg: "Hi! I want the ATS Resume Rewrite service (₹199)." },
 
-    { id: "03", title: "Resume + Naukri Optimization", price: "₹399", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
+    { id: "03", title: "Resume + Naukri Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
       feats: ["Everything in Resume Rewrite", "Naukri profile optimization", "More recruiter visibility"],
       whatsappMsg: "Hi! I want Resume + Naukri Optimization (₹399)." },
 
-    { id: "04", title: "Complete Career Boost", price: "₹499", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
+    { id: "04", title: "Complete Career Boost", price: "₹499", original: "₹999", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
       feats: ["LinkedIn profile optimization", "Naukri + ATS resume rewrite", "Personal branding boost"],
-      whatsappMsg: "Hi! I want the Complete Career Boost Package (₹499)." },
-
-    { id: "05", title: "LinkedIn Premium Services", price: "₹699*", priceNote: "starting from",
-      feats: ["Career, Business & more — all types", "Premium access + visibility boost", "Stand out to recruiters & clients"],
-      whatsappMsg: "Hi! I'm interested in LinkedIn Premium Services (career / business)." },
-
-    { id: "06", title: "Premium Tools at Lower Cost", price: "Up to 70% off", priceNote: "Canva, ChatGPT Plus & more",
-      feats: ["Canva Pro, ChatGPT Plus & more", "Coursera & Udemy Pro access", "Genuine, low-cost plans"],
-      href: "tools.html" },
-
-    { id: "07", title: "Social Media Services", price: "₹20*", priceNote: "starting from",
-      feats: ["Instagram growth services", "YouTube growth services", "Followers, views, engagement & more"],
-      href: "social.html" },
-
-    { id: "08", title: "Certifications, Exam-Prep & AI Prompts", price: "₹20*", priceNote: "starting from",
-      feats: ["Roadmaps + study materials", "AI Prompts Pack included", "ISO 27001, CompTIA & more"],
-      href: "certifications.html" },
-
-    { id: "FREE", free: true, title: "1500+ Verified HR Contacts", price: "₹0", priceNote: "free Excel directory",
-      feats: ["Verified HR & recruiter emails", "Across 50+ top companies", "Updated regularly · no signup"] }
+      whatsappMsg: "Hi! I want the Complete Career Boost Package (₹499)." }
   ],
 
   /* --- Service 06 page: Premium tools --------------------------------- */
@@ -222,6 +200,8 @@ const SITE_CONFIG = {
     { tag: "CC", title: "Corporate Connect", sub: "1:1 with industry mentors",
       desc: "Like AstroTalk, but for your career. Book real conversations with verified industry mentors & SMEs — not generic advice." },
     { tag: "in", title: "LinkedIn Profile Score Checker", sub: "Free · coming soon",
-      desc: "Paste your LinkedIn profile and get an instant strength score with clear, actionable tips to get noticed by recruiters." }
+      desc: "Paste your LinkedIn profile and get an instant strength score with clear, actionable tips to get noticed by recruiters." },
+    { tag: "ATS", title: "In-House ATS & Resume Filter", sub: "For enterprises · coming soon",
+      desc: "A private ATS and resume-screening tool for companies — filter, rank and shortlist candidates fast, with our honest, bias-aware scoring." }
   ]
 };
