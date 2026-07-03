@@ -60,12 +60,22 @@ nav { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 13
 .nav-links a:not(.nav-cta):hover { background: rgba(255,255,255,.08); color: var(--gold); }
 .nav-cta { background: var(--gold); color: var(--ink) !important; padding: 10px 20px !important; border-radius: 30px; font-weight: 800; margin-left: 6px; }
 .nav-cta:hover { background: #ffc72c; }
-.nav-mobile-actions { display: flex; align-items: center; gap: 10px; }
+.nav-mobile-actions { display: none; align-items: center; gap: 10px; }
 .nav-toggle { display: none; align-items: center; gap: 8px; cursor: pointer; background: none; border: 1.5px solid transparent; padding: 6px; }
 .nt-bars { display: flex; flex-direction: column; gap: 5px; }
 .nt-bars span { width: 26px; height: 3px; background: var(--gold); border-radius: 2px; }
 .nt-label { display: none; color: var(--gold); font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; }
 .nav-msvc { display: none; align-items: center; background: var(--gold); color: var(--ink) !important; font-weight: 800; font-size: 12.5px; padding: 8px 14px; border-radius: 8px; }
+
+/* Animated "free gift" icon button (HR contacts) — header, desktop + mobile */
+.nav-gift { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: transparent; margin-left: 4px; transition: background .2s, transform .15s;
+  animation: giftWiggle 2.6s ease-in-out infinite; will-change: transform; }
+.nav-gift:hover { transform: translateY(-2px) scale(1.06); background: rgba(244,180,0,.14); animation-play-state: paused; }
+.nav-gift .ng-emoji { font-size: 21px; line-height: 1; }
+.nav-gift .ng-ping { position: absolute; top: -7px; right: -9px; background: var(--ember); color: #fff; font-size: 8.5px; font-weight: 800; letter-spacing: .03em; padding: 2px 5px; border-radius: 9px; box-shadow: 0 2px 6px rgba(232,73,29,.5); }
+.nav-gift-m { display: none; }
+@keyframes giftWiggle { 0%,86%,100% { transform: rotate(0); } 89% { transform: rotate(-10deg); } 92% { transform: rotate(9deg); } 95% { transform: rotate(-5deg); } 98% { transform: rotate(2deg); } }
 
 /* ---------- rolling ticker ---------- */
 .ticker { background: var(--ink); border-top: 1px solid rgba(244,180,0,.25); border-bottom: 3px solid var(--gold); overflow: hidden; padding: 11px 0; }
@@ -132,6 +142,8 @@ nav { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 13
 .hv-badge { position: absolute; z-index: 3; left: -16px; bottom: -16px; background: var(--ink); color: var(--gold);
   font-size: 12px; font-weight: 800; padding: 9px 15px; border-radius: 30px; border: 1.5px solid var(--gold);
   box-shadow: 0 12px 26px rgba(0,0,0,.35); opacity: 0; animation: hvPop .5s ease 1.6s forwards; }
+/* Good-resume highlight lines — translucent green marks that reveal one-by-one
+   over the real template, like an AI approving each section. */
 @keyframes hvRing { to { stroke-dashoffset: 38; } }   /* ~88% fill */
 @keyframes hvFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 @keyframes hvPop { from { opacity: 0; transform: translateY(8px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -209,13 +221,23 @@ nav { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 13
 .wwd-card h3 { font-family: var(--display); text-transform: uppercase; font-size: 18px; }
 .wwd-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; flex: 1; }
 .wwd-card.featured p { color: #c9c3b5; }
-.wwd-price { font-family: var(--display); font-size: 18px; color: var(--gold-deep); margin: 2px 0 10px; }
-.wwd-card.featured .wwd-price { color: var(--gold); }
+/* Discount price line — struck original, live price, and "% off" pill neatly
+   aligned on one baseline row (wraps gracefully on very narrow cards). */
+.wwd-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 8px; font-family: var(--display); margin: 4px 0 12px; }
+.wwd-price .wp-from { font-size: 13px; font-weight: 600; color: var(--muted-light); }
+.wwd-price s { font-size: 15px; font-weight: 600; color: var(--muted-light); text-decoration-color: var(--ember); }
+.wwd-price strong { font-size: 23px; line-height: 1; color: var(--gold-deep); }
+.wwd-off { align-self: center; font-family: var(--body); font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .02em;
+  background: var(--ember); color: #fff; padding: 3px 8px; border-radius: 20px; }
+.wwd-card.featured .wwd-price strong { color: var(--gold); }
+.wwd-card.featured .wwd-price .wp-from, .wwd-card.featured .wwd-price s { color: #b8b2a4; }
 .wwd-best { position: absolute; top: -12px; right: 20px; background: var(--ember); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 13px; border-radius: 20px; }
 @media (max-width: 760px) {
   .stat-band-inner { grid-template-columns: 1fr 1fr; gap: 24px 12px; }
   .wwd-compare { grid-template-columns: 1fr; }
-  .wwd-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  /* Stack the three cards evenly so the featured one never stretches into a
+     wide rectangle — each keeps normal card proportions. */
+  .wwd-grid { grid-template-columns: 1fr; max-width: 380px; }
 }
 
 /* samples page — image tile gallery */
@@ -406,11 +428,11 @@ section { padding: 80px 5vw; }
 .svc-card.featured .svc-feats div { color: #c9c3b5; }
 .svc-feats div::before { content: "✓"; color: var(--gold-deep); font-weight: 900; flex-shrink: 0; }
 .svc-card.featured .svc-feats div::before { color: var(--gold); }
-.svc-price-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 2px dashed var(--line); padding-top: 16px; margin-top: auto; }
+.svc-price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 2px dashed var(--line); padding-top: 16px; margin-top: auto; }
 .svc-card.featured .svc-price-row { border-top-color: rgba(255,252,243,.2); }
-.svc-price { display: grid; }
+.svc-price { display: grid; gap: 3px; }
 .svc-price strong { font-family: var(--display); font-size: 26px; line-height: 1; }
-.svc-price small { color: var(--muted-light); font-size: 11.5px; font-weight: 600; margin-top: 4px; }
+.svc-price small { color: var(--muted-light); font-size: 11.5px; font-weight: 600; margin-top: 2px; }
 .svc-card.featured .svc-price small { color: #b8b2a4; }
 .svc-cta-link { background: var(--ink); color: var(--gold); padding: 11px 18px; border-radius: 9px; font-size: 13px; font-weight: 800; white-space: nowrap; transition: .2s; align-self: center; }
 .svc-cta-link:hover { background: var(--gold-deep); color: var(--ink); }
@@ -439,9 +461,11 @@ section { padding: 80px 5vw; }
 .follow-logos { display: flex; gap: 12px; justify-content: center; }
 /* Services page — simple aligned tile grid (no scrolling) */
 .services-page { max-width: var(--maxw); margin: 0 auto; padding: 46px 5vw 72px; }
-.svc-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(284px, 1fr)); gap: 22px; padding-top: 14px; align-items: stretch; }
-.svc-tiles .svc-card { width: auto; }
-@media (max-width: 620px) { .svc-tiles { grid-template-columns: 1fr; } }
+/* Centered flex wrap so an odd last card (e.g. the 5th) sits centered, not
+   stranded on the left as it did with an auto-fill grid. */
+.svc-tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; padding-top: 14px; align-items: stretch; }
+.svc-tiles .svc-card { flex: 0 1 320px; width: auto; }
+@media (max-width: 620px) { .svc-tiles .svc-card { flex-basis: 100%; } }
 .review-ticker { background: var(--ink); border: 1.5px solid rgba(244,180,0,.35); border-radius: 14px; margin: 30px 0 6px; padding: 12px 0; overflow: hidden; }
 .review-ticker .ticker-track span { font-family: var(--body); text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 600; color: var(--paper); }
 .review-ticker .ticker-track i { color: var(--gold); }
@@ -470,7 +494,7 @@ section { padding: 80px 5vw; }
 .coming-section .sec-label { background: var(--gold); color: var(--ink); }
 .coming-section .sec-title { color: var(--paper); }
 .coming-section .sec-sub { color: #c9c3b5; }
-.cs-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 430px)); justify-content: center; gap: 22px; margin-top: 42px; }
+.cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 350px)); justify-content: center; gap: 22px; margin-top: 42px; }
 .cs-card.astro { background: rgba(255,252,243,.04); border: 1.5px solid rgba(244,180,0,.25); border-radius: 22px; padding: 38px 30px; display: grid; justify-items: center; text-align: center; gap: 6px; }
 .cs-orb { width: 92px; height: 92px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--gold), var(--gold-deep));
   display: grid; place-items: center; font-family: var(--display); font-size: 30px; color: var(--ink); margin-bottom: 12px;
@@ -647,6 +671,83 @@ body.pop-open { overflow: hidden; }
 @keyframes lpFade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .lp-card, .lp-backdrop { animation: none; } }
 
+/* Launch-popup free-gift banner (HR contacts) */
+.lp-gift { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 16px; padding: 12px 14px; border-radius: 12px; text-align: center;
+  font-family: inherit; cursor: pointer; background: linear-gradient(135deg, rgba(52,209,122,.18), rgba(22,163,74,.1)); border: 1.5px solid rgba(52,209,122,.5); transition: transform .15s, border-color .2s; }
+.lp-gift:hover { transform: translateY(-1px); border-color: rgba(52,209,122,.9); }
+.lp-gift .lpg-emoji { font-size: 26px; line-height: 1; flex-shrink: 0; }
+.lp-gift .lpg-text { display: grid; gap: 1px; }
+.lp-gift .lpg-text strong { color: var(--paper); font-size: 13.5px; }
+.lp-gift .lpg-text small { color: #b7f0cd; font-size: 11.5px; }
+.lp-gift .lpg-arrow { color: #34d17a; font-weight: 800; font-size: 18px; }
+
+/* Gift menu — header gift button opens two "flash card" free offers */
+.gift-menu { position: fixed; inset: 0; z-index: 210; display: grid; place-items: center; padding: 20px; }
+.gift-menu[hidden] { display: none; }
+.gm-backdrop { position: absolute; inset: 0; background: rgba(13,13,13,.6); animation: lpFade .3s ease; }
+.gm-card { position: relative; z-index: 2; width: min(560px, 94vw); background: linear-gradient(165deg, #221f1a, #0d0d0d); color: var(--paper);
+  border: 1.5px solid var(--gold); border-radius: 22px; padding: 30px 26px 28px; box-shadow: 0 26px 60px rgba(0,0,0,.6);
+  animation: lpIn .45s cubic-bezier(.22,1,.36,1); text-align: center; }
+.gm-close { position: absolute; top: 12px; right: 14px; width: 32px; height: 32px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.12); color: var(--paper); font-size: 20px; line-height: 1; cursor: pointer; transition: background .2s; }
+.gm-close:hover { background: rgba(255,255,255,.24); }
+.gm-badge { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 12px; padding: 6px 15px; border-radius: 20px; letter-spacing: .03em; }
+.gm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+.gm-flash { display: grid; justify-items: center; gap: 7px; text-align: center; padding: 26px 18px; border-radius: 16px;
+  background: rgba(255,252,243,.05); border: 1.5px solid rgba(244,180,0,.3); transition: transform .15s, border-color .2s, background .2s; }
+.gm-flash:hover { transform: translateY(-4px); border-color: var(--gold); background: rgba(244,180,0,.1); }
+.gmf-ico { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; font-size: 30px; background: rgba(244,180,0,.16); }
+.gm-flash strong { font-family: var(--display); text-transform: uppercase; font-size: 19px; color: var(--paper); letter-spacing: .01em; }
+.gm-flash small { font-size: 13px; color: #c9c3b5; line-height: 1.5; }
+.gmf-cta { margin-top: 6px; color: var(--gold); font-weight: 800; font-size: 13px; }
+@media (max-width: 480px) { .gm-cards { grid-template-columns: 1fr; } }
+
+/* Discount pricing — struck original + "% OFF" pill sit on top, price below */
+.svc-price-was { display: flex; align-items: center; gap: 8px; }
+.svc-orig { color: var(--muted-light); font-size: 14px; font-weight: 600; text-decoration: line-through; text-decoration-color: var(--ember); }
+.svc-card.featured .svc-orig { color: #b8b2a4; }
+.svc-off { background: var(--ember); color: #fff; font-family: var(--body); font-size: 9.5px; font-weight: 800; letter-spacing: .03em; padding: 3px 7px; border-radius: 20px; line-height: 1.1; }
+
+/* Discount pricing on the homepage "What we do" cards */
+.wwd-price s { color: var(--muted-light); font-weight: 500; }
+.wwd-card.featured .wwd-price s { color: #b8b2a4; }
+.wwd-off { font-family: var(--body); font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .02em; background: var(--ember); color: #fff; padding: 2px 6px; border-radius: 12px; vertical-align: middle; }
+
+/* Services page — highlighted "view samples" pill above the tiles */
+.svc-samples-cta { display: flex; justify-content: center; margin: 4px 0 30px; }
+.samples-highlight { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); text-transform: uppercase; letter-spacing: .02em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink); font-weight: 800; font-size: 15px; padding: 13px 26px; border-radius: 30px;
+  box-shadow: 0 6px 18px rgba(244,180,0,.35); transition: transform .15s, box-shadow .15s; }
+.samples-highlight:hover { transform: translateY(-2px); box-shadow: 0 9px 24px rgba(244,180,0,.45); }
+.samples-highlight .sh-star { color: var(--ember); }
+.samples-highlight .sh-arrow { transition: transform .2s; }
+.samples-highlight:hover .sh-arrow { transform: translateX(4px); }
+
+/* ---------- HR free-gift page (hr-gift.html) ---------- */
+.gift-main { max-width: 720px; margin: 0 auto; padding: 52px 5vw 76px; }
+.gift-card { background: var(--ink); color: var(--paper); border: 2px solid var(--gold); border-radius: 24px; padding: 40px 34px; position: relative; overflow: hidden; text-align: center; }
+.gift-card::before { content: ""; position: absolute; right: -120px; top: -120px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(244,180,0,.18), transparent 70%); }
+.gift-orb { position: relative; z-index: 2; width: 84px; height: 84px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; font-size: 42px;
+  background: linear-gradient(135deg, #34d17a, #16a34a); box-shadow: 0 10px 28px rgba(34,197,94,.5); animation: giftWiggle 2.8s ease-in-out infinite; }
+.gift-tag { position: relative; z-index: 2; display: inline-block; margin-top: 18px; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 11.5px; padding: 5px 13px; border-radius: 20px; letter-spacing: .03em; }
+.gift-card h2 { position: relative; z-index: 2; color: var(--paper); font-size: clamp(24px, 3.4vw, 34px); margin-top: 14px; }
+.gift-sub { position: relative; z-index: 2; color: #c9c3b5; font-size: 15px; line-height: 1.6; margin: 12px auto 0; max-width: 460px; }
+.gift-perks { position: relative; z-index: 2; justify-items: center; margin: 18px auto 0; max-width: 360px; }
+.gift-perks li { justify-content: center; }
+.gift-step { position: relative; z-index: 2; margin-top: 26px; padding-top: 24px; border-top: 1px dashed rgba(255,252,243,.18); }
+.gift-step-num { display: inline-block; background: rgba(244,180,0,.16); color: var(--gold); font-weight: 800; font-size: 11px; padding: 4px 11px; border-radius: 20px; letter-spacing: .05em; text-transform: uppercase; }
+.gift-step > p { color: var(--paper); font-weight: 700; font-size: 15px; margin: 10px 0 14px; }
+.gift-follow { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.gate-btn { flex: 1 1 200px; max-width: 260px; text-align: center; padding: 13px 16px; border-radius: 12px; font-size: 14px; font-weight: 800; color: #fff; transition: transform .15s, box-shadow .15s; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+.gate-btn:hover { transform: translateY(-2px); }
+.gate-ig { background: linear-gradient(45deg, #f09433, #dc2743 50%, #bc1888); }
+.gate-yt { background: #ff0000; }
+.gift-unlock { margin-top: 4px; }
+.gift-unlock.is-locked { background: rgba(255,252,243,.1); color: #b8b2a4; box-shadow: none; cursor: not-allowed; }
+.gift-unlock.is-locked:hover { transform: none; }
+.gift-note { color: var(--muted-light); font-size: 12.5px; margin-top: 12px; }
+@media (max-width: 560px) { .gift-card { padding: 32px 20px; } .gate-btn { flex-basis: 100%; max-width: none; } }
+
 /* ---------- AI prompts pack (certifications page) ---------- */
 .ai-pack { background: var(--ink); color: var(--paper); border: 2px solid var(--gold); border-radius: 20px; padding: 30px 32px; margin-bottom: 44px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; position: relative; overflow: hidden; }
@@ -783,8 +884,9 @@ body.pop-open { overflow: hidden; }
 .subnav { position: sticky; top: 0; z-index: 50; background: var(--ink); box-shadow: 0 2px 0 var(--gold); padding: 13px 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; }
 .subnav .nav-brand { min-width: 0; }
 .subnav .back-link { white-space: nowrap; }
-.back-link { color: var(--cream); font-size: 14px; font-weight: 700; }
-.back-link:hover { color: var(--gold); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); background: var(--gold); font-size: 13.5px; font-weight: 800;
+  padding: 9px 18px; border-radius: 30px; box-shadow: 0 4px 12px rgba(244,180,0,.32); transition: background .2s, transform .15s, box-shadow .2s; }
+.back-link:hover { background: #ffc72c; color: var(--ink); transform: translateX(-2px); box-shadow: 0 6px 16px rgba(244,180,0,.42); }
 .page-hero { background: var(--ink); color: var(--paper); padding: 38px 5vw 32px; position: relative; overflow: hidden; }
 .page-hero::before { content: ""; position: absolute; top: -180px; right: -120px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(244,180,0,.22), transparent 70%); }
 .page-hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; text-align: center; }
@@ -841,7 +943,11 @@ body.pop-open { overflow: hidden; }
   .nav-toggle { display: inline-flex; border-color: var(--gold); border-radius: 9px; padding: 8px 14px; }
   .nt-bars { display: none; }
   .nt-label { display: inline; }
+  .nav-mobile-actions { display: flex; }
   .nav-msvc { display: inline-flex; }
+  .nav-gift-d { display: none; }
+  .nav-gift-m { display: inline-grid; width: 40px; height: 40px; margin-left: 0; }
+  .nav-gift-m .ng-emoji { font-size: 19px; }
 }
 @media (max-width: 640px) {
   section, .ats-section { padding: 60px 6vw; }
