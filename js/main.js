@@ -83,18 +83,33 @@ function countUp(el, target, suffix, duration) {
   const fill = document.querySelector(".hvg-fill");
   const numEl = document.getElementById("heroScore");
   const lblEl = document.querySelector(".hv-verdict-lbl");
+  const pill1 = document.querySelector(".hv-pill-1");
+  const pill2 = document.querySelector(".hv-pill-2");
   if (!stack || shots.length < 2 || !fill || !numEl) { if (numEl) numEl.textContent = "88"; return; }
 
-  // A mix of weak (blurred, red) and strong (sharp, green) resumes so visitors
-  // see the before/after at a glance. tone → blur amount + gauge colour.
+  // Strong slides show real templates crisp (with-photo + clean no-photo). Weak
+  // slides show genuine "bad resume" examples, softly blurred — no overlays.
+  // `img` indexes into .hv-shot: 0–3 good templates, 4–5 bad-resume examples.
   const slides = [
-    { score: 88, label: "Strong",  tone: "strong" },
-    { score: 41, label: "Weak",    tone: "weak" },
-    { score: 86, label: "Strong",  tone: "strong" },
-    { score: 58, label: "Average", tone: "avg" }
+    { img: 0, score: 90, label: "Strong", tone: "strong" },   // with photo
+    { img: 4, score: 38, label: "Weak",   tone: "weak"   },   // bad resume
+    { img: 1, score: 88, label: "Strong", tone: "strong" },   // no photo
+    { img: 5, score: 44, label: "Weak",   tone: "weak"   },   // bad resume
+    { img: 2, score: 92, label: "Strong", tone: "strong" },   // no photo (ATS)
+    { img: 3, score: 87, label: "Strong", tone: "strong" }    // with photo
   ];
-  const COLOR = { weak: "#ef4444", avg: "#f59e0b", strong: "#22c55e" };
-  const BLUR  = { weak: "blur(3px)", avg: "blur(1.2px)", strong: "none" };
+  const COLOR = { weak: "#ef4444", strong: "#22c55e" };
+  const PILL_COLOR = { weak: "#ef4444", strong: "#1e7a44" };
+  const PILLS = {
+    strong: [{ ic: "✓", t: "ATS-friendly" }, { ic: "✓", t: "Recruiter-ready" }],
+    weak:   [{ ic: "✕", t: "Weak formatting" }, { ic: "✕", t: "Keyword gaps" }]
+  };
+  const setPill = (el, item, color) => {
+    if (!el || !item) return;
+    el.innerHTML = '<i class="pi">' + item.ic + '</i> ' + item.t;
+    const pi = el.querySelector(".pi");
+    if (pi) pi.style.color = color;
+  };
   const ARC = 314;
   let idx = -1, numRaf = null, timer = null;
 
@@ -109,15 +124,20 @@ function countUp(el, target, suffix, duration) {
     numRaf = requestAnimationFrame(step);
   }
   function show(n) {
-    const s = slides[n], active = n % shots.length, c = COLOR[s.tone];
+    const s = slides[n], c = COLOR[s.tone];
+    const weak = s.tone === "weak";
     shots.forEach((img, k) => {
-      img.style.opacity = k === active ? "1" : "0";
-      img.style.filter = k === active ? BLUR[s.tone] : "none";
+      img.style.opacity = k === s.img ? "1" : "0";
+      img.style.filter = (k === s.img && weak) ? "blur(3.5px)" : "none";
     });
+    stack.classList.toggle("is-weak", weak);
     fill.style.stroke = c;
     fill.style.strokeDashoffset = ARC * (1 - s.score / 100);
     numEl.style.color = c;
     if (lblEl) { lblEl.textContent = s.label; lblEl.style.color = c; lblEl.style.opacity = "1"; }
+    const pills = PILLS[s.tone] || PILLS.strong;
+    setPill(pill1, pills[0], PILL_COLOR[s.tone]);
+    setPill(pill2, pills[1], PILL_COLOR[s.tone]);
     animateNum(s.score);
   }
   function next() { idx = (idx + 1) % slides.length; show(idx); }
@@ -270,8 +290,16 @@ if (founderBox && cfg.founder) {
 if (typeof renderContactRow === "function") renderContactRow($("#socialRow"), cfg);
 
 /* ---- Welcome launch-offer popup (once per session, auto-disappears) --- */
+// Falls back to built-in copy so it still works even if config.js isn't updated;
+// edit js/config.js -> launchOffer to change the text/date without touching code.
 const launchPop = $("#launchPop");
-const lo = cfg.launchOffer;
+const lo = cfg.launchOffer || {
+  enabled: true,
+  badge: "🎉 Launch Offer",
+  title: "Flat 5% OFF on all services",
+  sub: "Contact us now to claim it — and follow us on Instagram for our monthly giveaway. This month: 🎧 Earphones!",
+  validTill: "⏳ Valid till 15 July 2026"
+};
 if (launchPop && lo && lo.enabled !== false) {
   const set = (id, txt) => { const el = document.getElementById(id); if (el && txt) el.textContent = txt; };
   set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub); set("lpValid", lo.validTill);
@@ -291,12 +319,35 @@ if (launchPop && lo && lo.enabled !== false) {
     try { sessionStorage.setItem("tccLaunchSeen", "1"); } catch (e) {}
     hideTimer = setTimeout(close, 12000);   // disappears on its own after 12s
   };
-  if (!seen) setTimeout(open, 1400);
+  if (!seen && (location.hash || "").toLowerCase() !== "#gift") setTimeout(open, 1400);
   const lpClose = $("#lpClose");
   if (lpClose) lpClose.addEventListener("click", close);
   const lpBackdrop = $("#lpBackdrop");
   if (lpBackdrop) lpBackdrop.addEventListener("click", close);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !launchPop.hidden) close(); });
+}
+
+/* ---- Gift menu (header gift button → two free offers) ----------------- */
+const giftMenu = $("#giftMenu");
+if (giftMenu) {
+  const openGift = () => {
+    giftMenu.hidden = false;
+    document.body.classList.add("menu-open");
+    // If the mobile nav happens to be open, close it so the menu is unobstructed.
+    if (navLinks) { navLinks.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }
+    // Dismiss the launch popup if it's the one that triggered this.
+    if (launchPop && !launchPop.hidden) launchPop.hidden = true;
+  };
+  const closeGift = () => { giftMenu.hidden = true; document.body.classList.remove("menu-open"); };
+  document.querySelectorAll("[data-gift-open]").forEach((b) =>
+    b.addEventListener("click", (e) => { e.preventDefault(); openGift(); }));
+  giftMenu.querySelectorAll("[data-gift-close]").forEach((b) => b.addEventListener("click", closeGift));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !giftMenu.hidden) closeGift(); });
+  // Deep link: opening the site with #gift auto-opens the chooser. Share this
+  // URL (e.g. https://thecorporatechai.in/#gift) in WhatsApp greetings.
+  const checkGiftHash = () => { if ((location.hash || "").toLowerCase() === "#gift") openGift(); };
+  checkGiftHash();
+  window.addEventListener("hashchange", checkGiftHash);
 }
 
 /* ---- Scroll reveal ---------------------------------------------------- */
