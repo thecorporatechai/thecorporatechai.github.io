@@ -18,24 +18,6 @@
 
   gtag('config', 'G-HL097LFTE1');
 </script>
-
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1329183836005098');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body id="top">
   <div class="grain"></div>
@@ -51,10 +33,16 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
       <a href="services.html">Services</a>
       <a href="samples.html">Samples</a>
       <a href="community.html">Community</a>
-      <a href="certify.html">Get Certified</a>
+      <a href="#coming-soon">Coming Soon</a>
+      <button type="button" class="nav-gift nav-gift-d" data-gift-open aria-label="Free gifts" aria-haspopup="dialog" title="Free gifts — HR contacts & certificate">
+        <span class="ng-emoji">🎁</span><span class="ng-ping">FREE</span>
+      </button>
       <a class="nav-cta" href="connect.html">Connect</a>
     </div>
     <div class="nav-mobile-actions">
+      <button type="button" class="nav-gift nav-gift-m" data-gift-open aria-label="Free gifts" aria-haspopup="dialog" title="Free gifts — HR contacts & certificate">
+        <span class="ng-emoji">🎁</span><span class="ng-ping">FREE</span>
+      </button>
       <a class="nav-msvc" href="services.html">Services</a>
       <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">
         <span class="nt-label">Explore</span>
@@ -87,10 +75,14 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
 
       <div class="hero-visual reveal" aria-hidden="true">
         <div class="hv-stack">
-          <img class="hv-shot" src="assets/samples/template-07.jpg" alt="" loading="lazy">
-          <img class="hv-shot" src="assets/samples/template-12.jpg" alt="" loading="lazy">
+          <!-- strong: real templates shown crisp (with-photo + clean no-photo) -->
           <img class="hv-shot" src="assets/samples/template-08.jpg" alt="" loading="lazy">
-          <img class="hv-shot" src="assets/samples/template-11.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-12.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-01.jpg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/samples/template-07.jpg" alt="" loading="lazy">
+          <!-- weak: real "bad resume" examples, shown blurred (no overlays) -->
+          <img class="hv-shot" src="assets/bad/bad-01.jpeg" alt="" loading="lazy">
+          <img class="hv-shot" src="assets/bad/bad-02.avif" alt="" loading="lazy">
         </div>
         <div class="hv-gauge">
           <svg viewBox="0 0 120 120">
@@ -145,7 +137,7 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
           <div class="wwd-ico">📊</div>
           <h3>ATS Report</h3>
           <p>A detailed, section-by-section score report showing exactly what's holding your resume back.</p>
-          <span class="wwd-price">from ₹19</span>
+          <span class="wwd-price"><span class="wp-from">from</span> <s>₹49</s> <strong>₹19</strong> <span class="wwd-off">61% off</span></span>
           <a class="btn btn-dark btn-full" href="free-ats-resume-checker.html">Check my score →</a>
         </article>
         <article class="wwd-card featured reveal">
@@ -153,49 +145,40 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
           <div class="wwd-ico">✍️</div>
           <h3>Resume Rewrite</h3>
           <p>We rewrite your resume with the right keywords, real impact and clean ATS-friendly formatting.</p>
-          <span class="wwd-price">from ₹199</span>
+          <span class="wwd-price"><span class="wp-from">from</span> <s>₹399</s> <strong>₹199</strong> <span class="wwd-off">50% off</span></span>
           <a class="btn btn-primary btn-full" id="wwdRewriteBtn" href="#" target="_blank" rel="noopener noreferrer">Rewrite my resume →</a>
         </article>
         <article class="wwd-card reveal">
           <div class="wwd-ico">🚀</div>
           <h3>Build from Scratch</h3>
           <p>No resume yet? We build a professional, recruiter-ready resume for you from the ground up.</p>
-          <span class="wwd-price">from ₹250</span>
+          <span class="wwd-price"><span class="wp-from">from</span> <s>₹500</s> <strong>₹250</strong> <span class="wwd-off">50% off</span></span>
           <a class="btn btn-dark btn-full" href="build.html">Build mine →</a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- CERTIFY -->
-  <section class="certify-section">
+  <!-- JOIN THE COMMUNITY -->
+  <section class="community-section" id="join-community">
     <div class="section-inner">
-      <div class="certify-card reveal" id="get-certified">
-        <div class="certify-sample-mini">
-          <span class="cs-label">Your free certificate</span>
-          <div class="mini-cert" aria-hidden="true">
-            <div class="mc-head"><img src="assets/logo.jpeg" alt=""><span>The Corporate <b>Chai</b></span></div>
-            <div class="mc-banner">Certificate of True Corporate</div>
-            <div class="mc-awarded">This is proudly awarded to</div>
-            <div class="mc-name">Your Name</div>
-            <div class="mc-rule"></div>
-            <div class="mc-foot">
-              <span class="mc-id">TCC-XXXXXX</span>
-              <span class="mc-seal">★ TRUE<br>CORP</span>
-              <span class="mc-sign">Founder &amp; MD</span>
-            </div>
-          </div>
-        </div>
-        <div class="certify-copy">
-          <span class="sec-label">New · 100% Free</span>
-          <h2 class="display">Are you a True Corporate?</h2>
-          <p>Claim your official <b>True Corporate</b> certificate — personalised, printable, and made to flex on LinkedIn. Join the millions in the Corporate Circle.</p>
+      <div class="community-card reveal">
+        <div class="community-copy">
+          <span class="sec-label">Join the inner circle</span>
+          <h2 class="display">Real openings. Real people. Zero gyaan.</h2>
+          <p>Stop hustling alone. Join a no-filter <b>WhatsApp community</b> of working professionals who share real job openings, referrals and corporate survival hacks — every single day.</p>
           <ul class="community-perks">
-            <li>Personalised name + unique code</li>
-            <li>Printable / downloadable image</li>
-            <li>Post &amp; tag us on LinkedIn</li>
+            <li>Job + referral drops from members</li>
+            <li>Real corporate discussions, zero gyaan</li>
+            <li>First access to new tools &amp; launches</li>
           </ul>
-          <a class="btn btn-primary" href="certify.html">Get certified — free →</a>
+        </div>
+        <div class="community-join">
+          <div class="cj-icon">💬</div>
+          <strong class="cj-title">Join now · Stay updated</strong>
+          <p class="cj-sub">Be the first to spot referrals and launches. It takes 10 seconds and it's completely free.</p>
+          <a class="btn btn-primary btn-full" id="communityJoinBtn" href="#" target="_blank" rel="noopener noreferrer">Join the WhatsApp community →</a>
+          <p class="community-note">No spam · Leave anytime · 1000+ members</p>
         </div>
       </div>
     </div>
@@ -263,9 +246,37 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
       <h4 class="lp-title" id="lpTitle">Flat 5% OFF on all services</h4>
       <p class="lp-sub" id="lpSub">Contact us now to claim it.</p>
       <p class="lp-valid" id="lpValid">⏳ Valid till 15 July 2026</p>
+      <button type="button" class="lp-gift" data-gift-open>
+        <span class="lpg-emoji">🎁</span>
+        <span class="lpg-text"><strong>Claim your free gift</strong><small>Tap to pick your free gift</small></span>
+        <span class="lpg-arrow">→</span>
+      </button>
       <div class="lp-actions">
         <a class="lp-btn lp-ig" id="lpIg" href="#" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
         <a class="lp-btn lp-wa" id="lpWa" href="#" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift menu — opened by the header gift button (two free offers) -->
+  <div class="gift-menu" id="giftMenu" hidden>
+    <div class="gm-backdrop" data-gift-close></div>
+    <div class="gm-card" role="dialog" aria-modal="true" aria-label="Free gifts">
+      <button class="gm-close" type="button" data-gift-close aria-label="Close">×</button>
+      <span class="gm-badge">🎁 Pick your free gift</span>
+      <div class="gm-cards">
+        <a class="gm-flash" href="hr-gift.html">
+          <span class="gmf-ico">📇</span>
+          <strong>1500+ HR Contacts</strong>
+          <small>A free Excel directory of verified HR &amp; recruiter emails.</small>
+          <span class="gmf-cta">Get it free →</span>
+        </a>
+        <a class="gm-flash" href="certify.html">
+          <span class="gmf-ico">🏅</span>
+          <strong>Free Certificate</strong>
+          <small>Claim your personalised “True Corporate” certificate.</small>
+          <span class="gmf-cta">Get certified →</span>
+        </a>
       </div>
     </div>
   </div>
