@@ -11,6 +11,7 @@ const SITE_CONFIG = {
   domain: "thecorporatechai.in",
   instagram: "https://www.instagram.com/thecorporatechai.in",
   youtube: "https://www.youtube.com/@thecorporatechai_in",
+  store: "https://aravaanantharao.in/store",     // founder's ₹9 digital store
   linkedin: "https://www.linkedin.com/company/thecorporatechai/?viewAsMember=true",   // company page
   facebook: "https://www.facebook.com/share/1DCNZBtcvo/",   // Facebook page
   twitter: "https://x.com/D_CorporateChai",                 // X (Twitter)
@@ -72,10 +73,10 @@ const SITE_CONFIG = {
   /* --- Welcome launch-offer popup (shows once per visit) -------------- */
   launchOffer: {
     enabled: true,
-    badge: "🎉 Launch Offer",
-    title: "Flat 5% OFF on all services",
-    sub: "Contact us now to claim it — and follow us on Instagram for our monthly giveaway. This month: 🎧 Earphones!",
-    validTill: "⏳ Valid till 15 July 2026"
+    badge: "🎁 Giveaways",
+    title: "Win cash & rewards every month",
+    sub: "Join us on Instagram for random & monthly cash and reward giveaways.",
+    validTill: ""
   },
 
   /* --- Paid services (cards under "Services") -------------------------- */
@@ -188,7 +189,11 @@ const SITE_CONFIG = {
     { img: "assets/samples/template-13.jpg", name: "Accountant · Minimalist" },
     { img: "assets/samples/template-14.jpg", name: "Modern Professional · Navy" },
     { img: "assets/samples/template-15.jpg", name: "Professional Modern CV" },
-    { img: "assets/samples/template-16.jpg", name: "Accounting Executive CV" }
+    { img: "assets/samples/template-16.jpg", name: "Accounting Executive CV" },
+    { img: "assets/samples/template-17.jpg", name: "Accountant · Dark Sidebar" },
+    { img: "assets/samples/template-18.jpg", name: "Marketing Manager · Blue" },
+    { img: "assets/samples/template-19.jpg", name: "System Analyst · Classic" },
+    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
