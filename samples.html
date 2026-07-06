@@ -10,32 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HL097LFTE1');
-</script>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1329183836005098');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body class="subpage">
   <div class="grain"></div>
@@ -60,6 +34,7 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
         <span class="sec-label">Resume Templates</span>
         <h2 class="sec-title display">ATS-ready, recruiter-tested templates.</h2>
         <p class="sec-sub">Previews shown below — get the fully editable Word + PDF versions on WhatsApp.</p>
+        <div class="samples-top-cta"><a class="samples-mini-btn" id="tplTopCta" href="#" target="_blank" rel="noopener noreferrer">★ Select any 5 &amp; get editable — ₹49</a></div>
         <div class="stile-grid" id="tplGrid"></div>
         <div class="samples-cta"><a class="btn btn-primary" id="tplCta" href="#" target="_blank" rel="noopener noreferrer">Get 5 editable templates at ₹49 →</a></div>
       </div>
@@ -122,8 +97,11 @@ src="https://www.facebook.com/tr?id=1329183836005098&ev=PageView&noscript=1"
         tk.innerHTML = seq + seq;
       }
 
+      var tplMsg = "Hi! I saw the resume templates on the Samples page and I'd like the editable pack (₹49).";
       var tplCta = document.getElementById("tplCta");
-      if (tplCta) tplCta.href = wa("Hi! I saw the resume templates on the Samples page and I'd like the editable pack (₹49).");
+      if (tplCta) tplCta.href = wa(tplMsg);
+      var tplTopCta = document.getElementById("tplTopCta");
+      if (tplTopCta) tplTopCta.href = wa(tplMsg);
       var repCta = document.getElementById("repCta");
       if (repCta) repCta.href = wa("Hi! I saw the sample report and I'd like my detailed ATS report (₹19).");
       var floatWa = document.getElementById("floatWa");
