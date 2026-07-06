@@ -302,9 +302,9 @@ const lo = cfg.launchOffer || {
 };
 if (launchPop && lo && lo.enabled !== false) {
   const set = (id, txt) => { const el = document.getElementById(id); if (el && txt) el.textContent = txt; };
-  set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub); set("lpValid", lo.validTill);
+  set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub);
   setHref("lpIg", cfg.instagram);
-  setHref("lpWa", waUrl("Hi! I'd like to claim the launch offer — 5% off on services."));
+  if (cfg.store) setHref("lpStore", cfg.store);
 
   let seen = false;
   try { seen = !!sessionStorage.getItem("tccLaunchSeen"); } catch (e) {}
@@ -319,7 +319,7 @@ if (launchPop && lo && lo.enabled !== false) {
     try { sessionStorage.setItem("tccLaunchSeen", "1"); } catch (e) {}
     hideTimer = setTimeout(close, 12000);   // disappears on its own after 12s
   };
-  if (!seen && (location.hash || "").toLowerCase() !== "#gift") setTimeout(open, 1400);
+  if (!seen) setTimeout(open, 1400);
   const lpClose = $("#lpClose");
   if (lpClose) lpClose.addEventListener("click", close);
   const lpBackdrop = $("#lpBackdrop");
@@ -327,28 +327,10 @@ if (launchPop && lo && lo.enabled !== false) {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !launchPop.hidden) close(); });
 }
 
-/* ---- Gift menu (header gift button → two free offers) ----------------- */
-const giftMenu = $("#giftMenu");
-if (giftMenu) {
-  const openGift = () => {
-    giftMenu.hidden = false;
-    document.body.classList.add("menu-open");
-    // If the mobile nav happens to be open, close it so the menu is unobstructed.
-    if (navLinks) { navLinks.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }
-    // Dismiss the launch popup if it's the one that triggered this.
-    if (launchPop && !launchPop.hidden) launchPop.hidden = true;
-  };
-  const closeGift = () => { giftMenu.hidden = true; document.body.classList.remove("menu-open"); };
-  document.querySelectorAll("[data-gift-open]").forEach((b) =>
-    b.addEventListener("click", (e) => { e.preventDefault(); openGift(); }));
-  giftMenu.querySelectorAll("[data-gift-close]").forEach((b) => b.addEventListener("click", closeGift));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !giftMenu.hidden) closeGift(); });
-  // Deep link: opening the site with #gift auto-opens the chooser. Share this
-  // URL (e.g. https://thecorporatechai.in/#gift) in WhatsApp greetings.
-  const checkGiftHash = () => { if ((location.hash || "").toLowerCase() === "#gift") openGift(); };
-  checkGiftHash();
-  window.addEventListener("hashchange", checkGiftHash);
-}
+/* ---- Gift deep link (legacy #gift → gifts page) ----------------------- */
+// The gift chooser is now a standalone page. Keep old shared #gift links
+// working by forwarding them to gifts.html.
+if ((location.hash || "").toLowerCase() === "#gift") location.replace("gifts.html");
 
 /* ---- Scroll reveal ---------------------------------------------------- */
 const observer = new IntersectionObserver((entries) => {
