@@ -109,12 +109,24 @@
     </div>
   </section>
 
-  <!-- SOCIAL PROOF -->
+  <!-- SOCIAL PROOF + CROSS-SELL -->
   <section class="proof-section">
     <div class="section-inner center">
-      <span class="sec-label">Social proof</span>
-      <h2 class="sec-title display">Our clients have interviewed at</h2>
-      <div class="logo-strip" id="logoStrip"></div>
+      <span class="sec-label">After your free score</span>
+      <h2 class="sec-title display">We rewrite your resume &amp; give paid ATS templates.</h2>
+      <p class="sec-sub">A real peek at our ATS-friendly templates and the detailed score report — so you know exactly what you're getting before you pay, if you opt for a service after seeing your score.</p>
+      <div class="samples-logos proof-logos">
+        <span class="sl-label">🏆 Shortlisted at</span>
+        <span class="lw-item"><img src="assets/logos/google.webp" alt="Google"></span>
+        <span class="lw-item"><img src="assets/logos/amazon.jpg" alt="Amazon"></span>
+        <span class="lw-item"><img src="assets/logos/flipkart.png" alt="Flipkart"></span>
+        <span class="lw-item lw-tcs"><img src="assets/logos/tcs.png" alt="TCS"></span>
+        <span class="lw-item"><img src="assets/logos/accenture.png" alt="Accenture"></span>
+      </div>
+      <div class="samples-cta" style="margin-top:26px">
+        <a class="btn btn-primary" href="services.html">See services &amp; pricing →</a>
+        <a class="btn btn-dark" href="samples.html">View sample templates →</a>
+      </div>
       <p class="proof-disclaimer">Companies our clients have landed interviews with after working with us. We help you get noticed and shortlisted — we do <strong>not</strong> guarantee interview calls, a job, or a 100% switch. <a href="terms.html">See terms</a>.</p>
     </div>
   </section>
@@ -577,13 +589,6 @@
         tl.appendChild(el);
       });
 
-      var strip = document.getElementById("logoStrip");
-      (cfg.companies || []).forEach(function (c) {
-        var el = document.createElement("span");
-        el.className = "logo-chip";
-        el.textContent = c;
-        strip.appendChild(el);
-      });
     })();
   </script>
 </body>
