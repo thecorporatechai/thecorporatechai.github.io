@@ -7,7 +7,8 @@ const SITE_CONFIG = {
   /* --- Contact & socials ---------------------------------------------- */
   whatsapp: "919032687452",                 // international format, no "+"
   whatsappDisplay: "+91 90326 87452",
-  email: "thecorporatechai@gmail.com",
+  email: "thecorporatechai@gmail.com",             // normal support / enquiries
+  grievanceEmail: "grievance.thecorporatechai@gmail.com",  // privacy grievances / breach
   domain: "thecorporatechai.in",
   instagram: "https://www.instagram.com/thecorporatechai.in",
   youtube: "https://www.youtube.com/@thecorporatechai_in",
@@ -59,9 +60,23 @@ const SITE_CONFIG = {
     "Got shortlisted at Accenture", "My LinkedIn reach blew up"
   ],
 
+  /* --- Landing rolling review tiles (add / edit freely) ----------------
+     avatar: any emoji · linkedin: optional profile URL (shows a LinkedIn chip) */
+  landingReviews: [
+    { avatar: "🧑‍💻", text: "Spot-on rewrite. Cleared ATS easily and I started getting shortlists within days.", name: "Md Zaid Ahmed", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/mdzaidahmed/" },
+    { avatar: "👩‍💼", text: "Clean, recruiter-friendly ATS templates — super easy to edit in Word.", name: "Megha Bhattacherjee", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/megha-bhattacherjee/" },
+    { avatar: "🧑‍💻", text: "Honest, quick work. My resume finally reflects my real impact and skills.", name: "Ritwik Bholika", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/ritwik-bholika/" },
+    { avatar: "🧑‍💻", text: "My LinkedIn finally looks professional — reach and recruiter views improved a lot.", name: "Karthik V.", role: "Software Engineer · Cognizant" },
+    { avatar: "👩‍💻", text: "The Naukri optimization worked — more profile views and calls in two weeks.", name: "Pooja Nair", role: "Systems Engineer · Infosys" },
+    { avatar: "🧑‍🎓", text: "As a fresher I had no proper resume. They built one from scratch that got me calls.", name: "Aditya Sharma", role: "Fresher · B.Tech 2024" },
+    { avatar: "👩‍💼", text: "Resume + Naukri combo got recruiters reaching out to me directly.", name: "Sneha Reddy", role: "Consultant · Accenture" },
+    { avatar: "👷", text: "A professional ATS template that actually fit my field. Worth every rupee.", name: "Anil", role: "Civil Engineer" },
+    { avatar: "👩‍💻", text: "My empty LinkedIn was made recruiter-ready — started getting connection requests.", name: "Neha Kulkarni", role: "Fresher · Data Analyst" }
+  ],
+
   /* --- ATS checker --> paid CTAs --------------------------------------- */
-  rewriteServiceId: "02",                 // ₹199 rewrite (WhatsApp)
-  templatesServiceId: "01",               // ₹49 DIY templates flash-card
+  rewriteServiceId: "03",                 // ₹199 rewrite (WhatsApp)
+  templatesServiceId: "02",               // ₹49 DIY templates flash-card
   rewritePrice: "₹199",
   reportPrice: "₹19",                     // detailed fix report (WhatsApp)
   sampleReportUrl: "https://drive.google.com/file/d/1YUeiuonOJZDDY09GT_1Lfx4kiA4Bx0qo/view?usp=sharing",
@@ -83,23 +98,27 @@ const SITE_CONFIG = {
   /* Each card can carry an `original` (struck-through) price; the renderer
      shows it crossed out beside the live price with a "% OFF" pill. */
   services: [
-    { id: "00", title: "ATS Resume Report", price: "₹19", original: "₹49", priceNote: "detailed score report",
+    { id: "00", title: "Existing Resume Modify", price: "₹99*", original: "₹199", priceNote: "tweak your current resume",
+      feats: ["Update & polish your existing resume", "Fix formatting, keywords & ATS safety", "Quick single-page edits"],
+      whatsappMsg: "Hi! I want the Existing Resume Modify service (₹99*)." },
+
+    { id: "01", title: "ATS Resume Report", price: "₹19", original: "₹49", priceNote: "detailed score report",
       feats: ["Complete ATS score breakdown", "Priority fixes for shortlist chances", "Sample report preview available"],
       whatsappMsg: "Hi! I want the detailed ATS Resume Report (₹19)." },
 
-    { id: "01", title: "5 ATS Resume Templates", price: "₹49", original: "₹99", priceNote: "5 editable templates",
+    { id: "02", title: "5 ATS Resume Templates", price: "₹49", original: "₹99", priceNote: "5 editable templates",
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
-    { id: "02", title: "ATS Resume Rewrite", price: "₹199", original: "₹399", priceNote: "complete rewrite", bonus: "Free AI job-hunting prompts",
-      feats: ["Professionally rewritten content", "Keyword + impact optimization", "Clean ATS-friendly formatting"],
+    { id: "03", title: "ATS Resume Rewrite", price: "₹199*", original: "₹399", priceNote: "one format · per single page", bonus: "Free AI job-hunting prompts",
+      feats: ["Professionally rewritten content", "Keyword + impact optimization", "All resume types incl. global — charges vary", "Photo resumes from ₹250 · one selected format"],
       whatsappMsg: "Hi! I want the ATS Resume Rewrite service (₹199)." },
 
-    { id: "03", title: "Resume + Naukri Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
+    { id: "04", title: "Resume + Naukri Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
       feats: ["Everything in Resume Rewrite", "Naukri profile optimization", "More recruiter visibility"],
       whatsappMsg: "Hi! I want Resume + Naukri Optimization (₹399)." },
 
-    { id: "04", title: "Complete Career Boost", price: "₹499", original: "₹999", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
+    { id: "05", title: "Complete Career Boost", price: "₹499", original: "₹999", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
       feats: ["LinkedIn profile optimization", "Naukri + ATS resume rewrite", "Personal branding boost"],
       whatsappMsg: "Hi! I want the Complete Career Boost Package (₹499)." }
   ],
@@ -193,7 +212,15 @@ const SITE_CONFIG = {
     { img: "assets/samples/template-17.jpg", name: "Accountant · Dark Sidebar" },
     { img: "assets/samples/template-18.jpg", name: "Marketing Manager · Blue" },
     { img: "assets/samples/template-19.jpg", name: "System Analyst · Classic" },
-    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist" }
+    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist" },
+    { img: "assets/samples/template-21.jpg", name: "Governance & Transformation Consultant" },
+    { img: "assets/samples/template-22.jpg", name: "IT Service Management · SIAM" },
+    { img: "assets/samples/template-23.jpg", name: "Pharma · Regulatory Affairs" },
+    { img: "assets/samples/template-24.jpg", name: "Banking Operations Leader" },
+    { img: "assets/samples/template-25.jpg", name: "Office Support · Non-Tech" },
+    { img: "assets/samples/template-26.jpg", name: "Accounts & Office Admin" },
+    { img: "assets/samples/template-27.jpg", name: "Oil & Gas · Rig Operations" },
+    { img: "assets/samples/template-28.jpg", name: "Backend Engineer · Java" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
