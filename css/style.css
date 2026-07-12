@@ -1245,12 +1245,22 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
 .legal-wrap .legal-list.tick li::before { content: "✓"; color: var(--green); }
 
 /* Support: shareable legal first-warning notice tool */
-.legal-notice { background: #fff; border: 2px solid var(--ink); border-radius: 18px; padding: 26px 24px; box-shadow: var(--shadow); }
+.legal-notice { background: #fff; border: 2px solid var(--ink); border-radius: 18px; padding: 30px 24px; box-shadow: var(--shadow); text-align: center; }
 .legal-notice h2 { font-family: var(--display); text-transform: uppercase; font-size: 20px; }
-.legal-notice p.ln-sub { font-size: 13.5px; color: var(--muted); margin: 6px 0 14px; line-height: 1.55; }
-.legal-notice textarea { width: 100%; min-height: 200px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--cream); color: var(--ink); padding: 14px; font-family: var(--body); font-size: 13.5px; line-height: 1.55; resize: vertical; outline: 0; }
-.legal-notice textarea:focus { border-color: var(--gold-deep); }
-.ln-tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.legal-notice p.ln-sub, .lnm-card p.ln-sub { font-size: 13.5px; color: var(--muted); margin: 8px auto 16px; line-height: 1.55; max-width: 540px; }
+.lnm-card textarea { width: 100%; min-height: 220px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--cream); color: var(--ink); padding: 14px; font-family: var(--body); font-size: 13.5px; line-height: 1.55; resize: vertical; outline: 0; }
+.lnm-card textarea:focus { border-color: var(--gold-deep); }
+/* First-warning notice modal — blurred backdrop */
+.ln-modal { position: fixed; inset: 0; z-index: 220; display: grid; place-items: center; padding: 20px; }
+.ln-modal[hidden] { display: none; }
+.lnm-backdrop { position: absolute; inset: 0; background: rgba(13,13,13,.5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: lpFade .3s ease; }
+.lnm-card { position: relative; z-index: 2; width: min(680px, 94vw); max-height: 90vh; overflow: auto; text-align: center; background: var(--paper);
+  border: 1.5px solid var(--ink); border-radius: 18px; padding: 32px 26px 26px; box-shadow: 0 26px 60px rgba(0,0,0,.5); animation: lpIn .4s cubic-bezier(.22,1,.36,1); }
+.lnm-card h3 { font-family: var(--display); text-transform: uppercase; font-size: 21px; }
+.lnm-card textarea { text-align: left; }
+.lnm-close { position: absolute; top: 12px; right: 14px; width: 32px; height: 32px; border-radius: 50%; border: 0; background: var(--ink); color: var(--gold); font-size: 20px; line-height: 1; cursor: pointer; z-index: 3; }
+.lnm-close:hover { background: #000; }
+.ln-tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
 .ln-copied { font-size: 12.5px; color: var(--green); font-weight: 700; align-self: center; opacity: 0; transition: opacity .2s; }
 .ln-copied.show { opacity: 1; }
 
@@ -1258,7 +1268,7 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
 .reviews-roll { background: var(--paper); }
 .reviews-roll .section-inner { max-width: var(--maxw); margin: 0 auto; }
 .rr-carousel { position: relative; margin-top: 30px; padding: 0 52px; }
-.rr-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth; padding: 6px 4px 14px;
+.rr-track { display: flex; gap: 20px; overflow-x: auto; padding: 6px 4px 14px;
   scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
 .rr-track::-webkit-scrollbar { display: none; }
 .rr-card { flex: 0 0 300px; width: 300px; min-height: 288px; scroll-snap-align: start; background: #fff; border: 2.5px solid var(--ink); border-radius: 18px; box-shadow: var(--shadow); padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; }
