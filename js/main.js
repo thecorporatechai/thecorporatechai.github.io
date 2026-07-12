@@ -250,6 +250,48 @@ if (servicesGrid) (cfg.services || []).forEach((svc) => {
   if (!reduce && !document.hidden) start();
 })();
 
+/* ---- Rolling review tiles (landing) — auto-scroll + arrows ------------ */
+const reviewsRoll = $("#reviewsRoll");
+if (reviewsRoll && Array.isArray(cfg.landingReviews)) {
+  const rrCard = (r) => {
+    const li = r.linkedin
+      ? `<a class="rr-li" href="${r.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="${r.name} on LinkedIn">in&nbsp;LinkedIn</a>` : "";
+    return `
+    <figure class="rr-card">
+      <div class="rr-head"><span class="rr-avatar">${r.avatar || "🧑"}</span><div class="rr-stars">★★★★★</div></div>
+      <blockquote>${r.text}</blockquote>
+      <figcaption class="rr-who"><strong>${r.name}</strong><span>${r.role || ""}</span>${li ? `<div class="rr-caps">${li}</div>` : ""}</figcaption>
+    </figure>`;
+  };
+  const rrSeq = cfg.landingReviews.map(rrCard).join("");
+  reviewsRoll.innerHTML = rrSeq + rrSeq;   // duplicated so the loop feels endless
+
+  const rrPrev = $("#rrPrev"), rrNext = $("#rrNext");
+  const rrStep = () => {
+    const c = reviewsRoll.querySelector(".rr-card");
+    const gap = parseFloat(getComputedStyle(reviewsRoll).columnGap || "20") || 20;
+    return c ? c.getBoundingClientRect().width + gap : 320;
+  };
+  // Continuous glide; wraps back to the first copy at the halfway point.
+  let rrRaf = null;
+  const rrTick = () => {
+    const half = reviewsRoll.scrollWidth / 2;
+    if (reviewsRoll.scrollLeft >= half) reviewsRoll.scrollLeft -= half;
+    else reviewsRoll.scrollLeft += 0.6;
+    rrRaf = requestAnimationFrame(rrTick);
+  };
+  const rrStop = () => { if (rrRaf) { cancelAnimationFrame(rrRaf); rrRaf = null; } };
+  const rrStart = () => { rrStop(); rrRaf = requestAnimationFrame(rrTick); };
+  if (rrNext) rrNext.addEventListener("click", () => { rrStop(); reviewsRoll.scrollBy({ left: rrStep(), behavior: "smooth" }); setTimeout(rrStart, 1200); });
+  if (rrPrev) rrPrev.addEventListener("click", () => { rrStop(); reviewsRoll.scrollBy({ left: -rrStep(), behavior: "smooth" }); setTimeout(rrStart, 1200); });
+  reviewsRoll.addEventListener("mouseenter", rrStop);
+  reviewsRoll.addEventListener("mouseleave", rrStart);
+  reviewsRoll.addEventListener("touchstart", rrStop, { passive: true });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) rrStop(); else rrStart(); });
+  const rrReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!rrReduce && !document.hidden) rrStart();
+}
+
 /* ---- Follow logos under services -------------------------------------- */
 const followLogos = $("#followLogos");
 if (followLogos && window.TCC_ICON) {
