@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HL097LFTE1');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Real 5-star reviews from professionals at TCS, Accenture, Cognizant, Infosys & more — resume rewrites, ATS templates, LinkedIn & Naukri optimization. Verified founder proof, transparent billing, guaranteed privacy.">
@@ -223,7 +215,7 @@
     <div class="sub-contact-inner">
       <h5>Contact us</h5>
       <div class="social-row" id="subSocial"></div>
-      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy &amp; Terms</a></div>
+      <div class="legal-links"><a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
       <div class="foot-bottom" style="border:0">© 2024–2026 The Corporate Chai</div>
     </div>
   </section>
@@ -247,6 +239,26 @@
       var floatWa = document.getElementById("floatWa");
       if (floatWa) floatWa.href = wa("Hi! I'd like to share my feedback with The Corporate Chai.");
       if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
+
+      // Add a small round avatar emoji to each testimonial card (by name).
+      var AV = {
+        "Md Zaid Ahmed": "🧑‍💻", "Megha Bhattacherjee": "👩‍💼", "Ritwik Bholika": "🧑‍💻",
+        "Anil": "👷", "Sneha Reddy": "👩‍💼", "Karthik V.": "🧑‍💻",
+        "Pooja Nair": "👩‍💻", "Aditya Sharma": "🧑‍🎓", "Neha Kulkarni": "👩‍💻"
+      };
+      document.querySelectorAll(".tm-card").forEach(function (card) {
+        var nameEl = card.querySelector("figcaption strong");
+        var stars = card.querySelector(".tm-stars");
+        if (!nameEl || !stars || card.querySelector(".tm-avatar")) return;
+        var head = document.createElement("div");
+        head.className = "tm-head";
+        var av = document.createElement("span");
+        av.className = "tm-avatar";
+        av.textContent = AV[nameEl.textContent.trim()] || "🧑";
+        card.insertBefore(head, stars);
+        head.appendChild(av);
+        head.appendChild(stars);
+      });
 
       // Bill / invoice lightbox
       var billModal = document.getElementById("billModal");
