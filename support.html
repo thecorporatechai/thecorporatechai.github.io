@@ -67,8 +67,19 @@
     </div>
 
     <div class="legal-notice">
-      <h2>📄 First-warning notice (copy / share)</h2>
-      <p class="ln-sub">A ready, non-threatening first reminder for an advance-paid order that wasn't completed. Edit the <b>[brackets]</b>, then copy it or share it on WhatsApp. We only ever use lawful, courteous follow-ups.</p>
+      <h2>📄 First-warning notice</h2>
+      <p class="ln-sub">A ready, non-threatening first reminder for an advance-paid order that wasn't completed. Open it to edit the <b>[brackets]</b>, then copy or share on WhatsApp. We only ever use lawful, courteous follow-ups.</p>
+      <button class="btn btn-primary" id="lnShow" type="button">📄 Show &amp; share notice →</button>
+    </div>
+  </main>
+
+  <!-- First-warning notice modal (blurred backdrop) -->
+  <div class="ln-modal" id="lnModal" hidden>
+    <div class="lnm-backdrop" data-ln-close></div>
+    <div class="lnm-card">
+      <button class="lnm-close" type="button" data-ln-close aria-label="Close">×</button>
+      <h3>📄 First-warning notice</h3>
+      <p class="ln-sub">Edit the <b>[brackets]</b>, then copy it or share it on WhatsApp.</p>
       <textarea id="lnText" spellcheck="false">Subject: Payment reminder &amp; first notice — The Corporate Chai
 
 Dear [Customer Name],
@@ -86,13 +97,8 @@ We never spam or harass — this is simply a courtesy first notice.
 Thank you,
 Arava Anantha Rao
 Founder, The Corporate Chai</textarea>
-      <div class="ln-tools">
-        <button class="btn btn-dark" id="lnCopy" type="button">📋 Copy text</button>
-        <a class="btn btn-primary" id="lnShare" href="#" target="_blank" rel="noopener noreferrer">Share on WhatsApp →</a>
-        <span class="ln-copied" id="lnCopied">Copied ✓</span>
-      </div>
     </div>
-  </main>
+  </div>
 
   <section class="sub-contact">
     <div class="sub-contact-inner">
@@ -123,18 +129,16 @@ Founder, The Corporate Chai</textarea>
       if (grv) grv.href = "mailto:" + grvMail + "?subject=" + encodeURIComponent("Privacy grievance — The Corporate Chai");
       document.getElementById("grvEmailText").textContent = grvMail;
 
-      // First-warning notice: copy + WhatsApp share
-      var lnText = document.getElementById("lnText");
-      var lnShare = document.getElementById("lnShare");
-      var syncShare = function () { if (lnShare && lnText) lnShare.href = "https://wa.me/?text=" + encodeURIComponent(lnText.value); };
-      syncShare();
-      if (lnText) lnText.addEventListener("input", syncShare);
-      var lnCopy = document.getElementById("lnCopy");
-      if (lnCopy) lnCopy.addEventListener("click", function () {
-        var done = function () { var c = document.getElementById("lnCopied"); if (c) { c.classList.add("show"); setTimeout(function () { c.classList.remove("show"); }, 1800); } };
-        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(lnText.value).then(done, function () { lnText.select(); document.execCommand("copy"); done(); }); }
-        else { lnText.select(); document.execCommand("copy"); done(); }
-      });
+      // Notice modal (blurred backdrop) — open/close
+      var lnModal = document.getElementById("lnModal");
+      var lnShow = document.getElementById("lnShow");
+      if (lnModal && lnShow) {
+        var openLn = function () { lnModal.hidden = false; document.body.classList.add("menu-open"); };
+        var closeLn = function () { lnModal.hidden = true; document.body.classList.remove("menu-open"); };
+        lnShow.addEventListener("click", openLn);
+        lnModal.querySelectorAll("[data-ln-close]").forEach(function (b) { b.addEventListener("click", closeLn); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !lnModal.hidden) closeLn(); });
+      }
 
       if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
     })();
