@@ -120,6 +120,18 @@ const SITE_CONFIG = {
       feats: ["Everything in Resume Rewrite", "Naukri profile optimization", "More recruiter visibility"],
       whatsappMsg: "Hi! I want Resume + Naukri Optimization (₹399)." },
 
+    { id: "09", title: "Resume + LinkedIn Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
+      feats: ["Everything in Resume Rewrite", "LinkedIn profile optimization", "Get noticed by recruiters"],
+      whatsappMsg: "Hi! I want Resume + LinkedIn Optimization (₹399)." },
+
+    { id: "10", title: "LinkedIn Optimization", price: "₹149", original: "₹299", priceNote: "LinkedIn profile only", bonus: "Free AI job-hunting prompts",
+      feats: ["Complete LinkedIn profile makeover", "Headline, About & keyword optimization", "More recruiter views & reach"],
+      whatsappMsg: "Hi! I want the LinkedIn Optimization service (₹149)." },
+
+    { id: "11", title: "Naukri Optimization", price: "₹149", original: "₹299", priceNote: "Naukri profile only", bonus: "Free AI job-hunting prompts",
+      feats: ["Complete Naukri profile optimization", "Recruiter-search keywords & headline", "More profile views & calls"],
+      whatsappMsg: "Hi! I want the Naukri Optimization service (₹149)." },
+
     { id: "05", title: "Complete Career Boost", price: "₹499", original: "₹999", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
       feats: ["LinkedIn profile optimization", "Naukri + ATS resume rewrite", "Personal branding boost"],
       whatsappMsg: "Hi! I want the Complete Career Boost Package (₹499)." }
