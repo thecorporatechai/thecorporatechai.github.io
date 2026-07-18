@@ -337,16 +337,27 @@ if (typeof renderContactRow === "function") renderContactRow($("#socialRow"), cf
 const launchPop = $("#launchPop");
 const lo = cfg.launchOffer || {
   enabled: true,
-  badge: "🎉 Launch Offer",
-  title: "Flat 5% OFF on all services",
-  sub: "Contact us now to claim it — and follow us on Instagram for our monthly giveaway. This month: 🎧 Earphones!",
-  validTill: "⏳ Valid till 15 July 2026"
+  badge: "🤝 Proven results",
+  title: "Our clients got placed at",
+  sub: "Resumes, LinkedIn & Naukri profiles crafted by us — real offers from India's top companies.",
+  validTill: ""
 };
 if (launchPop && lo && lo.enabled !== false) {
   const set = (id, txt) => { const el = document.getElementById(id); if (el && txt) el.textContent = txt; };
   set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub);
   setHref("lpIg", cfg.instagram);
   if (cfg.store) setHref("lpStore", cfg.store);
+
+  // Duplicate each client-logo row once so the marquee loops seamlessly
+  // (the CSS animation slides the track by exactly one set's width).
+  launchPop.querySelectorAll(".lp-track").forEach((track) => {
+    const logoSet = track.querySelector(".lp-set");
+    if (logoSet) {
+      const dup = logoSet.cloneNode(true);
+      dup.setAttribute("aria-hidden", "true");
+      track.appendChild(dup);
+    }
+  });
 
   let seen = false;
   try { seen = !!sessionStorage.getItem("tccLaunchSeen"); } catch (e) {}
