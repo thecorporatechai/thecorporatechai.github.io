@@ -894,11 +894,12 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
 .wwd-off { font-family: var(--body); font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .02em; background: var(--ember); color: #fff; padding: 2px 6px; border-radius: 12px; vertical-align: middle; }
 
 /* Samples page — small attention pill above the templates grid */
-.samples-top-cta { display: flex; justify-content: center; margin: 4px 0 22px; }
+.samples-top-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 4px 0 22px; }
 .samples-mini-btn { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink);
   font-weight: 800; font-size: 13.5px; padding: 9px 18px; border-radius: 30px; box-shadow: 0 5px 14px rgba(244,180,0,.4);
   animation: tplPulse 2.2s ease-in-out infinite; transition: transform .15s; }
 .samples-mini-btn:hover { transform: translateY(-2px); animation-play-state: paused; }
+.samples-mini-btn.intl { background: var(--ink); color: var(--gold); box-shadow: 0 5px 14px rgba(13,13,13,.3); animation: none; }
 @keyframes tplPulse { 0%,100% { box-shadow: 0 5px 14px rgba(244,180,0,.4); } 50% { box-shadow: 0 6px 22px rgba(244,180,0,.7); } }
 
 /* Services page — highlighted pills above the tiles (samples + details) */
