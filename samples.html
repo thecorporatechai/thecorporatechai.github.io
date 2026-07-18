@@ -10,15 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HL097LFTE1');
-</script>
 </head>
 <body class="subpage">
   <div class="grain"></div>
@@ -54,7 +45,10 @@
         <p class="sec-sub">Every template scores <b>90+</b> on our in-house Corporate Chai ATS tool.</p>
         <p class="tpl-inspired">🎨 Designs <b>inspired by Canva</b>, redesigned by us <span class="canva-chip">Canva</span></p>
         <p class="tpl-options">For <b>both</b> options you get an editable resume — grab them as <b>DIY editable templates</b> (any 5 for ₹49), or get one <b>professionally rewritten</b> for you (from ₹199*).</p>
-        <div class="samples-top-cta"><a class="samples-mini-btn" id="tplTopCta" href="#" target="_blank" rel="noopener noreferrer">★ Select any 5 &amp; get editable — ₹49</a></div>
+        <div class="samples-top-cta">
+          <a class="samples-mini-btn" id="tplTopCta" href="#" target="_blank" rel="noopener noreferrer">★ Select any 5 &amp; get editable — ₹49</a>
+          <a class="samples-mini-btn intl" id="intlCvCta" href="#" target="_blank" rel="noopener noreferrer">🌍 International CV — starting at ₹299</a>
+        </div>
         <div class="stile-grid" id="tplGrid"></div>
         <div class="samples-cta">
           <a class="btn btn-primary" id="tplCta" href="#" target="_blank" rel="noopener noreferrer">Get 5 editable templates — ₹49 →</a>
@@ -150,6 +144,8 @@
       if (tplTopCta) tplTopCta.href = wa(tplMsg);
       var tplRewriteCta = document.getElementById("tplRewriteCta");
       if (tplRewriteCta) tplRewriteCta.href = wa("Hi! I'd like my resume ready-rewritten in one of your template models (starting from ₹199* per single page). The model I selected is:");
+      var intlCvCta = document.getElementById("intlCvCta");
+      if (intlCvCta) intlCvCta.href = wa("Hi! I need an International CV (starting at ₹299).");
       var repCta = document.getElementById("repCta");
       if (repCta) repCta.href = wa("Hi! I saw the sample report and I'd like my detailed ATS report (₹19).");
       var floatWa = document.getElementById("floatWa");
