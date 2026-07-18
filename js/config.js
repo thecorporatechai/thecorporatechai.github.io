@@ -85,12 +85,14 @@ const SITE_CONFIG = {
   buildOffer: "50% off · first 100 users",
   scoreBands: { medium: 55, high: 80 },   // <medium = Weak, <high = Medium, else Strong
 
-  /* --- Welcome launch-offer popup (shows once per visit) -------------- */
+  /* --- Welcome popup (shows once per visit) ---------------------------- */
+  /* Showcases companies where our clients got placed (logos live in
+     assets/clients + index.html), with Services / ₹9 Store / Instagram CTAs. */
   launchOffer: {
     enabled: true,
-    badge: "🎁 Giveaways",
-    title: "Win cash & rewards every month",
-    sub: "Join us on Instagram for random & monthly cash and reward giveaways.",
+    badge: "🤝 Proven results",
+    title: "Our clients got placed at",
+    sub: "Resumes, LinkedIn & Naukri profiles crafted by us — real offers from India's top companies.",
     validTill: ""
   },
 
