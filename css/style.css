@@ -670,9 +670,10 @@ body.pop-open { overflow: hidden; }
 .launch-pop { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
 .launch-pop[hidden] { display: none; }
 .lp-backdrop { position: absolute; inset: 0; background: rgba(13,13,13,.55); animation: lpFade .3s ease; }
-.lp-card { position: relative; z-index: 2; width: min(380px, 92vw); text-align: center;
+.lp-card { position: relative; z-index: 2; width: min(460px, 94vw); text-align: center;
   background: linear-gradient(165deg, #2a2620, #0d0d0d); color: var(--paper); border: 1.5px solid rgba(244,180,0,.55);
-  border-radius: 22px; padding: 34px 28px 28px; box-shadow: 0 26px 60px rgba(0,0,0,.6); animation: lpIn .5s cubic-bezier(.22,1,.36,1); }
+  border-radius: 22px; padding: 32px 24px 24px; box-shadow: 0 26px 60px rgba(0,0,0,.6); animation: lpIn .5s cubic-bezier(.22,1,.36,1);
+  max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px); overflow-y: auto; overscroll-behavior: contain; }
 .launch-pop.lp-closing .lp-card { animation: lpOut .35s ease forwards; }
 .launch-pop.lp-closing .lp-backdrop { animation: lpFade .35s ease reverse forwards; }
 .lp-close { position: absolute; top: 12px; right: 13px; width: 30px; height: 30px; border-radius: 50%; border: 0;
@@ -693,8 +694,30 @@ body.pop-open { overflow: hidden; }
 @keyframes lpFade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .lp-card, .lp-backdrop { animation: none; } }
 
-/* Launch-popup gift action button (→ gifts page) */
-.lp-gift-btn { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink) !important; }
+/* Launch-popup client logo showcase (two framed marquee rows) */
+.lp-clients { margin-top: 18px; display: grid; gap: 10px; }
+.lp-marquee { overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.lp-track { display: flex; width: max-content; animation: lpScroll 34s linear infinite; }
+.lp-marquee-rev .lp-track { animation-direction: reverse; animation-duration: 38s; }
+.lp-marquee:hover .lp-track { animation-play-state: paused; }
+.lp-set { display: flex; gap: 9px; padding-right: 9px; }
+.lp-chip { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; height: 46px; padding: 9px 13px;
+  background: #fff; border: 1px solid rgba(244,180,0,.4); border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.32); }
+.lp-chip img { display: block; height: 25px; width: auto; max-width: 110px; object-fit: contain; }
+.lp-chip-dark { background: #000; }
+@keyframes lpScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .lp-track { animation: none; } .lp-marquee { overflow-x: auto; } }
+
+/* Launch-popup action buttons (services CTA + store/instagram row) */
+.lp-services { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink) !important; }
+.lp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 400px) {
+  .lp-title { font-size: 22px; }
+  .lp-card { padding: 28px 16px 20px; }
+  .lp-btn { font-size: 13.5px; padding: 13px 10px; }
+}
 
 /* ---------- gifts page (gifts.html) ---------- */
 .gifts-main { max-width: var(--maxw); margin: 0 auto; padding: 52px 5vw 76px; }
