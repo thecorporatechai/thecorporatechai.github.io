@@ -256,6 +256,12 @@ nav { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 13
 .stile-wm { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; pointer-events: none;
   color: rgba(20,20,20,.14); font-weight: 800; font-size: clamp(13px, 2.2vw, 19px); letter-spacing: .1em;
   text-transform: uppercase; transform: rotate(-18deg); text-shadow: 0 1px 1px rgba(255,255,255,.4); }
+/* International / Leadership tags — top-left, stacked (90+ ATS badge sits top-right) */
+.stile-tags { position: absolute; top: 9px; left: 9px; z-index: 3; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.stile-tag { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; font-size: 10.5px;
+  padding: 4px 9px; border-radius: 20px; letter-spacing: .02em; box-shadow: 0 3px 8px rgba(0,0,0,.25); white-space: nowrap; }
+.stile-tag-intl { background: var(--ink); color: var(--gold); }
+.stile-tag-lead { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink); }
 /* caption: rank + name on top, star rating + price below (no image overlap) */
 .stile figcaption { position: relative; z-index: 3; background: #fff; border-top: 1px solid var(--line); padding: 11px 13px; display: grid; gap: 8px; }
 .stile-top { display: flex; align-items: center; gap: 8px; }
@@ -900,6 +906,7 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
   animation: tplPulse 2.2s ease-in-out infinite; transition: transform .15s; }
 .samples-mini-btn:hover { transform: translateY(-2px); animation-play-state: paused; }
 .samples-mini-btn.intl { background: var(--ink); color: var(--gold); box-shadow: 0 5px 14px rgba(13,13,13,.3); animation: none; }
+.samples-mini-btn.addon { background: var(--green); color: #fff; box-shadow: 0 5px 14px rgba(0,0,0,.22); animation: none; }
 @keyframes tplPulse { 0%,100% { box-shadow: 0 5px 14px rgba(244,180,0,.4); } 50% { box-shadow: 0 6px 22px rgba(244,180,0,.7); } }
 
 /* Services page — highlighted pills above the tiles (samples + details) */
