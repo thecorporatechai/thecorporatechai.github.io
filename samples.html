@@ -10,15 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HL097LFTE1');
-</script>
 </head>
 <body class="subpage">
   <div class="grain"></div>
@@ -57,6 +48,7 @@
         <div class="samples-top-cta">
           <a class="samples-mini-btn" id="tplTopCta" href="#" target="_blank" rel="noopener noreferrer">★ Select any 5 &amp; get editable — ₹49</a>
           <a class="samples-mini-btn intl" id="intlCvCta" href="#" target="_blank" rel="noopener noreferrer">🌍 International CV — starting at ₹299</a>
+          <a class="samples-mini-btn addon" id="coverLetterCta" href="#" target="_blank" rel="noopener noreferrer">✉️ Add a matching cover letter — ₹99*</a>
         </div>
         <div class="stile-grid" id="tplGrid"></div>
         <div class="samples-cta">
@@ -107,17 +99,27 @@
     (function () {
       var cfg = SITE_CONFIG;
       var wa = function (m) { return "https://wa.me/" + cfg.whatsapp + "?text=" + encodeURIComponent(m); };
-      // Templates priced ₹249 (more detailed / multi-section designs); rest ₹199.
+      // Legacy fallback: templates without an explicit `price` in config.js
+      // are ₹249 if listed here, else ₹199. New templates set their own price.
       var HIGH_PRICE = [3, 7, 8, 9, 17, 18, 19, 20];
       function ratingFor(n) { return (4.6 + ((n * 3) % 5) / 10).toFixed(1); }  // 4.6–5.0
+      // International (🌍) / Leadership (👑) badges, driven by item.tag ("intl", "lead", or "intl lead").
+      function tagBadges(tag) {
+        if (!tag) return "";
+        var out = "";
+        if (tag.indexOf("intl") >= 0) out += '<span class="stile-tag stile-tag-intl">🌍 International</span>';
+        if (tag.indexOf("lead") >= 0) out += '<span class="stile-tag stile-tag-lead">👑 Leadership</span>';
+        return out ? '<span class="stile-tags">' + out + '</span>' : "";
+      }
       function tile(item, n, showNum) {
         if (!showNum) {
           return '<figure class="stile"><img loading="lazy" src="' + item.img + '" alt="' + item.name + '">' +
                    '<span class="stile-wm">The Corporate Chai</span>' +
                    '<figcaption><span class="stile-name">' + item.name + '</span></figcaption></figure>';
         }
-        var price = HIGH_PRICE.indexOf(n) >= 0 ? "₹249*" : "₹199*";
+        var price = item.price || (HIGH_PRICE.indexOf(n) >= 0 ? "₹249*" : "₹199*");
         return '<figure class="stile">' +
+                 tagBadges(item.tag) +
                  '<span class="stile-badge">90+ ATS</span>' +
                  '<img loading="lazy" src="' + item.img + '" alt="' + item.name + ' resume sample">' +
                  '<span class="stile-wm">The Corporate Chai</span>' +
@@ -155,6 +157,8 @@
       if (tplRewriteCta) tplRewriteCta.href = wa("Hi! I'd like my resume ready-rewritten in one of your template models (starting from ₹199* per single page). The model I selected is:");
       var intlCvCta = document.getElementById("intlCvCta");
       if (intlCvCta) intlCvCta.href = wa("Hi! I need an International CV (starting at ₹299).");
+      var coverLetterCta = document.getElementById("coverLetterCta");
+      if (coverLetterCta) coverLetterCta.href = wa("Hi! I'd like a matching cover letter added with my resume (₹99*).");
       var repCta = document.getElementById("repCta");
       if (repCta) repCta.href = wa("Hi! I saw the sample report and I'd like my detailed ATS report (₹19).");
       var floatWa = document.getElementById("floatWa");
