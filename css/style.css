@@ -923,6 +923,37 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
 .samples-mini-btn:hover { transform: translateY(-2px); animation-play-state: paused; }
 .samples-mini-btn.intl { background: var(--ink); color: var(--gold); box-shadow: 0 5px 14px rgba(13,13,13,.3); animation: none; }
 .samples-mini-btn.addon { background: var(--green); color: #fff; box-shadow: 0 5px 14px rgba(0,0,0,.22); animation: none; }
+
+/* Cover-letter preview popup — blurred backdrop, framed image with tiled watermark */
+.cl-pop { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 20px; }
+.cl-pop[hidden] { display: none; }
+.cl-backdrop { position: absolute; inset: 0; background: rgba(13,13,13,.55);
+  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); animation: clFade .25s ease; }
+.cl-card { position: relative; z-index: 2; width: min(560px, 94vw); max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px);
+  display: flex; flex-direction: column; overflow: hidden; background: linear-gradient(180deg, #fff, #fffdf5);
+  border: 1.5px solid rgba(244,180,0,.5); border-radius: 18px; box-shadow: 0 26px 60px rgba(0,0,0,.55);
+  animation: clIn .3s cubic-bezier(.22,1,.36,1); }
+.cl-close { position: absolute; top: 10px; right: 12px; z-index: 6; width: 34px; height: 34px; border-radius: 50%; border: 0;
+  background: var(--gold); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,.3);
+  transition: background .2s, transform .2s; }
+.cl-close:hover { background: #ffc72c; transform: rotate(90deg); }
+.cl-shot { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; background: #f2eee2; }
+.cl-canvas { position: relative; }
+.cl-canvas img { display: block; width: 100%; height: auto; }
+/* tiled diagonal "The Corporate Chai" watermark over the whole letter */
+.cl-wm { position: absolute; inset: 0; z-index: 2; pointer-events: none; background-repeat: repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Ctext x='6' y='115' transform='rotate(-28 150 100)' fill='%230d0d0d' fill-opacity='0.08' font-family='Arial, sans-serif' font-size='21' font-weight='700' letter-spacing='1.5'%3EThe Corporate Chai%3C/text%3E%3C/svg%3E"); }
+.cl-foot { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 13px 16px; background: #fff; border-top: 1px solid var(--line); }
+.cl-meta { display: grid; gap: 2px; }
+.cl-meta b { font-family: var(--display); text-transform: uppercase; font-size: 15px; color: var(--ink); letter-spacing: .01em; }
+.cl-meta span { font-size: 12.5px; color: var(--muted); }
+.cl-order { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink);
+  font-weight: 800; font-size: 13px; padding: 11px 16px; border-radius: 10px; box-shadow: 0 5px 14px rgba(244,180,0,.4); transition: transform .15s, box-shadow .2s; }
+.cl-order:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(244,180,0,.55); }
+@keyframes clIn { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes clFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cl-card, .cl-backdrop { animation: none; } }
 @keyframes tplPulse { 0%,100% { box-shadow: 0 5px 14px rgba(244,180,0,.4); } 50% { box-shadow: 0 6px 22px rgba(244,180,0,.7); } }
 
 /* Services page — highlighted pills above the tiles (samples + details) */
