@@ -247,7 +247,11 @@ const SITE_CONFIG = {
     { img: "assets/samples/template-33.jpg", name: "Enterprise Delivery Leader", price: "₹349*", tag: "lead" },
     { img: "assets/samples/template-34.jpg", name: "Engineering Executive", price: "₹299*" },
     { img: "assets/samples/template-35.jpg", name: "Mechanical Engineer", price: "₹349*" },
-    { img: "assets/samples/template-36.jpg", name: "Delivery Driver · Australia", price: "₹299*", tag: "intl" }
+    { img: "assets/samples/template-36.jpg", name: "Delivery Driver · Australia", price: "₹299*", tag: "intl" },
+    { img: "assets/samples/template-37.jpg", name: "General Helper · Support Staff", price: "₹249*" },
+    { img: "assets/samples/template-38.jpg", name: "HR & Recruitment Professional", price: "₹249*" },
+    { img: "assets/samples/template-39.jpg", name: "Business Admin Undergraduate", price: "₹299*" },
+    { img: "assets/samples/template-40.jpg", name: "Aspiring Software Developer", price: "₹199*" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
