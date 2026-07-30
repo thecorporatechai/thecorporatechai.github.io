@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
 <script>
@@ -102,6 +102,24 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10.3 10.3 0 0 1-1.6-5.6c0-5.7 4.7-10.4 10.4-10.4s10.4 4.7 10.4 10.4S21.7 25.8 16 25.8zm5.7-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z" fill="#fff"/></svg>
   </a>
 
+  <!-- Cover-letter preview popup (opens from the "cover letter" mini-button) -->
+  <div class="cl-pop" id="clPop" hidden>
+    <div class="cl-backdrop" id="clBackdrop"></div>
+    <div class="cl-card">
+      <button class="cl-close" id="clClose" type="button" aria-label="Close preview">×</button>
+      <div class="cl-shot">
+        <div class="cl-canvas">
+          <img src="assets/samples/cover-letter.jpg" alt="Matching cover letter sample — The Corporate Chai">
+          <div class="cl-wm" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="cl-foot">
+        <div class="cl-meta"><b>Matching cover letter</b><span>Written to match your resume · ₹99*</span></div>
+        <a class="cl-order" id="clOrder" href="#" target="_blank" rel="noopener noreferrer">✉️ Get this — ₹99*</a>
+      </div>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
   <script src="js/icons.js"></script>
   <script>
@@ -173,8 +191,24 @@
       if (tplRewriteCta) tplRewriteCta.href = wa("Hi! I'd like my resume ready-rewritten in one of your template models (starting from ₹299* per single page). The model I selected is:");
       var intlCvCta = document.getElementById("intlCvCta");
       if (intlCvCta) intlCvCta.href = wa("Hi! I need a global / overseas CV (starting at ₹349).");
+      // Cover-letter button opens an in-page preview popup (image + watermark, blurred backdrop)
+      var clPop = document.getElementById("clPop");
       var coverLetterCta = document.getElementById("coverLetterCta");
-      if (coverLetterCta) coverLetterCta.href = wa("Hi! I'd like a matching cover letter added with my resume (₹99*).");
+      var clOrder = document.getElementById("clOrder");
+      if (clOrder) clOrder.href = wa("Hi! I'd like a matching cover letter added with my resume (₹99*).");
+      if (coverLetterCta) coverLetterCta.setAttribute("href", "assets/samples/cover-letter.jpg");  // graceful fallback if JS is off
+      function clClose() { if (clPop) { clPop.hidden = true; document.body.classList.remove("pop-open"); } }
+      if (coverLetterCta) coverLetterCta.addEventListener("click", function (e) {
+        if (!clPop) return;
+        e.preventDefault();
+        clPop.hidden = false;
+        document.body.classList.add("pop-open");
+      });
+      var clCloseBtn = document.getElementById("clClose");
+      if (clCloseBtn) clCloseBtn.addEventListener("click", clClose);
+      var clBackdrop = document.getElementById("clBackdrop");
+      if (clBackdrop) clBackdrop.addEventListener("click", clClose);
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && clPop && !clPop.hidden) clClose(); });
       var repCta = document.getElementById("repCta");
       if (repCta) repCta.href = wa("Hi! I saw the sample report and I'd like my detailed ATS report (₹19).");
       var floatWa = document.getElementById("floatWa");
