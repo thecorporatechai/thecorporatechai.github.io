@@ -75,9 +75,9 @@ const SITE_CONFIG = {
   ],
 
   /* --- ATS checker --> paid CTAs --------------------------------------- */
-  rewriteServiceId: "03",                 // ₹199 rewrite (WhatsApp)
+  rewriteServiceId: "03",                 // ₹249 rewrite (WhatsApp)
   templatesServiceId: "02",               // ₹49 DIY templates flash-card
-  rewritePrice: "₹199",
+  rewritePrice: "₹249",
   reportPrice: "₹19",                     // detailed fix report (WhatsApp)
   sampleReportUrl: "https://drive.google.com/file/d/1YUeiuonOJZDDY09GT_1Lfx4kiA4Bx0qo/view?usp=sharing",
   buildPrice: "₹250",                     // "Build my resume" service (offer price)
@@ -112,9 +112,9 @@ const SITE_CONFIG = {
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
-    { id: "03", title: "ATS Resume Rewrite", price: "₹199*", original: "₹399", priceNote: "one format · per single page", bonus: "Free AI job-hunting prompts",
-      feats: ["Professionally rewritten content", "Keyword + impact optimization", "All resume types incl. global — charges vary", "Photo resumes from ₹250 · one selected format"],
-      whatsappMsg: "Hi! I want the ATS Resume Rewrite service (₹199)." },
+    { id: "03", title: "ATS Resume Rewrite", price: "₹249*", original: "₹399", priceNote: "one format · per single page", bonus: "Free AI job-hunting prompts",
+      feats: ["Professionally rewritten content", "Keyword + impact optimization", "All resume types incl. global — charges vary", "Photo resumes from ₹299 · one selected format"],
+      whatsappMsg: "Hi! I want the ATS Resume Rewrite service (₹249)." },
 
     { id: "04", title: "Resume + Naukri Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
       feats: ["Everything in Resume Rewrite", "Naukri profile optimization", "More recruiter visibility"],
@@ -207,47 +207,47 @@ const SITE_CONFIG = {
      Image tiles shown on the Samples page. Drop a new image in
      assets/samples/ and add a line here — it appears automatically.
      Optional per-template fields:
-       price : shown price, e.g. "₹299*" (if omitted, falls back to the
+       price : shown price, e.g. "₹349*" (if omitted, falls back to the
                legacy HIGH_PRICE logic in samples.html)
        tag   : badge(s) on the tile — "intl" (🌍 International),
                "lead" (👑 Leadership), or "intl lead" for both. */
   sampleTemplates: [
     { img: "assets/samples/template-01.jpg", name: "ATS · GRC / Security" },
-    { img: "assets/samples/template-02.jpg", name: "ATS · Developer", price: "₹299*" },
-    { img: "assets/samples/template-03.jpg", name: "Modern · Black & White", price: "₹299*" },
-    { img: "assets/samples/template-04.jpg", name: "Simple Professional · A4", price: "₹249*" },
+    { img: "assets/samples/template-02.jpg", name: "ATS · Developer", price: "₹349*" },
+    { img: "assets/samples/template-03.jpg", name: "Modern · Black & White", price: "₹349*" },
+    { img: "assets/samples/template-04.jpg", name: "Simple Professional · A4", price: "₹299*" },
     { img: "assets/samples/template-05.jpg", name: "Simple Professional" },
     { img: "assets/samples/template-06.jpg", name: "Standard Professional" },
-    { img: "assets/samples/template-07.jpg", name: "Modern Professional · Gold", price: "₹299*" },
-    { img: "assets/samples/template-08.jpg", name: "Software Engineer", price: "₹299*" },
-    { img: "assets/samples/template-09.jpg", name: "Simple CV · Blue", price: "₹299*", tag: "intl" },
+    { img: "assets/samples/template-07.jpg", name: "Modern Professional · Gold", price: "₹349*" },
+    { img: "assets/samples/template-08.jpg", name: "Software Engineer", price: "₹349*" },
+    { img: "assets/samples/template-09.jpg", name: "Simple CV · Blue", price: "₹349*", tag: "intl" },
     { img: "assets/samples/template-10.jpg", name: "Nursing / Healthcare" },
-    { img: "assets/samples/template-11.jpg", name: "Fresh Graduate", price: "₹249*" },
-    { img: "assets/samples/template-12.jpg", name: "Corporate ATS · Minimalist", price: "₹249*" },
+    { img: "assets/samples/template-11.jpg", name: "Fresh Graduate", price: "₹299*" },
+    { img: "assets/samples/template-12.jpg", name: "Corporate ATS · Minimalist", price: "₹299*" },
     { img: "assets/samples/template-13.jpg", name: "Accountant · Minimalist" },
-    { img: "assets/samples/template-14.jpg", name: "Modern Professional · Navy", price: "₹249*" },
+    { img: "assets/samples/template-14.jpg", name: "Modern Professional · Navy", price: "₹299*" },
     { img: "assets/samples/template-15.jpg", name: "Professional Modern CV" },
     { img: "assets/samples/template-16.jpg", name: "Accounting Executive CV" },
-    { img: "assets/samples/template-17.jpg", name: "Accountant · Dark Sidebar", price: "₹299*" },
+    { img: "assets/samples/template-17.jpg", name: "Accountant · Dark Sidebar", price: "₹349*" },
     { img: "assets/samples/template-18.jpg", name: "Marketing Manager · Blue" },
     { img: "assets/samples/template-19.jpg", name: "System Analyst · Classic" },
-    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist", price: "₹299*" },
-    { img: "assets/samples/template-21.jpg", name: "Governance & Transformation Consultant", price: "₹299*", tag: "lead" },
-    { img: "assets/samples/template-22.jpg", name: "IT Service Management · SIAM", price: "₹299*", tag: "lead" },
-    { img: "assets/samples/template-23.jpg", name: "Pharma · Regulatory Affairs", price: "₹249*", tag: "intl" },
-    { img: "assets/samples/template-24.jpg", name: "Banking Operations Leader", price: "₹299*", tag: "lead" },
+    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist", price: "₹349*" },
+    { img: "assets/samples/template-21.jpg", name: "Governance & Transformation Consultant", price: "₹349*", tag: "lead" },
+    { img: "assets/samples/template-22.jpg", name: "IT Service Management · SIAM", price: "₹349*", tag: "lead" },
+    { img: "assets/samples/template-23.jpg", name: "Pharma · Regulatory Affairs", price: "₹299*", tag: "intl" },
+    { img: "assets/samples/template-24.jpg", name: "Banking Operations Leader", price: "₹349*", tag: "lead" },
     { img: "assets/samples/template-25.jpg", name: "Office Support · Non-Tech" },
     { img: "assets/samples/template-26.jpg", name: "Accounts & Office Admin" },
-    { img: "assets/samples/template-27.jpg", name: "Oil & Gas · Rig Operations", price: "₹299*" },
-    { img: "assets/samples/template-28.jpg", name: "Backend Engineer · Java", price: "₹249*" },
-    { img: "assets/samples/template-29.jpg", name: "IT Delivery Leader · Life Sciences", price: "₹299*", tag: "intl lead" },
-    { img: "assets/samples/template-30.jpg", name: "UX Designer · Modern", price: "₹249*" },
-    { img: "assets/samples/template-31.jpg", name: "Senior Financial Analyst", price: "₹249*" },
-    { img: "assets/samples/template-32.jpg", name: "Fraud & Claims · AML / KYC", price: "₹299*", tag: "intl" },
-    { img: "assets/samples/template-33.jpg", name: "Enterprise Delivery Leader", price: "₹299*", tag: "lead" },
-    { img: "assets/samples/template-34.jpg", name: "Engineering Executive", price: "₹249*" },
-    { img: "assets/samples/template-35.jpg", name: "Mechanical Engineer", price: "₹299*" },
-    { img: "assets/samples/template-36.jpg", name: "Delivery Driver · Australia", price: "₹249*", tag: "intl" }
+    { img: "assets/samples/template-27.jpg", name: "Oil & Gas · Rig Operations", price: "₹349*" },
+    { img: "assets/samples/template-28.jpg", name: "Backend Engineer · Java", price: "₹299*" },
+    { img: "assets/samples/template-29.jpg", name: "IT Delivery Leader · Life Sciences", price: "₹349*", tag: "intl lead" },
+    { img: "assets/samples/template-30.jpg", name: "UX Designer · Modern", price: "₹299*" },
+    { img: "assets/samples/template-31.jpg", name: "Senior Financial Analyst", price: "₹299*" },
+    { img: "assets/samples/template-32.jpg", name: "Fraud & Claims · AML / KYC", price: "₹349*", tag: "intl" },
+    { img: "assets/samples/template-33.jpg", name: "Enterprise Delivery Leader", price: "₹349*", tag: "lead" },
+    { img: "assets/samples/template-34.jpg", name: "Engineering Executive", price: "₹299*" },
+    { img: "assets/samples/template-35.jpg", name: "Mechanical Engineer", price: "₹349*" },
+    { img: "assets/samples/template-36.jpg", name: "Delivery Driver · Australia", price: "₹299*", tag: "intl" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
