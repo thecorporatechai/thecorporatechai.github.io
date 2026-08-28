@@ -379,7 +379,6 @@ if (launchPop && lo && lo.enabled !== false) {
   if (lpBackdrop) lpBackdrop.addEventListener("click", close);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !launchPop.hidden) close(); });
 }
-
 /* ---- Gift deep link (legacy #gift → gifts page) ----------------------- */
 // The gift chooser is now a standalone page. Keep old shared #gift links
 // working by forwarding them to gifts.html.
