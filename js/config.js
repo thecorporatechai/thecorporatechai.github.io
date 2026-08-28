@@ -66,6 +66,7 @@ const SITE_CONFIG = {
     { avatar: "🧑‍💻", text: "Spot-on rewrite. Cleared ATS easily and I started getting shortlists within days.", name: "Md Zaid Ahmed", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/mdzaidahmed/" },
     { avatar: "👩‍💼", text: "Clean, recruiter-friendly ATS templates — super easy to edit in Word.", name: "Megha Bhattacherjee", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/megha-bhattacherjee/" },
     { avatar: "🧑‍💻", text: "Honest, quick work. My resume finally reflects my real impact and skills.", name: "Ritwik Bholika", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/ritwik-bholika/" },
+    { avatar: "👩‍💻", text: "Took the combo — 2 resumes plus Naukri and LinkedIn, all done together. Delivered fast and my profile finally reflects my real ServiceNow work.", name: "V Sindhuja", role: "ServiceNow Developer · Capgemini", linkedin: "https://www.linkedin.com/in/v-sindhuja-66a2972b6/" },
     { avatar: "🧑‍💻", text: "My LinkedIn finally looks professional — reach and recruiter views improved a lot.", name: "Karthik V.", role: "Software Engineer · Cognizant" },
     { avatar: "👩‍💻", text: "The Naukri optimization worked — more profile views and calls in two weeks.", name: "Pooja Nair", role: "Systems Engineer · Infosys" },
     { avatar: "🧑‍🎓", text: "As a fresher I had no proper resume. They built one from scratch that got me calls.", name: "Aditya Sharma", role: "Fresher · B.Tech 2024" },
@@ -75,9 +76,9 @@ const SITE_CONFIG = {
   ],
 
   /* --- ATS checker --> paid CTAs --------------------------------------- */
-  rewriteServiceId: "03",                 // ₹249 rewrite (WhatsApp)
+  rewriteServiceId: "03",                 // ₹199 rewrite (WhatsApp)
   templatesServiceId: "02",               // ₹49 DIY templates flash-card
-  rewritePrice: "₹249",
+  rewritePrice: "₹199",
   reportPrice: "₹19",                     // detailed fix report (WhatsApp)
   sampleReportUrl: "https://drive.google.com/file/d/1YUeiuonOJZDDY09GT_1Lfx4kiA4Bx0qo/view?usp=sharing",
   buildPrice: "₹250",                     // "Build my resume" service (offer price)
@@ -112,29 +113,33 @@ const SITE_CONFIG = {
       feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
       whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
 
-    { id: "03", title: "ATS Resume Rewrite", price: "₹249*", original: "₹399", priceNote: "one format · per single page", bonus: "Free AI job-hunting prompts",
+    { id: "03", title: "ATS Resume Rewrite", price: "₹199*", original: "₹399", priceNote: "starting from · per single page", bonus: "Free AI job-hunting prompts",
       feats: ["Professionally rewritten content", "Keyword + impact optimization", "All resume types incl. global — charges vary", "Photo resumes from ₹299 · one selected format"],
-      whatsappMsg: "Hi! I want the ATS Resume Rewrite service (₹249)." },
+      whatsappMsg: "Hi! I want the ATS Resume Rewrite service (starting from ₹199)." },
 
-    { id: "04", title: "Resume + Naukri Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
+    { id: "04", title: "Resume + Naukri Optimization", price: "₹499", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
       feats: ["Everything in Resume Rewrite", "Naukri profile optimization", "More recruiter visibility"],
-      whatsappMsg: "Hi! I want Resume + Naukri Optimization (₹399)." },
+      whatsappMsg: "Hi! I want Resume + Naukri Optimization (₹499)." },
 
-    { id: "09", title: "Resume + LinkedIn Optimization", price: "₹399", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
+    { id: "05", title: "Resume + LinkedIn Optimization", price: "₹499", original: "₹799", priceNote: "visibility boost", bonus: "Free AI job-hunting prompts",
       feats: ["Everything in Resume Rewrite", "LinkedIn profile optimization", "Get noticed by recruiters"],
-      whatsappMsg: "Hi! I want Resume + LinkedIn Optimization (₹399)." },
+      whatsappMsg: "Hi! I want Resume + LinkedIn Optimization (₹499)." },
 
-    { id: "10", title: "LinkedIn Optimization", price: "₹149", original: "₹299", priceNote: "LinkedIn profile only", bonus: "Free AI job-hunting prompts",
+    { id: "06", title: "LinkedIn Optimization", price: "₹299", original: "₹499", priceNote: "LinkedIn profile only", bonus: "Free AI job-hunting prompts",
       feats: ["Complete LinkedIn profile makeover", "Headline, About & keyword optimization", "More recruiter views & reach"],
-      whatsappMsg: "Hi! I want the LinkedIn Optimization service (₹149)." },
+      whatsappMsg: "Hi! I want the LinkedIn Optimization service (₹299)." },
 
-    { id: "11", title: "Naukri Optimization", price: "₹149", original: "₹299", priceNote: "Naukri profile only", bonus: "Free AI job-hunting prompts",
+    { id: "07", title: "Naukri Optimization", price: "₹299", original: "₹499", priceNote: "Naukri profile only", bonus: "Free AI job-hunting prompts",
       feats: ["Complete Naukri profile optimization", "Recruiter-search keywords & headline", "More profile views & calls"],
-      whatsappMsg: "Hi! I want the Naukri Optimization service (₹149)." },
+      whatsappMsg: "Hi! I want the Naukri Optimization service (₹299)." },
 
-    { id: "05", title: "Complete Career Boost", price: "₹499", original: "₹999", priceNote: "LinkedIn + Naukri + Resume", featured: true, bonus: "Free AI job-hunting prompts",
-      feats: ["LinkedIn profile optimization", "Naukri + ATS resume rewrite", "Personal branding boost"],
-      whatsappMsg: "Hi! I want the Complete Career Boost Package (₹499)." }
+    { id: "08", title: "Complete Career Boost", price: "₹999", original: "₹1999", priceNote: "2 resumes + Naukri + LinkedIn", featured: true, bonus: "Free AI job-hunting prompts",
+      feats: ["2 ATS resumes (2 formats)", "Naukri profile optimization", "LinkedIn profile optimization", "Delivered in 24–48 hours"],
+      whatsappMsg: "Hi! I want the Complete Career Boost combo — 2 resumes + Naukri + LinkedIn (₹999)." },
+
+    { id: "09", title: "Personal Customized Portfolio", price: "₹1999", priceNote: "starting from · excluding domain",
+      feats: ["Personal portfolio website, custom-built", "Mobile + desktop responsive design", "Domain cost not included"],
+      whatsappMsg: "Hi! I want a Personal Customized Portfolio website (starting from ₹1999, excluding domain)." }
   ],
 
   /* --- Service 06 page: Premium tools --------------------------------- */
@@ -271,7 +276,9 @@ const SITE_CONFIG = {
     { img: "assets/samples/template-57.jpg", name: "Marketing Manager · Blue Sidebar", tier: "basic" },
     { img: "assets/samples/template-58.jpg", name: "UX Designer · Dark Sidebar", tier: "premium" },
     { img: "assets/samples/template-59.jpg", name: "UX Designer · Minimal", tier: "basic" },
-    { img: "assets/samples/template-60.jpg", name: "Accounting Executive · Navy", tier: "premium" }
+    { img: "assets/samples/template-60.jpg", name: "Accounting Executive · Navy", tier: "premium" },
+    { img: "assets/samples/template-61.png", name: "Marketing Specialist · Europe", tier: "basic", tag: "intl" },
+    { img: "assets/samples/template-62.png", name: "Logistics & Supply Chain · Gulf", tier: "premium", tag: "intl" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
