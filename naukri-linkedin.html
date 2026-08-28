@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
 <script>
@@ -36,12 +36,26 @@
   </header>
 
   <main class="nl-body">
+    <section class="nl-combo">
+      <div class="nl-combo-price">
+        <s class="nlc-was">₹1999</s>
+        <strong class="nlc-now">₹999</strong>
+        <span class="nlc-off">50% OFF</span>
+      </div>
+      <div class="nl-combo-meta">
+        <b>Complete Career Boost combo</b>
+        <span>2 ATS resumes + Naukri &amp; LinkedIn optimization · delivered in <b>24–48 hours</b></span>
+      </div>
+      <a class="nl-combo-cta" id="nlComboWa" href="#" target="_blank" rel="noopener noreferrer">Get the combo →</a>
+    </section>
+
     <section class="nl-card nl-included">
       <h2 class="nl-h">✅ What's included</h2>
       <ul class="nl-list">
-        <li>1 ATS-Friendly Resume (Word + PDF)</li>
+        <li><b>2 ATS-Friendly Resumes</b> — two formats (Word + PDF)</li>
         <li>Personalized Naukri Profile Optimization Guide (PDF)</li>
         <li>Personalized LinkedIn Profile Optimization Guide (PDF)</li>
+        <li>Combo price <b>₹999</b> · delivered in <b>24–48 hours</b></li>
       </ul>
 
       <div class="nl-bonus">
@@ -64,6 +78,22 @@
         <figure class="stile"><img loading="lazy" src="assets/linkedin/proof-03.jpeg" alt="LinkedIn before and after transformation 3"></figure>
         <figure class="stile"><img loading="lazy" src="assets/linkedin/proof-02.jpeg" alt="LinkedIn before and after transformation 2"></figure>
         <figure class="stile"><img loading="lazy" src="assets/linkedin/proof-04.jpeg" alt="LinkedIn before and after transformation 4"></figure>
+      </div>
+    </section>
+
+    <section class="nl-proof">
+      <span class="sec-label">Verified proof</span>
+      <h2 class="nl-h">Real Naukri &amp; LinkedIn results</h2>
+      <p class="nl-proof-sub">Actual profile numbers after optimization — recruiter searches, recruiter actions, and a fully rebuilt LinkedIn presence.</p>
+      <div class="nl-proof-grid nl-proof-2">
+        <figure class="stile">
+          <img loading="lazy" src="assets/linkedin/naukri-proof.jpeg" alt="Naukri profile showing 16,277 search appearances and 475 recruiter actions in the last 90 days">
+          <figcaption class="nl-cap">📈 Naukri — <b>16,277</b> search appearances &amp; <b>475</b> recruiter actions in 90 days</figcaption>
+        </figure>
+        <figure class="stile">
+          <img loading="lazy" src="assets/linkedin/linkedin-proof.jpeg" alt="Optimized LinkedIn profile with custom banner and keyword-rich headline">
+          <figcaption class="nl-cap">💼 LinkedIn — optimized banner, headline &amp; keyword-rich profile</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -113,6 +143,8 @@
       var msg = "Hi! I'd like the Naukri & LinkedIn optimization pack (Resume + Naukri + LinkedIn guides + bonuses).";
       var nlWa = document.getElementById("nlWa");
       if (nlWa) nlWa.href = wa(msg);
+      var nlComboWa = document.getElementById("nlComboWa");
+      if (nlComboWa) nlComboWa.href = wa("Hi! I want the Complete Career Boost combo — 2 resumes + Naukri + LinkedIn (₹999).");
       var floatWa = document.getElementById("floatWa");
       if (floatWa) floatWa.href = wa(msg);
       if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
