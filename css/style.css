@@ -800,6 +800,33 @@ a.gift-tile:hover { transform: translateY(-6px); box-shadow: 10px 12px 0 rgba(13
 
 @media (max-width: 560px) { .nl-card { padding: 26px 20px; } .nl-cta .btn { width: 100%; } }
 
+/* Naukri & LinkedIn page — combo price banner + verified-proof captions */
+.nl-combo { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; justify-content: space-between;
+  background: linear-gradient(135deg, var(--ink), var(--ink-soft)); color: var(--paper);
+  border: 2.5px solid var(--gold); border-radius: 20px; padding: 22px 26px; box-shadow: var(--shadow); }
+.nl-combo-price { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }
+.nlc-was { color: #b8b2a4; font-size: 16px; font-weight: 600; text-decoration-color: var(--ember); }
+.nlc-now { font-family: var(--display); font-size: 34px; color: var(--gold); line-height: 1; }
+.nlc-off { background: var(--ember); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: .03em;
+  padding: 4px 9px; border-radius: 20px; }
+.nl-combo-meta { display: grid; gap: 3px; min-width: 200px; flex: 1 1 240px; text-align: left; }
+.nl-combo-meta b { font-family: var(--display); text-transform: uppercase; font-size: 17px; letter-spacing: .01em; color: var(--paper); }
+.nl-combo-meta span { font-size: 13.5px; color: #d8d2c4; line-height: 1.5; }
+.nl-combo-meta span b { font-family: var(--body); font-size: inherit; text-transform: none; color: var(--gold); }
+.nl-combo-cta { flex-shrink: 0; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink);
+  font-weight: 800; font-size: 14.5px; padding: 13px 22px; border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(244,180,0,.36); transition: transform .15s, box-shadow .2s; }
+.nl-combo-cta:hover { transform: translateY(-2px); box-shadow: 0 9px 22px rgba(244,180,0,.5); }
+.nl-proof-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.nl-cap { background: #fff; border-top: 1px solid var(--line); padding: 11px 13px; font-size: 12.5px;
+  color: var(--muted); line-height: 1.45; text-align: center; }
+.nl-cap b { color: var(--ink); }
+@media (max-width: 560px) {
+  .nl-combo { justify-content: center; text-align: center; padding: 22px 18px; }
+  .nl-combo-meta { text-align: center; flex-basis: 100%; }
+  .nl-combo-cta { width: 100%; text-align: center; }
+}
+
 /* ---------- Reviews & proof page (testimonials.html) ---------- */
 .tm-body { max-width: 980px; margin: 0 auto; padding: 30px 5vw 60px; display: grid; gap: 26px; }
 /* these are <section>s — cancel the global section padding; tm-body gap handles spacing */
