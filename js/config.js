@@ -278,7 +278,11 @@ const SITE_CONFIG = {
     { img: "assets/samples/template-59.jpg", name: "UX Designer · Minimal", tier: "basic" },
     { img: "assets/samples/template-60.jpg", name: "Accounting Executive · Navy", tier: "premium" },
     { img: "assets/samples/template-61.png", name: "Marketing Specialist · Europe", tier: "basic", tag: "intl" },
-    { img: "assets/samples/template-62.png", name: "Logistics & Supply Chain · Gulf", tier: "premium", tag: "intl" }
+    { img: "assets/samples/template-62.png", name: "Logistics & Supply Chain · Gulf", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-63.jpg", name: "Head of Sales · Insurance & Banking", tier: "premium" },
+    { img: "assets/samples/template-64.jpg", name: "Accountant · Accounts Assistant", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-65.jpg", name: "CTO · AI / ML Engineering", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-66.jpg", name: "Food Safety & Hygiene Officer", tier: "premium", tag: "intl" }
   ],
   sampleReports: [
     { img: "assets/samples/report-01.jpg", name: "ATS Score Report · Page 1" },
