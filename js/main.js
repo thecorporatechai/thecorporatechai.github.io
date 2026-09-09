@@ -331,22 +331,13 @@ if (founderBox && cfg.founder) {
 }
 if (typeof renderContactRow === "function") renderContactRow($("#socialRow"), cfg);
 
-/* ---- Welcome launch-offer popup (once per session, auto-disappears) --- */
-// Falls back to built-in copy so it still works even if config.js isn't updated;
-// edit js/config.js -> launchOffer to change the text/date without touching code.
+/* ---- Welcome popup (once per session, auto-disappears) ---------------- */
+// The copy (logos, trust line, offer box, steps) lives in index.html.
+// js/config.js -> launchOffer.enabled = false turns the popup off.
 const launchPop = $("#launchPop");
-const lo = cfg.launchOffer || {
-  enabled: true,
-  badge: "🤝 Proven results",
-  title: "Our clients got placed at",
-  sub: "Resumes, LinkedIn & Naukri profiles crafted by us — real offers from India's top companies.",
-  validTill: ""
-};
+const lo = cfg.launchOffer || { enabled: true };
 if (launchPop && lo && lo.enabled !== false) {
-  const set = (id, txt) => { const el = document.getElementById(id); if (el && txt) el.textContent = txt; };
-  set("lpBadge", lo.badge); set("lpTitle", lo.title); set("lpSub", lo.sub);
   setHref("lpIg", cfg.instagram);
-  if (cfg.store) setHref("lpStore", cfg.store);
 
   // Duplicate each client-logo row once so the marquee loops seamlessly
   // (the CSS animation slides the track by exactly one set's width).
@@ -379,6 +370,7 @@ if (launchPop && lo && lo.enabled !== false) {
   if (lpBackdrop) lpBackdrop.addEventListener("click", close);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !launchPop.hidden) close(); });
 }
+
 /* ---- Gift deep link (legacy #gift → gifts page) ----------------------- */
 // The gift chooser is now a standalone page. Keep old shared #gift links
 // working by forwarding them to gifts.html.
