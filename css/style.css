@@ -269,29 +269,61 @@ nav { position: sticky; top: 0; z-index: 50; background: var(--ink); padding: 13
 .stile-tag-intl { background: rgba(13,13,13,.62); }
 .stile-tag-lead { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
 /* caption: rank + name, star rating + price, then the order CTA */
-.stile-cap { position: relative; z-index: 3; background: #fff; border-top: 1px solid var(--line); padding: 12px 13px 13px; display: grid; gap: 9px; }
-.stile-top { display: flex; align-items: center; gap: 8px; }
+.stile-cap { position: relative; z-index: 3; background: #fff; border-top: 1px solid var(--line); padding: 11px 12px 12px; display: grid; gap: 6px; }
+.stile-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; }
+.stile-code { font-family: var(--display); text-transform: uppercase; font-size: 15px; color: var(--ink); letter-spacing: .02em; }
+.stile-code b { color: var(--gold-deep); }
+.stile-fmt { flex: 0 0 auto; font-size: 11.5px; color: var(--muted-light); font-weight: 600; white-space: nowrap; }
 .stile-rank { flex-shrink: 0; background: var(--ink); color: var(--gold); font-family: var(--display); font-size: 12.5px; padding: 3px 9px; border-radius: 8px; letter-spacing: .05em; }
-.stile-name { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.22; }
-.stile-bot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.stile-stars { display: inline-flex; align-items: center; gap: 5px; color: var(--gold); font-size: 12.5px; letter-spacing: 1px; }
+.stile-name { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.25;
+  flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stile-bot { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; }
+.stile-stars { display: inline-flex; align-items: center; gap: 4px; color: var(--gold); font-size: 10.5px; letter-spacing: .5px; flex-shrink: 0; }
 .stile-stars em { font-style: normal; color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: 0; }
-/* Basic / Premium tier label (replaces the old per-template price) */
-.stile-tier { font-family: var(--display); font-size: 12.5px; letter-spacing: .05em; text-transform: uppercase;
-  padding: 4px 11px; border-radius: 20px; white-space: nowrap; }
-.stile-tier.is-basic { background: rgba(13,13,13,.07); color: var(--muted); border: 1px solid var(--line); }
-.stile-tier.is-premium { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink);
-  border: 1px solid rgba(217,151,28,.5); box-shadow: 0 3px 9px rgba(244,180,0,.32); }
 /* the whole card links to WhatsApp; this gold pill is the visible "order" affordance */
-.stile-order { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink); font-weight: 800; font-size: 12.5px;
-  padding: 10px 12px; border-radius: 10px; box-shadow: 0 4px 12px rgba(244,180,0,.32);
-  transition: transform .15s, box-shadow .2s, background .2s, color .2s; }
-.stile-order svg { flex-shrink: 0; color: var(--ink); transition: color .2s; }
-.stile:hover .stile-order { background: linear-gradient(135deg, var(--ink), var(--ink-soft)); color: var(--gold); box-shadow: 0 7px 18px rgba(13,13,13,.3); }
-.stile:hover .stile-order svg { color: var(--gold); }
+.stile-order { display: inline-flex; align-items: center; justify-content: center; gap: 7px; margin-top: 3px;
+  background: #22c55e; color: #fff; font-weight: 800; font-size: 13.5px; padding: 11px 12px; border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(34,197,94,.32); transition: background .2s, transform .15s, box-shadow .2s; }
+.stile:hover .stile-order { background: #16a34a; box-shadow: 0 7px 18px rgba(34,197,94,.45); }
 /* reports grid: framed like a card, centred label, no order button */
 .stile-report .stile-cap { text-align: center; }
+
+/* samples page — tighter hero + smaller logo strip */
+.page-hero-tight { padding: 26px 5vw 22px; }
+.page-hero-tight h1 { margin-top: 0; font-size: clamp(26px, 3.6vw, 40px); }
+.samples-logos-sm { margin-top: 12px; gap: 6px 8px; }
+.samples-logos-sm .sl-label { font-size: 11.5px; }
+.samples-logos-sm .lw-item { height: 30px; padding: 4px 9px; border-radius: 7px; }
+.samples-logos-sm .lw-item img { height: 17px; max-width: 74px; }
+
+/* sticky tier picker under the sub-nav */
+/* On the samples page the tier bar owns the sticky slot (the sub-nav wraps to
+   different heights, so stacking two sticky bars is fragile). */
+body.samples-page .subnav { position: static; }
+.tier-bar { position: sticky; top: 0; z-index: 50; background: var(--paper);
+  border-bottom: 1px solid var(--line); box-shadow: 0 6px 16px rgba(13,13,13,.09); padding: 10px 5vw; }
+.tier-bar-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.tier-card { display: grid; justify-items: center; gap: 2px; padding: 9px 8px; background: #fff;
+  border: 1.5px solid var(--line); border-radius: 12px; text-align: center;
+  transition: border-color .2s, transform .15s, box-shadow .2s; }
+.tier-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(244,180,0,.24); }
+.tier-card b { font-family: var(--display); text-transform: uppercase; font-size: 13.5px; color: var(--ink); letter-spacing: .02em; line-height: 1.1; }
+.tier-card span { font-family: var(--display); font-size: 17px; color: var(--gold-deep); line-height: 1; }
+
+/* tier sections */
+#templates { padding-top: 26px; }
+.tier-sec { padding: 0; scroll-margin-top: calc(var(--stick-h, 80px) + 16px); }
+.tier-head { display: flex; align-items: baseline; gap: 12px; margin: 34px 0 14px; padding-bottom: 9px;
+  border-bottom: 2px solid var(--line); }
+.tier-sec:first-child .tier-head { margin-top: 4px; }
+.tier-head h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(22px, 3vw, 30px); line-height: 1; }
+.tier-head-price { font-family: var(--display); font-size: 20px; color: var(--gold-deep); }
+.samples-addons { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 36px; }
+@media (max-width: 430px) {
+  .tier-card b { font-size: 12px; }
+  .tier-card span { font-size: 15px; }
+  .samples-addons .btn, .samples-addons .samples-mini-btn { width: 100%; justify-content: center; }
+}
 .samples-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
 .sample-empty { text-align: center; color: var(--muted); font-size: 15px; padding: 30px 0; }
 
@@ -446,6 +478,19 @@ section { padding: 80px 5vw; }
 .cj-title { font-family: var(--display); text-transform: uppercase; font-size: 24px; color: var(--paper); }
 .cj-sub { color: #c9c3b5; font-size: 14.5px; line-height: 1.5; max-width: 330px; }
 .community-note { font-size: 12px; color: var(--muted-light); }
+/* two WhatsApp channel cards (data comes from config -> whatsappGroups) */
+.cj-groups { display: grid; gap: 10px; width: 100%; max-width: 360px; }
+.cj-group { display: flex; align-items: center; gap: 12px; text-align: left; padding: 12px 14px; border-radius: 14px;
+  background: rgba(255,252,243,.06); border: 1.5px solid rgba(244,180,0,.3);
+  transition: transform .15s, border-color .2s, background .2s, box-shadow .2s; }
+.cj-group:hover { transform: translateY(-2px); border-color: var(--gold); background: rgba(244,180,0,.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+.cjg-ico { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #25d366;
+  display: grid; place-items: center; font-size: 19px; }
+.cjg-txt { display: grid; gap: 2px; min-width: 0; }
+.cjg-txt b { font-size: 14.5px; font-weight: 800; color: var(--paper); line-height: 1.2; }
+.cjg-txt small { font-size: 11.5px; color: #b8b2a4; line-height: 1.4; }
+.cjg-go { flex-shrink: 0; margin-left: auto; color: var(--gold); font-size: 19px; font-weight: 800; }
 
 /* ---------- services ---------- */
 .services-section { background: var(--cream); }
@@ -706,15 +751,38 @@ body.pop-open { overflow: hidden; }
 .lp-close { position: absolute; top: 12px; right: 13px; width: 30px; height: 30px; border-radius: 50%; border: 0;
   background: rgba(255,255,255,.12); color: var(--paper); font-size: 19px; line-height: 1; cursor: pointer; transition: background .2s; }
 .lp-close:hover { background: rgba(255,255,255,.24); }
-.lp-badge { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 11.5px; padding: 6px 14px; border-radius: 20px; letter-spacing: .04em; text-transform: uppercase; }
-.lp-title { font-family: var(--display); text-transform: uppercase; font-size: 25px; color: var(--gold); margin-top: 15px; line-height: 1.14; letter-spacing: .01em; }
-.lp-sub { font-size: 14px; color: #d8d2c4; line-height: 1.55; margin-top: 11px; }
-.lp-sub strong { color: var(--paper); }
-.lp-actions { display: grid; gap: 10px; margin-top: 22px; }
+/* eyebrow above the client logos */
+.lp-eyebrow { display: block; font-size: 11px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; color: #b8b2a4; }
+/* trust pill under the logos */
+.lp-trust { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 9px 18px;
+  border-radius: 30px; background: rgba(244,180,0,.12); border: 1px solid rgba(244,180,0,.4);
+  color: var(--gold); font-weight: 800; font-size: 13px; line-height: 1.3; }
+/* the single "Explore designs" offer box -> samples page */
+.lp-offer { display: block; margin-top: 16px; text-align: left; padding: 14px 16px 15px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(244,180,0,.15), rgba(244,180,0,.04));
+  border: 1.5px solid rgba(244,180,0,.55); box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  transition: transform .15s, box-shadow .2s, border-color .2s; }
+.lp-offer:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 11px 26px rgba(244,180,0,.24); }
+.lp-offer-tag { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 20px; }
+.lp-offer-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 11px; }
+.lp-offer-left { display: grid; gap: 4px; }
+.lp-offer-name { font-family: var(--display); text-transform: uppercase; font-size: 19px;
+  color: var(--paper); letter-spacing: .01em; line-height: 1.1; }
+.lp-offer-see { font-size: 12.5px; font-weight: 800; color: var(--gold); }
+.lp-offer-price { display: grid; justify-items: end; gap: 1px; flex-shrink: 0; }
+.lp-offer-price small { font-size: 10.5px; color: #b8b2a4; letter-spacing: .05em; text-transform: uppercase; font-weight: 700; }
+.lp-offer-price strong { font-family: var(--display); font-size: 26px; color: var(--gold); line-height: 1; }
+/* one-line "how it works" step */
+.lp-step { margin-top: 12px; font-size: 12.5px; color: #c9c3b5; line-height: 1.5; }
+/* security / watermark fine print */
+.lp-secure { margin-top: 12px; font-size: 11.5px; color: #948e81; line-height: 1.5; }
+.lp-card > .lp-btn { margin-top: 14px; }
 .lp-btn { display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 14px 14px; border-radius: 12px;
   font-size: 14.5px; font-weight: 800; color: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.28); transition: transform .15s, box-shadow .2s; }
 .lp-btn:hover { transform: translateY(-2px); box-shadow: 0 9px 22px rgba(0,0,0,.34); }
-.lp-store { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
 .lp-ig { background: linear-gradient(45deg, #f09433, #dc2743 50%, #bc1888); }
 @keyframes lpIn { from { opacity: 0; transform: translateY(14px) scale(.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes lpOut { to { opacity: 0; transform: translateY(14px) scale(.95); } }
@@ -738,8 +806,6 @@ body.pop-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .lp-track { animation: none; } .lp-marquee { overflow-x: auto; } }
 
 /* Launch-popup action buttons (services CTA + store/instagram row) */
-.lp-services { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: var(--ink) !important; }
-.lp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 400px) {
   .lp-title { font-size: 22px; }
   .lp-card { padding: 28px 16px 20px; }
