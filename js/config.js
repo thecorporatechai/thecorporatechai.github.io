@@ -26,9 +26,18 @@ const SITE_CONFIG = {
     website: "https://aravaanantharao.in"
   },
 
-  /* --- WhatsApp group (Corporate Majdoor Community) -------------------
-     Group info → Invite via link. Used by the community + Coming Soon. */
+  /* --- WhatsApp channels ----------------------------------------------
+     whatsappGroupUrl is the main channel (used by the Coming Soon CTA).
+     whatsappGroups drives the cards on community.html — add more freely. */
   whatsappGroupUrl: "https://whatsapp.com/channel/0029Vb8MuHREquiUlbG34I47",
+  whatsappGroups: [
+    { icon: "💬", name: "Community & Testimonials",
+      desc: "Real member reviews, referrals, corporate talk and first access to new launches.",
+      url: "https://whatsapp.com/channel/0029Vb8MuHREquiUlbG34I47" },
+    { icon: "📢", name: "Job Updates",
+      desc: "Daily fresher and experienced job openings, hiring alerts and referral drops.",
+      url: "https://whatsapp.com/channel/0029Vb8HyxBKGGGCEkWhNu0K" }
+  ],
 
   /* --- Free HR contact list (follow-to-unlock) ------------------------
      Paste your OneDrive "anyone with the link" URL to the Excel sheet. */
@@ -86,15 +95,11 @@ const SITE_CONFIG = {
   buildOffer: "50% off · first 100 users",
   scoreBands: { medium: 55, high: 80 },   // <medium = Weak, <high = Medium, else Strong
 
-  /* --- Welcome popup (shows once per visit) ---------------------------- */
-  /* Showcases companies where our clients got placed (logos live in
-     assets/clients + index.html), with Services / ₹9 Store / Instagram CTAs. */
+  /* --- Welcome popup (shows once per visit) ----------------------------
+     Only `enabled` is read here — all popup copy (client logos, trust line,
+     "Explore Designs" box, Instagram + security line) lives in index.html. */
   launchOffer: {
-    enabled: true,
-    badge: "🤝 Proven results",
-    title: "Our clients got placed at",
-    sub: "Resumes, LinkedIn & Naukri profiles crafted by us — real offers from India's top companies.",
-    validTill: ""
+    enabled: true
   },
 
   /* --- Paid services (cards under "Services") -------------------------- */
