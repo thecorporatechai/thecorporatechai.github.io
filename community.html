@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=9">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
 <script>
@@ -31,7 +31,7 @@
     <div class="page-hero-inner">
       <span class="sec-label">Join the inner circle</span>
       <h1>The Corporate Majdoor Community</h1>
-      <p>Stop hustling alone. Join a no-filter WhatsApp circle of working professionals who share real job openings, referrals and corporate survival hacks — every single day.</p>
+      <p>Stop hustling alone. Join a no-filter WhatsApp circle of working professionals who share real job openings, referrals and corporate survival hacks — every single day. Two free channels: <b>Community &amp; Testimonials</b> and <b>Job Updates</b>.</p>
     </div>
   </header>
 
@@ -51,8 +51,8 @@
         <div class="community-join">
           <div class="cj-icon">💬</div>
           <strong class="cj-title">Join now · Stay updated</strong>
-          <p class="cj-sub">Be the first to spot referrals and launches. It takes 10 seconds and it's completely free.</p>
-          <a class="btn btn-primary btn-full" id="communityJoinBtn" href="#" target="_blank" rel="noopener noreferrer">Join the WhatsApp community →</a>
+          <p class="cj-sub">Two free WhatsApp channels — join one or both. It takes 10 seconds.</p>
+          <div class="cj-groups" id="cmtyGroups"></div>
           <p class="community-note">No spam · Leave anytime · 1000+ members</p>
         </div>
       </div>
@@ -77,6 +77,20 @@
   <script>
     (function () {
       var cfg = SITE_CONFIG;
+      // WhatsApp channels (edit js/config.js -> whatsappGroups)
+      var wrap = document.getElementById("cmtyGroups");
+      var groups = cfg.whatsappGroups || [];
+      if (!groups.length && cfg.whatsappGroupUrl) {
+        groups = [{ icon: "💬", name: "WhatsApp community", desc: "", url: cfg.whatsappGroupUrl }];
+      }
+      if (wrap) wrap.innerHTML = groups.map(function (g) {
+        return '<a class="cj-group" href="' + g.url + '" target="_blank" rel="noopener noreferrer">' +
+                 '<span class="cjg-ico">' + (g.icon || "💬") + '</span>' +
+                 '<span class="cjg-txt"><b>' + g.name + '</b>' +
+                   (g.desc ? '<small>' + g.desc + '</small>' : '') + '</span>' +
+                 '<span class="cjg-go">→</span>' +
+               '</a>';
+      }).join("");
       var join = document.getElementById("communityJoinBtn");
       if (join) join.href = cfg.whatsappGroupUrl || "#";
       var floatWa = document.getElementById("floatWa");
