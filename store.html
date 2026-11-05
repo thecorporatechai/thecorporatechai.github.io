@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=16">
+  <link rel="stylesheet" href="css/style.css?v=17">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL097LFTE1"></script>
 <script>
@@ -30,9 +30,14 @@
 
   <header class="st-hero">
     <span class="st-eyebrow">Hacks &amp; eBooks</span>
-    <h1>The ₹49 Store</h1>
+    <h1>The <b>₹49</b> Store</h1>
     <p>Practical guides for your job search and interviews. Pick one and get the file on WhatsApp.</p>
     <div class="st-tabs" id="stTabs"></div>
+    <ol class="st-steps">
+      <li><b>1</b>Pick a guide</li>
+      <li><b>2</b>Message us on WhatsApp</li>
+      <li><b>3</b>Get your file</li>
+    </ol>
   </header>
 
   <main class="st-body" id="stBody"></main>
@@ -61,7 +66,12 @@
       document.getElementById("stTabs").innerHTML = cfg.store.map(function (sec) {
         return '<a href="#' + sec.id + '">' + sec.title + '</a>';
       }).join("");
-      document.getElementById("stBody").innerHTML = cfg.store.map(function (sec) {
+      var ad = '<aside class="st-ad" aria-label="Our resume services">' +
+        '<div class="st-ad-copy"><span>Want it done for you?</span><h2>Get your resume fixed</h2>' +
+        '<p>Choose a design and our team rewrites your resume for you.</p></div>' +
+        '<div class="st-ad-cta"><a class="st-ad-btn" href="samples.html">Get your resume fixed — starting ₹199* →</a>' +
+        '<a class="st-ad-btn st-ad-alt" href="services.html">Explore all our services →</a></div></aside>';
+      document.getElementById("stBody").innerHTML = cfg.store.map(function (sec, i) {
         return '<section class="st-sec" id="' + sec.id + '">' +
           '<div class="st-head"><h2>' + sec.title + '</h2><span>' + sec.items.length + ' guides</span></div>' +
           '<div class="st-grid">' +
@@ -70,7 +80,7 @@
               '<div class="st-shot"><img loading="lazy" src="' + it.img + '" alt="' + it.name + '"></div>' +
               '<div class="st-meta"><span class="st-name">' + (it.label || it.name) + '</span>' +
               '<span class="st-foot"><b>' + price + '</b><i>Get it →</i></span></div></a>';
-          }).join("") + '</div></section>';
+          }).join("") + '</div></section>' + (i === 0 ? ad : "");
       }).join("");
       document.getElementById("floatWa").href = wa("Hi! I have a question about the ₹49 store.");
       if (typeof renderContactRow === "function") renderContactRow(document.getElementById("subSocial"), cfg);
