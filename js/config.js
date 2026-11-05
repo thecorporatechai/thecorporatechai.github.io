@@ -1,0 +1,320 @@
+/* =====================================================================
+   The Corporate Chai — site configuration
+   Edit the values below to update the site. No build step required.
+   Shared by index.html and all sub-pages (tools / social / certifications).
+   ===================================================================== */
+const SITE_CONFIG = {
+  /* --- Contact & socials ---------------------------------------------- */
+  whatsapp: "919032687452",                 // international format, no "+"
+  whatsappDisplay: "+91 90326 87452",
+  email: "thecorporatechai@gmail.com",             // normal support / enquiries
+  grievanceEmail: "grievance.thecorporatechai@gmail.com",  // privacy grievances / breach
+  domain: "thecorporatechai.in",
+  instagram: "https://www.instagram.com/thecorporatechai.in",
+  youtube: "https://www.youtube.com/@thecorporatechai_in",
+  twitter: "https://x.com/D_CorporateChai",                 // X (Twitter)
+
+  /* --- WhatsApp channels ----------------------------------------------
+     whatsappGroupUrl is the main channel (used by the Coming Soon CTA).
+     whatsappGroups drives the cards on community.html — add more freely. */
+  whatsappGroupUrl: "https://whatsapp.com/channel/0029Vb8MuHREquiUlbG34I47",
+  whatsappGroups: [
+    { icon: "💬", name: "Community & Testimonials",
+      desc: "Real member reviews, referrals, corporate talk and first access to new launches.",
+      url: "https://whatsapp.com/channel/0029Vb8MuHREquiUlbG34I47" },
+    { icon: "📢", name: "Job Updates",
+      desc: "Daily fresher and experienced job openings, hiring alerts and referral drops.",
+      url: "https://whatsapp.com/channel/0029VbDqwgeICVfcjmxncG1y" },
+    { icon: "🛡️", name: "Security Adda · Infosec Jobs",
+      desc: "Cybersecurity and infosec job openings, hiring alerts and security career updates.",
+      url: "https://whatsapp.com/channel/0029Vb9t6IF9Bb67FAjBci0V" }
+  ],
+
+  /* --- Free HR contact list (follow-to-unlock) ------------------------
+     Paste your OneDrive "anyone with the link" URL to the Excel sheet. */
+  hrContactsUrl: "https://docs.google.com/spreadsheets/d/11RINwimXdBOxgIPD5c_PXuM0jmwbqpKh/edit?gid=1862004380#gid=1862004380",
+
+  /* --- Google review link (Rate us) ----------------------------------
+     From Google Business Profile → Ask for reviews → copy link. */
+  googleReviewUrl: "https://g.page/r/CVzq0t8L2X00EBM/review",
+
+  /* --- Hero stats ------------------------------------------------------ */
+  stats: [
+    { value: "1000+",  label: "Professionals helped", sub: "and counting" },
+    { value: "500+",   label: "Interview calls landed", sub: "after our help" },
+    { value: "10s",    label: "Instant ATS score", sub: "free, in your browser" },
+    { value: "24–48h", label: "Resume delivery", sub: "fast turnaround" }
+  ],
+
+  /* --- Rolling highlights ticker (under the header) -------------------- */
+  highlights: [
+    "Resume Rewrites", "LinkedIn Makeovers", "Naukri Optimization",
+    "Recruiter Connections", "ATS Templates"
+  ],
+
+  /* --- Reviews ticker (in the Services section) ------------------------ */
+  reviews: [
+    "“Loved it!” ⭐⭐⭐⭐⭐", "Got 3 interview calls in a week",
+    "Finally cleared the ATS bots", "Got a call from Deloitte 🎉",
+    "Recruiters started reaching out", "Worth every rupee",
+    "Got shortlisted at Accenture", "My LinkedIn reach blew up"
+  ],
+
+  /* --- Landing rolling review tiles (add / edit freely) ----------------
+     avatar: any emoji · linkedin: optional profile URL (shows a LinkedIn chip) */
+  landingReviews: [
+    { avatar: "🧑‍💻", text: "Spot-on rewrite. Cleared ATS easily and I started getting shortlists within days.", name: "Md Zaid Ahmed", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/mdzaidahmed/" },
+    { avatar: "👩‍💼", text: "Clean, recruiter-friendly ATS templates — super easy to edit in Word.", name: "Megha Bhattacherjee", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/megha-bhattacherjee/" },
+    { avatar: "🧑‍💻", text: "Honest, quick work. My resume finally reflects my real impact and skills.", name: "Ritwik Bholika", role: "Software Professional · TCS", linkedin: "https://www.linkedin.com/in/ritwik-bholika/" },
+    { avatar: "👩‍💻", text: "Took the combo — 2 resumes plus Naukri and LinkedIn, all done together. Delivered fast and my profile finally reflects my real ServiceNow work.", name: "V Sindhuja", role: "ServiceNow Developer · Capgemini", linkedin: "https://www.linkedin.com/in/v-sindhuja-66a2972b6/" },
+    { avatar: "🧑‍💻", text: "My LinkedIn finally looks professional — reach and recruiter views improved a lot.", name: "Karthik V.", role: "Software Engineer · Cognizant" },
+    { avatar: "👩‍💻", text: "The Naukri optimization worked — more profile views and calls in two weeks.", name: "Pooja Nair", role: "Systems Engineer · Infosys" },
+    { avatar: "🧑‍🎓", text: "As a fresher I had no proper resume. They built one from scratch that got me calls.", name: "Aditya Sharma", role: "Fresher · B.Tech 2024" },
+    { avatar: "👩‍💼", text: "Resume + Naukri combo got recruiters reaching out to me directly.", name: "Sneha Reddy", role: "Consultant · Accenture" },
+    { avatar: "👷", text: "A professional ATS template that actually fit my field. Worth every rupee.", name: "Anil", role: "Civil Engineer" },
+    { avatar: "👩‍💻", text: "My empty LinkedIn was made recruiter-ready — started getting connection requests.", name: "Neha Kulkarni", role: "Fresher · Data Analyst" }
+  ],
+
+  /* --- ATS checker --> paid CTAs --------------------------------------- */
+  rewriteServiceId: "02",                 // ₹199 rewrite (WhatsApp)
+  templatesServiceId: "01",               // ₹49 DIY templates flash-card
+  rewritePrice: "₹199",
+  buildPrice: "₹250",                     // "Build my resume" service (offer price)
+  buildPriceOriginal: "₹500",             // struck-through original
+  buildOffer: "50% off · first 100 users",
+  scoreBands: { medium: 55, high: 80 },   // <medium = Weak, <high = Medium, else Strong
+
+  /* --- Booking page (book.html) ---------------------------------------
+     upiId MUST be the exact UPI ID that receives your money — check it in
+     your UPI app's profile. A mobile number alone can't open a pay link.
+     packs: the options in the booking dropdown. */
+  booking: {
+    upiId: "9032687452@naviaxis",
+    upiName: "The Corporate Chai",
+    slaHours: 24,
+    packs: [
+      { id: "linkedin", name: "LinkedIn", price: 500 },
+      { id: "naukri",   name: "Naukri",   price: 500 },
+      { id: "indeed",   name: "Indeed",   price: 500 },
+      { id: "ln",       name: "LinkedIn + Naukri", price: 999 },
+      { id: "all",      name: "LinkedIn + Naukri + Indeed", price: 1299 }
+    ]
+  },
+
+  /* --- ₹49 Store (store.html) ------------------------------------------
+     Drop a poster in assets/store/ and add a line — it appears automatically.
+     Each tile opens WhatsApp with the file name and price. */
+  storePrice: 49,
+  store: [
+    { id: "career", title: "Career Hacks & eBooks", items: [
+      { name: "Naukri & LinkedIn Daily Hacks", img: "assets/store/naukri-linkedin-hacks.webp" },
+      { name: "AI Job Search Hack Pack", img: "assets/store/ai-job-search.webp" },
+      { name: "Interview Ready Cheat Sheet", img: "assets/store/interview-cheat-sheet.webp" },
+      { name: "English & Confidence for Interviews", img: "assets/store/english-confidence.webp" },
+      { name: "MS Excel Mastery for Interviews", img: "assets/store/ms-excel.webp" },
+      { name: "Resignation & Notice Period Kit", img: "assets/store/resignation-kit.webp" }
+    ] },
+    { id: "grc", title: "GRC & InfoSec", items: [
+      { name: "Top 250 InfoSec, Cyber Security & GRC Interview Questions Playbook", label: "Top 250 InfoSec & GRC Questions", img: "assets/store/top-250-infosec-grc.webp" },
+      { name: "Risk Management Playbook", img: "assets/store/risk-management.webp" },
+      { name: "ISO 27001 & IT Audit Master Playbook", img: "assets/store/iso-27001-it-audit.webp" }
+    ] }
+  ],
+
+  /* --- Welcome popup (shows once per visit) ----------------------------
+     Only `enabled` is read here — all popup copy (client logos, trust line,
+     "Explore Designs" box, Instagram + security line) lives in index.html. */
+  launchOffer: {
+    enabled: true
+  },
+
+  /* --- Paid services (cards under "Services") -------------------------- */
+  /* Each card can carry an `original` (struck-through) price; the renderer
+     shows it crossed out beside the live price with a "% OFF" pill. */
+  services: [
+    { id: "00", title: "Existing Resume Modify", price: "₹99*", original: "₹199", priceNote: "tweak your current resume",
+      feats: ["Update & polish your existing resume", "Fix formatting, keywords & ATS safety", "Quick single-page edits"],
+      whatsappMsg: "Hi! I want the Existing Resume Modify service (₹99*)." },
+
+    { id: "01", title: "5 ATS Resume Templates", price: "₹49", original: "₹99", priceNote: "5 editable templates",
+      feats: ["5 industry-specific templates", "Editable Word + PDF", "Instant download"],
+      whatsappMsg: "Hi! I want the 5 ATS Resume Templates pack (₹49)." },
+
+    { id: "02", title: "ATS Resume Rewrite", price: "₹199*", original: "₹399", priceNote: "starting from · per single page", bonus: "Free AI job-hunting prompts",
+      feats: ["Professionally rewritten content", "Keyword + impact optimization", "All resume types incl. global — charges vary", "Photo resumes from ₹299 · one selected format"],
+      whatsappMsg: "Hi! I want the ATS Resume Rewrite service (starting from ₹199)." },
+
+    { id: "03", title: "Naukri Optimization", price: "₹500", priceNote: "Naukri profile", bonus: "1 Premium Resume + AI job prompt guide",
+      feats: ["Complete Naukri profile optimization", "Recruiter-search keywords & headline", "More profile views & calls"],
+      whatsappMsg: "Hi! I want Naukri Optimization (₹500) with 1 free premium resume + AI job prompt guide." },
+
+    { id: "04", title: "LinkedIn Optimization", price: "₹500", priceNote: "LinkedIn profile", bonus: "1 Premium Resume + AI job prompt guide",
+      feats: ["Complete LinkedIn profile makeover", "Headline, About & keyword optimization", "More recruiter views & reach"],
+      whatsappMsg: "Hi! I want LinkedIn Optimization (₹500) with 1 free premium resume + AI job prompt guide." },
+
+    { id: "05", title: "Indeed Optimization", price: "₹500", priceNote: "Indeed profile", bonus: "1 Premium Resume + AI job prompt guide",
+      feats: ["Complete Indeed profile optimization", "Job-title & skill keywords", "Better visibility to employers"],
+      whatsappMsg: "Hi! I want Indeed Optimization (₹500) with 1 free premium resume + AI job prompt guide." },
+
+    { id: "06", title: "Complete Combo", price: "₹1299", priceNote: "Naukri + LinkedIn + Indeed", featured: true, bonus: "1 Premium Resume + AI job prompt guide",
+      feats: ["Naukri profile optimization", "LinkedIn profile optimization", "Indeed profile optimization"],
+      whatsappMsg: "Hi! I want the Complete Combo — Naukri + LinkedIn + Indeed (₹1299) with 1 free premium resume + AI job prompt guide." },
+
+    { id: "07", title: "Personal Customized Portfolio", price: "₹1999", priceNote: "starting from · excluding domain",
+      feats: ["Personal portfolio website, custom-built", "Mobile + desktop responsive design", "Domain cost not included"],
+      whatsappMsg: "Hi! I want a Personal Customized Portfolio website (starting from ₹1999, excluding domain)." }
+  ],
+
+  /* --- Service 06 page: Premium tools --------------------------------- */
+  toolsPage: [
+    { name: "Canva Pro", note: "Design like a pro — templates, brand kit, magic tools." },
+    { name: "ChatGPT Plus", note: "Priority access to the most capable AI models." },
+    { name: "Gemini Pro", note: "Google's advanced AI — long context & deep reasoning." },
+    { name: "Coursera Plus", note: "Unlimited courses & professional certificates." },
+    { name: "Udemy Pro", note: "Top-rated courses across tech, business & design." },
+    { name: "LinkedIn Premium", note: "InMail, insights and recruiter visibility." }
+    /* add more tools here — they appear automatically */
+  ],
+
+  /* --- Service 07 page: Social media services ------------------------- */
+  socialPage: {
+    instagram: [
+      { name: "Instagram Followers", note: "Real, gradual follower growth." },
+      { name: "Instagram Likes", note: "Boost likes on your posts & reels." },
+      { name: "Instagram Shares", note: "More shares for wider reach." },
+      { name: "Instagram Engagement", note: "Comments, saves & overall engagement." }
+    ],
+    youtube: [
+      { name: "YouTube Shorts Views", note: "Views for your Shorts." },
+      { name: "YouTube Video Views", note: "Views for long-form videos." },
+      { name: "YouTube Subscribers", note: "Grow your subscriber base." }
+    ]
+    /* add more categories/items here */
+  },
+
+  /* --- Service 08 page: 3 sections (prompt packs / certs / exams) ------ */
+  aiPromptPacks: [
+    { title: "AI Job-Hunting Prompt Pack", price: "₹19",
+      desc: "100+ prompts for resumes, cover letters, interview prep, LinkedIn & cold emails.",
+      whatsappMsg: "Hi! I want the AI Job-Hunting Prompt Pack (₹19)." },
+    { title: "Thumbnail & Reel-Cover Prompt Pack", price: "₹19",
+      desc: "Prompts to create scroll-stopping YouTube thumbnails & reel / cover pages.",
+      whatsappMsg: "Hi! I want the Thumbnail & Reel-Cover Prompt Pack (₹19)." },
+    { title: "Photo & Poster Design Prompt Pack", price: "₹19*",
+      desc: "Prompts for photo editing, poster & graphic design — plus a free website.",
+      whatsappMsg: "Hi! I want the Photo & Poster Design Prompt Pack + free website (₹19)." }
+    /* add more prompt packs here */
+  ],
+  examPacks: [
+    { title: "SSC CGL Pack", price: "₹49*",
+      desc: "Study material, a study plan, notes, reference videos & suggested course sites — all included.",
+      whatsappMsg: "Hi! I want the SSC CGL exam pack (₹49)." }
+    /* add more exam packs here */
+  ],
+  certifications: [
+    { code: "ISO 27001:2022 LA", name: "Lead Auditor", desc: "Roadmap, study materials & guidance to clear the exam." },
+    { code: "ISO 27001:2022 LI", name: "Lead Implementer", desc: "Roadmap, study materials & guidance to clear the exam." },
+    { code: "CompTIA Security+", name: "SY0-701", desc: "Roadmap, study materials & AI prompt cheat sheets." }
+    /* add more certifications here */
+  ],
+
+  /* --- Results page: impact timeline + social proof -------------------
+     Edit these to your real outcomes. Company names render as text chips
+     (swap for real logo images later if you have the rights to use them). */
+  impactTimeline: [
+    { when: "Week 1", text: "Interview calls start landing in the inbox." },
+    { when: "Week 2–3", text: "2–3 calls a week + recruiters reaching out directly." },
+    { when: "Ongoing", text: "LinkedIn profile views & reach climb steadily." }
+  ],
+  companies: [
+    "Deloitte", "PwC", "EY", "KPMG", "Accenture", "Tech Mahindra",
+    "TCS", "Infosys", "Wipro", "Deutsche Bank", "Capgemini", "Cognizant"
+  ],
+
+  /* --- Samples page (samples.html) ------------------------------------
+     Image tiles shown on the Samples page. Drop a new image in
+     assets/samples/ and add a line here — it appears automatically.
+     Optional per-template fields:
+       tier  : "basic" or "premium" — shown as a label on the tile instead
+               of a price (prices are quoted on WhatsApp). Defaults to basic.
+       tag   : badge(s) on the tile — "intl" (🌍 International),
+               "lead" (👑 Leadership), or "intl lead" for both. */
+  sampleTemplates: [
+    { img: "assets/samples/template-01.jpg", name: "ATS · GRC / Security", tier: "basic" },
+    { img: "assets/samples/template-02.jpg", name: "ATS · Developer", tier: "premium" },
+    { img: "assets/samples/template-03.jpg", name: "Modern · Black & White", tier: "premium" },
+    { img: "assets/samples/template-04.jpg", name: "Simple Professional · A4", tier: "basic" },
+    { img: "assets/samples/template-05.jpg", name: "Simple Professional", tier: "basic" },
+    { img: "assets/samples/template-06.jpg", name: "Standard Professional", tier: "basic" },
+    { img: "assets/samples/template-07.jpg", name: "Restaurant Manager · Navy & Gold", tier: "premium" },
+    { img: "assets/samples/template-08.jpg", name: "Principal · Navy Banner", tier: "premium" },
+    { img: "assets/samples/template-09.jpg", name: "Principal · Educational Leader", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-10.jpg", name: "Nursing / Healthcare", tier: "basic" },
+    { img: "assets/samples/template-11.jpg", name: "Fresh Graduate", tier: "basic" },
+    { img: "assets/samples/template-12.jpg", name: "Corporate ATS · Minimalist", tier: "basic" },
+    { img: "assets/samples/template-13.jpg", name: "Accountant · Minimalist", tier: "basic" },
+    { img: "assets/samples/template-14.jpg", name: "Modern Professional · Navy", tier: "basic" },
+    { img: "assets/samples/template-15.jpg", name: "Professional Modern CV", tier: "basic" },
+    { img: "assets/samples/template-16.jpg", name: "Accounting Executive CV", tier: "basic" },
+    { img: "assets/samples/template-17.jpg", name: "Accountant · Dark Sidebar", tier: "premium" },
+    { img: "assets/samples/template-18.jpg", name: "Marketing Manager · Blue", tier: "basic" },
+    { img: "assets/samples/template-19.jpg", name: "System Analyst · Classic", tier: "basic" },
+    { img: "assets/samples/template-20.jpg", name: "Web Developer · Minimalist", tier: "premium" },
+    { img: "assets/samples/template-21.jpg", name: "Governance & Transformation Consultant", tier: "premium", tag: "lead" },
+    { img: "assets/samples/template-22.jpg", name: "IT Service Management · SIAM", tier: "premium", tag: "lead" },
+    { img: "assets/samples/template-23.jpg", name: "Pharma · Regulatory Affairs", tier: "basic", tag: "intl" },
+    { img: "assets/samples/template-24.jpg", name: "Banking Operations Leader", tier: "premium", tag: "lead" },
+    { img: "assets/samples/template-25.jpg", name: "Office Support · Non-Tech", tier: "basic" },
+    { img: "assets/samples/template-26.jpg", name: "Accounts & Office Admin", tier: "basic" },
+    { img: "assets/samples/template-27.jpg", name: "Oil & Gas · Rig Operations", tier: "premium" },
+    { img: "assets/samples/template-28.jpg", name: "Backend Engineer · Java", tier: "basic" },
+    { img: "assets/samples/template-29.jpg", name: "IT Delivery Leader · Life Sciences", tier: "premium", tag: "intl lead" },
+    { img: "assets/samples/template-30.jpg", name: "UX Designer · Modern", tier: "basic" },
+    { img: "assets/samples/template-31.jpg", name: "Senior Financial Analyst", tier: "basic" },
+    { img: "assets/samples/template-32.jpg", name: "Fraud & Claims · AML / KYC", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-33.jpg", name: "Enterprise Delivery Leader", tier: "premium", tag: "lead" },
+    { img: "assets/samples/template-34.jpg", name: "Engineering Executive", tier: "basic" },
+    { img: "assets/samples/template-35.jpg", name: "Mechanical Engineer", tier: "premium" },
+    { img: "assets/samples/template-36.jpg", name: "Delivery Driver · Australia", tier: "basic", tag: "intl" },
+    { img: "assets/samples/template-37.jpg", name: "General Helper · Support Staff", tier: "basic" },
+    { img: "assets/samples/template-38.jpg", name: "HR & Recruitment Professional", tier: "basic" },
+    { img: "assets/samples/template-39.jpg", name: "Business Admin Undergraduate", tier: "basic" },
+    { img: "assets/samples/template-40.jpg", name: "Aspiring Software Developer", tier: "basic" },
+    { img: "assets/samples/template-41.jpg", name: "Design Director · Editorial", tier: "basic" },
+    { img: "assets/samples/template-42.jpg", name: "Junior Software Engineer", tier: "basic" },
+    { img: "assets/samples/template-43.png", name: "Sales & Business Development", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-44.jpg", name: "VP Design & Brand · Executive", tier: "premium", tag: "lead" },
+    { img: "assets/samples/template-45.jpg", name: "Operations & Safety Officer", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-46.jpg", name: "Marketing Manager · Green Sidebar", tier: "premium" },
+    { img: "assets/samples/template-47.jpg", name: "CEO & Founder · Startup", tier: "basic", tag: "lead" },
+    { img: "assets/samples/template-48.jpg", name: "Chief Operating Officer", tier: "premium", tag: "intl lead" },
+    { img: "assets/samples/template-49.jpg", name: "Business Admin Graduate · EU", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-50.jpg", name: "Marketing Manager · Maroon Sidebar", tier: "premium" },
+    { img: "assets/samples/template-51.jpg", name: "Senior HR Business Partner", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-52.jpg", name: "Marketing Manager · Maroon Banner", tier: "basic" },
+    { img: "assets/samples/template-53.jpg", name: "Marketing Manager · Green Classic", tier: "basic" },
+    { img: "assets/samples/template-54.jpg", name: "Marketing Manager · Navy Banner", tier: "basic" },
+    { img: "assets/samples/template-55.jpg", name: "Marketing Manager · Navy Serif", tier: "basic" },
+    { img: "assets/samples/template-56.jpg", name: "Europass-Style CV · Europe", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-57.jpg", name: "Marketing Manager · Blue Sidebar", tier: "basic" },
+    { img: "assets/samples/template-58.jpg", name: "UX Designer · Dark Sidebar", tier: "premium" },
+    { img: "assets/samples/template-59.jpg", name: "UX Designer · Minimal", tier: "basic" },
+    { img: "assets/samples/template-60.jpg", name: "Accounting Executive · Navy", tier: "premium" },
+    { img: "assets/samples/template-61.png", name: "Marketing Specialist · Europe", tier: "basic", tag: "intl" },
+    { img: "assets/samples/template-62.png", name: "Logistics & Supply Chain · Gulf", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-63.jpg", name: "Head of Sales · Insurance & Banking", tier: "premium" },
+    { img: "assets/samples/template-64.jpg", name: "Accountant · Accounts Assistant", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-65.jpg", name: "CTO · AI / ML Engineering", tier: "premium", tag: "intl" },
+    { img: "assets/samples/template-66.jpg", name: "Food Safety & Hygiene Officer", tier: "premium", tag: "intl" }
+  ],
+
+  /* --- Coming soon ----------------------------------------------------- */
+  comingSoon: [
+    { tag: "CC", title: "Corporate Connect", sub: "1:1 with industry mentors",
+      desc: "Like AstroTalk, but for your career. Book real conversations with verified industry mentors & SMEs — not generic advice." },
+    { tag: "in", title: "LinkedIn Profile Score Checker", sub: "Free · coming soon",
+      desc: "Paste your LinkedIn profile and get an instant strength score with clear, actionable tips to get noticed by recruiters." },
+    { tag: "ATS", title: "In-House ATS & Resume Filter", sub: "For enterprises · coming soon",
+      desc: "A private ATS and resume-screening tool for companies — filter, rank and shortlist candidates fast, with our honest, bias-aware scoring." }
+  ]
+};
